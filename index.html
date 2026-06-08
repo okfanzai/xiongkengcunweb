@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-CN" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>熊坑村 DOTA2 战队 | 遗迹不倒 青春不散</title>
+  <title>熊坑村 DOTA2 战队 | 阅尽天下坑货 村长这边独坑</title>
   <!-- Meta tags for SEO -->
-  <meta name="description" content="熊坑村 DOTA2 战队官方网页 - 遗迹不倒，青春不散。Forged in battle, united in MMR. 欢迎加入我们一起开黑征战遗迹！">
+  <meta name="description" content="熊坑村 DOTA2 战队官方网页 - 阅尽天下坑货 村长这边独坑。来都来了，不被村干部坑两把，你不是白来了？. 欢迎加入我们一起被村干部猛坑！">
   <meta name="keywords" content="熊坑村, DOTA2, 战队, 电竞, 刀塔, 游戏, 开黑">
-  
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <!-- Google Fonts: Inter & Orbitron -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@600;700;800;900&display=swap"
+    rel="stylesheet">
+
   <!-- Tailwind Configuration -->
   <script>
     tailwind.config = {
@@ -45,11 +48,11 @@
     /* 科技感网格底纹 */
     .bg-grid-pattern {
       background-size: 50px 50px;
-      background-image: 
+      background-image:
         linear-gradient(to right, rgba(244, 63, 94, 0.03) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(244, 63, 94, 0.03) 1px, transparent 1px);
     }
-    
+
     /* 径向渐变遮罩，使网格从中心向四周自然淡出 */
     .mask-radial {
       mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
@@ -60,226 +63,297 @@
     .shadow-neon-red {
       box-shadow: 0 0 20px rgba(244, 63, 94, 0.35);
     }
+
     .hover\:shadow-neon-red-lg:hover {
       box-shadow: 0 0 35px rgba(244, 63, 94, 0.6);
     }
-    
+
     /* 自定义流动光效 */
     .text-glow {
       text-shadow: 0 0 12px rgba(244, 63, 94, 0.5);
     }
   </style>
 </head>
+
 <body class="bg-slate-950 text-slate-100 font-sans selection:bg-rose-600 selection:text-white overflow-x-hidden">
 
   <!-- 背景装饰光斑 (Ambience Glow) -->
   <div class="absolute top-0 left-0 w-full h-screen overflow-hidden pointer-events-none z-0">
     <!-- 左上红斑 -->
-    <div class="absolute -top-[10%] -left-[10%] w-[50vw] h-[50vw] max-w-[600px] rounded-full bg-rose-600/10 blur-[120px] animate-pulse-slow"></div>
+    <div
+      class="absolute -top-[10%] -left-[10%] w-[50vw] h-[50vw] max-w-[600px] rounded-full bg-rose-600/10 blur-[120px] animate-pulse-slow">
+    </div>
     <!-- 右下橙红斑 -->
-    <div class="absolute top-[40%] right-[-10%] w-[45vw] h-[45vw] max-w-[550px] rounded-full bg-orange-600/10 blur-[130px] animate-pulse-slow" style="animation-delay: 2s;"></div>
+    <div
+      class="absolute top-[40%] right-[-10%] w-[45vw] h-[45vw] max-w-[550px] rounded-full bg-orange-600/10 blur-[130px] animate-pulse-slow"
+      style="animation-delay: 2s;"></div>
   </div>
 
-  <!-- 吸顶导航栏 (Navbar) -->
-  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-slate-900/80 bg-slate-950/70 backdrop-blur-md transition-all duration-300">
+  <!-- 大屏左侧竖向导航栏 (Sidebar Navigation) -->
+  <aside class="hidden lg:flex flex-col justify-between fixed top-0 bottom-0 left-0 w-64 z-50 border-r border-slate-900/80 bg-slate-950/60 backdrop-blur-xl p-8 select-none">
+    
+    <!-- 顶部：Logo 与战队名 -->
+    <div class="space-y-6">
+      <a href="#" class="flex flex-col items-center text-center space-y-3 group">
+        <!-- 战队图标 (类似刀塔神盾的极简科技感图标) -->
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center shadow-neon-red group-hover:scale-105 transition-all duration-300">
+          <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L2 9l2 11 8 3 8-3 2-11L12 2zm0 3.8l6 4.2-1.5 8.2-4.5 1.8-4.5-1.8L6 10l6-4.2z"/>
+          </svg>
+        </div>
+        <!-- 战队名字 -->
+        <span class="text-2xl font-black font-display tracking-widest bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent group-hover:brightness-125 transition-all duration-300 drop-shadow-[0_0_15px_rgba(244,63,94,0.3)]">
+          熊坑村
+        </span>
+      </a>
+      <div class="h-[1px] bg-gradient-to-r from-transparent via-slate-800 to-transparent"></div>
+    </div>
+
+    <!-- 中部：竖向菜单链接 -->
+    <nav class="flex flex-col space-y-2 w-full">
+      <a href="#intro" class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
+        <span class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
+        <span class="text-sm font-semibold tracking-wider">简介 / About</span>
+      </a>
+      <a href="#roster" class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
+        <span class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
+        <span class="text-sm font-semibold tracking-wider">阵容 / Roster</span>
+      </a>
+      <a href="#history" class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
+        <span class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
+        <span class="text-sm font-semibold tracking-wider">往事 / History</span>
+      </a>
+      <a href="#join" class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
+        <span class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
+        <span class="text-sm font-semibold tracking-wider">加入 / Join us</span>
+      </a>
+    </nav>
+
+    <!-- 底部：社交与版本信息 -->
+    <div class="space-y-4 text-center">
+      <div class="h-[1px] bg-gradient-to-r from-transparent via-slate-800 to-transparent"></div>
+      <div class="text-xs font-mono tracking-widest text-slate-600 uppercase">EST. 2026</div>
+    </div>
+
+  </aside>
+
+  <!-- 小屏吸顶导航栏 (Topbar Navigation) -->
+  <nav class="lg:hidden fixed top-0 left-0 right-0 z-50 border-b border-slate-900/80 bg-slate-950/70 backdrop-blur-md transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        
+      <div class="flex items-center justify-between h-16">
+
         <!-- 左侧：战队Logo/名字 -->
         <a href="#" class="flex items-center space-x-3 group">
-          <!-- 战队图标 (类似刀塔神盾的极简科技感图标) -->
-          <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center shadow-neon-red group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <!-- 抽象熊爪/遗迹利刃图标 -->
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center shadow-neon-red group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2L2 9l2 11 8 3 8-3 2-11L12 2zm0 3.8l6 4.2-1.5 8.2-4.5 1.8-4.5-1.8L6 10l6-4.2z"/>
             </svg>
           </div>
-          <!-- 战队名字 -->
-          <span class="text-2xl font-black font-display tracking-widest bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent group-hover:brightness-125 transition-all duration-300 drop-shadow-[0_0_15px_rgba(244,63,94,0.3)]">
+          <span class="text-lg font-black font-display tracking-widest bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent group-hover:brightness-125 transition-all duration-300 drop-shadow-[0_0_15px_rgba(244,63,94,0.3)]">
             熊坑村
           </span>
         </a>
 
-        <!-- 右侧：导航链接 -->
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="#intro" class="text-sm font-semibold tracking-wider text-slate-300 hover:text-rose-500 transition-colors duration-300 relative py-2 group">
-            简介
-            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#roster" class="text-sm font-semibold tracking-wider text-slate-300 hover:text-rose-500 transition-colors duration-300 relative py-2 group">
-            阵容
-            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#join" class="text-sm font-semibold tracking-wider text-slate-300 hover:text-rose-500 transition-colors duration-300 relative py-2 group">
-            加入
-            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          
-          <!-- 战队口号装饰 -->
-          <div class="h-4 w-[1px] bg-slate-800"></div>
-          <span class="text-xs font-mono tracking-widest text-slate-500 uppercase">EST. 2026</span>
-        </div>
-
-        <!-- 移动端菜单按钮 (防呆留空交互) -->
-        <div class="md:hidden">
+        <!-- 右侧：移动端菜单按钮 -->
+        <div class="flex items-center">
           <button id="mobile-menu-btn" type="button" class="text-slate-400 hover:text-white focus:outline-none p-2" aria-label="Toggle Menu">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
             </svg>
           </button>
         </div>
 
       </div>
     </div>
-    
-    <!-- 移动端下拉菜单 (隐藏，点击时通过简单 JS 触发) -->
-    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-900 bg-slate-950/95 backdrop-blur-lg px-4 pt-2 pb-6 space-y-3">
+
+    <!-- 移动端下拉菜单 -->
+    <div id="mobile-menu" class="hidden border-t border-slate-900 bg-slate-950/95 backdrop-blur-lg px-4 pt-2 pb-6 space-y-3">
       <a href="#intro" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">简介</a>
       <a href="#roster" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">阵容</a>
+      <a href="#history" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">往事</a>
       <a href="#join" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">加入</a>
     </div>
   </nav>
 
-  <!-- 首屏横幅 (Hero Section) -->
-  <section class="relative min-h-screen flex items-center justify-center overflow-hidden z-10 pt-20">
-    <!-- 科技感网格背景 -->
+  <!-- 首屏横幅 (Hero Section) & 关于熊坑村合并 -->
+  <section id="intro" class="relative min-h-[80vh] flex items-center justify-center overflow-hidden z-10 pt-16 pb-8 lg:pl-64">
+    <!-- 震撼首屏大背景图 -->
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <img src="./assets/beijing1.jpg" alt="主页背景"
+        class="w-full h-full object-cover opacity-35 scale-105 filter brightness-90">
+      <!-- 渐变阴影遮罩 -->
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/20"></div>
+    </div>
+
+    <!-- 科技感网格背景 (叠加在背景图上) -->
     <div class="absolute inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 animate-float">
-      
-      <!-- 赛事徽章 (Badge) -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 backdrop-blur-sm text-rose-400 text-xs sm:text-sm font-semibold tracking-widest uppercase mb-8 shadow-[0_0_15px_rgba(244,63,94,0.15)]">
-        <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-        ⚔️ DOTA2 LEAGUE DIVISION TEAM
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 transition-all duration-300">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+        <!-- 左侧：左对齐的主页标题与按钮 (lg:col-span-5) -->
+        <div class="lg:col-span-5 space-y-8 text-left animate-float">
+          <!-- 赛事徽章 (Badge) -->
+          <div
+            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 backdrop-blur-sm text-rose-400 text-xs sm:text-sm font-semibold tracking-widest uppercase shadow-[0_0_15px_rgba(244,63,94,0.15)]">
+            <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+            ⚔️ DOTA2 LEAGUE DIVISION TEAM
+          </div>
+
+          <!-- 主标题 (Hero Title) -->
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-black font-display tracking-tight leading-none">
+            <span
+              class="bg-gradient-to-r from-red-600 via-rose-600 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_5px_25px_rgba(244,63,94,0.3)]">
+              熊坑村
+            </span>
+            <span class="block mt-2 text-white text-3xl sm:text-4xl md:text-5xl font-bold tracking-normal uppercase">
+              DOTA2 战队
+            </span>
+          </h1>
+
+          <!-- 副标题 (Hero Subtitle) -->
+          <p class="text-slate-400 text-base sm:text-lg md:text-xl font-light tracking-wider leading-relaxed">
+            直到来到熊坑村，我才领悟到坑的真谛……
+          </p>
+
+          <!-- 按钮区域 -->
+          <div>
+            <a href="#join"
+              class="inline-flex items-center justify-center px-8 py-4 text-base font-extrabold tracking-widest text-white bg-gradient-to-r from-red-700 via-rose-600 to-orange-600 rounded-xl shadow-neon-red hover:shadow-neon-red-lg hover:scale-105 hover:brightness-110 active:scale-95 transition-all duration-300 group cursor-pointer">
+              <span>加入开黑</span>
+              <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 右侧：关于熊坑村 (About Us) 卡片 (lg:col-span-7) -->
+        <div id="about"
+          class="lg:col-span-7 bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-3xl p-6 sm:p-8 relative group transition-all duration-300 hover:border-slate-700/80 hover:shadow-[0_0_35px_rgba(244,63,94,0.08)]">
+          <!-- 背景发光效果 -->
+          <div
+            class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-rose-600 to-orange-600 opacity-5 blur-xl group-hover:opacity-10 transition duration-1000 group-hover:duration-200">
+          </div>
+
+          <div class="relative space-y-6">
+            <!-- 战队 LOGO 图片 -->
+            <div
+              class="relative w-full h-48 sm:h-56 md:h-64 rounded-2xl overflow-hidden border border-slate-800/60 shadow-inner group-hover:border-rose-500/20 transition-all duration-500">
+              <img src="./assets/zhanduilogo.jpg" alt="熊坑村战队 Logo"
+                class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700">
+              <div
+                class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rose-500/20 bg-rose-500/10 backdrop-blur-sm text-rose-400 text-xs font-semibold tracking-wider uppercase">
+                ABOUT US / 战队简介
+              </div>
+            </div>
+
+            <!-- 热血介绍文字 -->
+            <div class="space-y-4">
+              <h2 class="text-xl sm:text-2xl font-black font-display tracking-tight text-white">
+                关于
+                <span
+                  class="bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(244,63,94,0.2)]">
+                  熊坑村
+                </span>
+              </h2>
+              <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
+                你可曾看到过凌晨4点的熊坑村，那里没有声音，只有一个又一个村干部默默的组团坑人。天梯排到我们熊坑村，你就等着享福吧！
+              </p>
+              <p class="text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
+                无论是顺风局的稳健推进，还是逆风局的破釜沉舟，你都别怕，不到最后一刻，你永远不知道，这把村干部们会怎么坑你。但是别担心，坑是他们的，锅还得你来背！
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
-
-      <!-- 主标题 (Hero Title) -->
-      <h1 class="text-4xl sm:text-6xl md:text-8xl font-black font-display tracking-tight leading-none">
-        <span class="bg-gradient-to-r from-red-600 via-rose-600 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_5px_25px_rgba(244,63,94,0.3)]">
-          熊坑村
-        </span>
-        <span class="block mt-2 sm:mt-4 text-white text-3xl sm:text-5xl md:text-7xl font-bold tracking-normal uppercase">
-          DOTA2 战队
-        </span>
-      </h1>
-
-      <!-- 副标题 (Hero Subtitle) -->
-      <p class="mt-8 text-base sm:text-xl md:text-2xl text-slate-400 font-light tracking-wider max-w-3xl mx-auto leading-relaxed">
-        直到来到熊坑村，我才领悟到坑的真谛……
-      </p>
-
-      <!-- 按钮区域 -->
-      <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-        <a href="#join" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-extrabold tracking-widest text-white bg-gradient-to-r from-red-700 via-rose-600 to-orange-600 rounded-xl shadow-neon-red hover:shadow-neon-red-lg hover:scale-105 hover:brightness-110 active:scale-95 transition-all duration-300 group cursor-pointer">
-          <span>加入开黑</span>
-          <!-- 炫酷向右箭头 -->
-          <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-          </svg>
-        </a>
-      </div>
-
     </div>
 
     <!-- 首屏装饰底部斜角或网格线 -->
-    <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-slate-950 to-transparent pointer-events-none z-10"></div>
-  </section>
-
-  <!-- 战队简介 (About Us) 板块 -->
-  <section id="about" class="relative py-24 bg-slate-900/40 border-t border-b border-slate-900/80 overflow-hidden z-10">
-    <!-- 科技感网格背景 -->
-    <div class="absolute inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        
-        <!-- 左侧：热血介绍 -->
-        <div class="space-y-6">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rose-500/20 bg-rose-500/5 text-rose-400 text-xs font-semibold tracking-widest uppercase">
-            ABOUT US / 战队简介
-          </div>
-          <h2 class="text-3xl sm:text-5xl font-black font-display tracking-tight leading-tight">
-            关于
-            <span class="bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(244,63,94,0.2)]">
-              熊坑村
-            </span>
-          </h2>
-          <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
-            不分锅，只干架。我们是一群热爱 DOTA2 的西恩玩家，信奉快乐电竞，致力于在天梯中捍卫遗迹的尊严。在熊坑村，没有绝对的胜负，只有拉满的节目效果与永不妥协的拼搏精神。
-          </p>
-          <p class="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
-            无论是顺风局的稳健推进，还是逆风局的破釜沉舟，我们都并肩作战。哪怕被对手打入“熊坑”，我们也会微笑着重新站起，用一次次精彩的团战向所有人证明——兄弟齐心，其利断金！
-          </p>
-        </div>
-
-        <!-- 右侧：占位图 -->
-        <div class="relative group">
-          <!-- 背景发光效果 -->
-          <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-rose-600 to-orange-600 opacity-20 blur-xl group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-          
-          <div class="relative w-full aspect-[16/10] rounded-2xl border border-slate-800 bg-gradient-to-br from-slate-950 to-slate-900 flex flex-col items-center justify-center p-8 overflow-hidden shadow-2xl">
-            <!-- 几何线框背景 -->
-            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f43f5e_1px,transparent_1px)] [background-size:16px_16px]"></div>
-            
-            <div class="z-10 text-center space-y-4">
-              <!-- 盾牌装饰 -->
-              <svg class="w-16 h-16 text-rose-500/80 mx-auto animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <div class="font-display text-2xl sm:text-3xl font-black tracking-widest text-slate-100 uppercase drop-shadow-[0_0_10px_rgba(244,63,94,0.3)]">
-                CN DOTA, BEST DOTA
-              </div>
-              <p class="text-xs text-slate-500 tracking-widest font-mono">FORGED IN BATTLE • UNITED IN MMR</p>
-            </div>
-            
-            <!-- 拐角装饰线 -->
-            <div class="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-rose-500/40"></div>
-            <div class="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-rose-500/40"></div>
-            <div class="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-rose-500/40"></div>
-            <div class="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-rose-500/40"></div>
-          </div>
-        </div>
-
-      </div>
+    <div
+      class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-slate-950 to-transparent pointer-events-none z-10">
     </div>
   </section>
 
-  <!-- 核心阵容 (Roster) 板块 -->
-  <section id="roster" class="relative py-24 bg-slate-950 overflow-hidden z-10">
+  <section id="roster" class="relative py-24 bg-slate-950 overflow-hidden z-10 lg:pl-64">
     <!-- 科技感网格背景 -->
     <div class="absolute inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-all duration-300">
+
       <!-- 标题 -->
       <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rose-500/20 bg-rose-500/5 text-rose-400 text-xs font-semibold tracking-widest uppercase">
-          THE SQUAD / 战队成员
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rose-500/20 bg-rose-500/5 text-rose-400 text-xs font-semibold tracking-widest uppercase">
+          COMMITTEE / 领导班子
         </div>
         <h2 class="text-3xl sm:text-5xl font-black font-display tracking-tight">
-          主力阵容
+          村委会领导班子
         </h2>
         <p class="text-slate-400 text-sm sm:text-base font-light">
-          熊坑村的顶级战力，各自坚守分路，默契无间，共同向着遗迹发起冲锋。
+          熊坑村的核心骨干，维护全村日常开黑秩序与天梯和平。
         </p>
       </div>
 
       <!-- 队员卡片列表 -->
-      <div class="flex flex-wrap justify-center gap-8">
-        
-        <!-- 卡片 1：Carry -->
-        <div class="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-sm bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:border-rose-500/30 hover:shadow-[0_0_25px_rgba(244,63,94,0.15)] group">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+        <!-- 卡片 1：村长 -->
+        <div
+          class="w-full max-w-sm mx-auto bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:border-rose-500/30 hover:shadow-[0_0_25px_rgba(244,63,94,0.15)] group">
           <!-- 头像区 -->
-          <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-slate-950 to-slate-900 border border-slate-800/80 mx-auto flex items-center justify-center mb-6 overflow-hidden relative shadow-inner group-hover:border-rose-500/20 transition-colors">
-            <span class="font-display text-3xl font-black text-rose-500/60 group-hover:text-rose-500 group-hover:scale-110 transition-all">POS 1</span>
+          <div
+            class="w-24 h-24 rounded-full border border-slate-800/80 mx-auto mb-6 overflow-hidden relative shadow-inner group-hover:border-rose-500/40 transition-colors">
+            <img src="./assets/cunzhang.png" alt="村长"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
           <!-- 名字与标签 -->
           <div class="space-y-2 mb-6">
-            <h3 class="font-display text-2xl font-bold text-slate-100 group-hover:text-rose-400 transition-colors">村长</h3>
-            <span class="inline-block px-3 py-0.5 text-xs font-semibold rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20 tracking-wider">
-              1号位 (Carry)
+            <h3 class="font-display text-2xl font-bold text-slate-100 group-hover:text-rose-400 transition-colors">村长
+            </h3>
+            <span
+              class="inline-block px-3 py-0.5 text-xs font-semibold rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20 tracking-wider">
+              1号位 (Carry) / 村委书记
             </span>
           </div>
+
+          <!-- 三维个人数据栏 -->
+          <div class="space-y-4 text-left mb-6">
+            <!-- 数据 1 -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-slate-400">天梯 MMR</span>
+                <span class="text-rose-400 font-bold">10,500 (冠绝)</span>
+              </div>
+              <div class="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden">
+                <div class="h-full bg-rose-500 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+            <!-- 数据 2 -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-slate-400">参战率</span>
+                <span class="text-slate-200">68%</span>
+              </div>
+              <div class="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden">
+                <div class="h-full bg-rose-500/70 rounded-full" style="width: 68%"></div>
+              </div>
+            </div>
+            <!-- 数据 3 -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-slate-400">场均背锅率</span>
+                <span class="text-slate-500">5% (甩锅能手)</span>
+              </div>
+              <div class="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden">
+                <div class="h-full bg-slate-700 rounded-full" style="width: 5%"></div>
+              </div>
+            </div>
+          </div>
+
           <hr class="border-slate-800/60 my-4" />
           <!-- 绝活英雄 -->
           <div class="space-y-1">
@@ -288,19 +362,59 @@
           </div>
         </div>
 
-        <!-- 卡片 2：Mid -->
-        <div class="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-sm bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:border-orange-500/30 hover:shadow-[0_0_25px_rgba(249,115,22,0.15)] group">
+        <!-- 卡片 2：副村长 -->
+        <div
+          class="w-full max-w-sm mx-auto bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:border-orange-500/30 hover:shadow-[0_0_25px_rgba(249,115,22,0.15)] group">
           <!-- 头像区 -->
-          <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-slate-950 to-slate-900 border border-slate-800/80 mx-auto flex items-center justify-center mb-6 overflow-hidden relative shadow-inner group-hover:border-orange-500/20 transition-colors">
-            <span class="font-display text-3xl font-black text-orange-500/60 group-hover:text-orange-500 group-hover:scale-110 transition-all">POS 2</span>
+          <div
+            class="w-24 h-24 rounded-full border border-slate-800/80 mx-auto mb-6 overflow-hidden relative shadow-inner group-hover:border-orange-500/40 transition-colors">
+            <img src="./assets/fucunzhang.png" alt="副村长"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
           <!-- 名字与标签 -->
           <div class="space-y-2 mb-6">
-            <h3 class="font-display text-2xl font-bold text-slate-100 group-hover:text-orange-400 transition-colors">坑神</h3>
-            <span class="inline-block px-3 py-0.5 text-xs font-semibold rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 tracking-wider">
-              2号位 (Mid)
+            <h3 class="font-display text-2xl font-bold text-slate-100 group-hover:text-orange-400 transition-colors">副村长
+            </h3>
+            <span
+              class="inline-block px-3 py-0.5 text-xs font-semibold rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 tracking-wider">
+              2号位 (Mid) / 村委副书记
             </span>
           </div>
+
+          <!-- 三维个人数据栏 -->
+          <div class="space-y-4 text-left mb-6">
+            <!-- 数据 1 -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-slate-400">天梯 MMR</span>
+                <span class="text-orange-400 font-bold">9,800 (冠绝)</span>
+              </div>
+              <div class="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden">
+                <div class="h-full bg-orange-500 rounded-full" style="width: 93%"></div>
+              </div>
+            </div>
+            <!-- 数据 2 -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-slate-400">参战率</span>
+                <span class="text-slate-200">82% (带节奏大师)</span>
+              </div>
+              <div class="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden">
+                <div class="h-full bg-orange-500/70 rounded-full" style="width: 82%"></div>
+              </div>
+            </div>
+            <!-- 数据 3 -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-slate-400">场均背锅率</span>
+                <span class="text-slate-500">15%</span>
+              </div>
+              <div class="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden">
+                <div class="h-full bg-slate-700 rounded-full" style="width: 15%"></div>
+              </div>
+            </div>
+          </div>
+
           <hr class="border-slate-800/60 my-4" />
           <!-- 绝活英雄 -->
           <div class="space-y-1">
@@ -309,19 +423,59 @@
           </div>
         </div>
 
-        <!-- 卡片 3：Offlane -->
-        <div class="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-sm bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/30 hover:shadow-[0_0_25px_rgba(245,158,11,0.15)] group">
+        <!-- 卡片 3：村保安 -->
+        <div
+          class="w-full max-w-sm mx-auto bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/30 hover:shadow-[0_0_25px_rgba(245,158,11,0.15)] group">
           <!-- 头像区 -->
-          <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-slate-950 to-slate-900 border border-slate-800/80 mx-auto flex items-center justify-center mb-6 overflow-hidden relative shadow-inner group-hover:border-amber-500/20 transition-colors">
-            <span class="font-display text-3xl font-black text-amber-500/60 group-hover:text-amber-500 group-hover:scale-110 transition-all">POS 3</span>
+          <div
+            class="w-24 h-24 rounded-full border border-slate-800/80 mx-auto mb-6 overflow-hidden relative shadow-inner group-hover:border-amber-500/40 transition-colors">
+            <img src="./assets/cunbaoan.png" alt="村保安"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
           <!-- 名字与标签 -->
           <div class="space-y-2 mb-6">
-            <h3 class="font-display text-2xl font-bold text-slate-100 group-hover:text-amber-400 transition-colors">熊二</h3>
-            <span class="inline-block px-3 py-0.5 text-xs font-semibold rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 tracking-wider">
-              3号位 (Offlane)
+            <h3 class="font-display text-2xl font-bold text-slate-100 group-hover:text-amber-400 transition-colors">村保安
+            </h3>
+            <span
+              class="inline-block px-3 py-0.5 text-xs font-semibold rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 tracking-wider">
+              3号位 (Offlane) / 治安主任
             </span>
           </div>
+
+          <!-- 三维个人数据栏 -->
+          <div class="space-y-4 text-left mb-6">
+            <!-- 数据 1 -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-slate-400">天梯 MMR</span>
+                <span class="text-amber-400 font-bold">3,200 (万古)</span>
+              </div>
+              <div class="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden">
+                <div class="h-full bg-amber-500 rounded-full" style="width: 30%"></div>
+              </div>
+            </div>
+            <!-- 数据 2 -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-slate-400">参战率</span>
+                <span class="text-slate-200">55%</span>
+              </div>
+              <div class="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden">
+                <div class="h-full bg-amber-500/70 rounded-full" style="width: 55%"></div>
+              </div>
+            </div>
+            <!-- 数据 3 -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-slate-400">场均背锅率</span>
+                <span class="text-red-500 font-bold">99% (保安真香)</span>
+              </div>
+              <div class="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden">
+                <div class="h-full bg-red-600 rounded-full" style="width: 99%"></div>
+              </div>
+            </div>
+          </div>
+
           <hr class="border-slate-800/60 my-4" />
           <!-- 绝活英雄 -->
           <div class="space-y-1">
@@ -330,46 +484,195 @@
           </div>
         </div>
 
-        <!-- 卡片 4：Support -->
-        <div class="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-sm bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:border-emerald-500/30 hover:shadow-[0_0_25px_rgba(16,185,129,0.15)] group">
-          <!-- 头像区 -->
-          <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-slate-950 to-slate-900 border border-slate-800/80 mx-auto flex items-center justify-center mb-6 overflow-hidden relative shadow-inner group-hover:border-emerald-500/20 transition-colors">
-            <span class="font-display text-3xl font-black text-emerald-500/60 group-hover:text-emerald-500 group-hover:scale-110 transition-all">POS 4</span>
-          </div>
-          <!-- 名字与标签 -->
-          <div class="space-y-2 mb-6">
-            <h3 class="font-display text-2xl font-bold text-slate-100 group-hover:text-emerald-400 transition-colors">巡逻员</h3>
-            <span class="inline-block px-3 py-0.5 text-xs font-semibold rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 tracking-wider">
-              4号位 (Support)
-            </span>
-          </div>
-          <hr class="border-slate-800/60 my-4" />
-          <!-- 绝活英雄 -->
-          <div class="space-y-1">
-            <div class="text-xs uppercase tracking-widest text-slate-500 font-mono">绝活英雄</div>
-            <div class="text-slate-300 text-sm font-medium">大地之灵 / 拉比克 / 莱恩</div>
-          </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 村干部往事 (History) 板块 -->
+  <section id="history"
+    class="relative py-24 bg-slate-900/60 border-t border-b border-slate-900/80 overflow-hidden z-10 lg:pl-64">
+    <!-- 科技感网格背景 -->
+    <div class="absolute inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-all duration-300">
+
+      <!-- 标题 -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rose-500/20 bg-rose-500/5 text-rose-400 text-xs font-semibold tracking-widest uppercase">
+          VILLAGE HISTORY / 峥嵘岁月
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black font-display tracking-tight text-white">
+          村干部往事
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base font-light">
+          那些曾在熊坑村口口相传、甚至载入人类文明（史诗级跑偏）史册的伟大壮举。
+        </p>
+      </div>
+
+      <!-- 两栏互动布局 -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+
+        <!-- 左侧：纵向 Tab 切换菜单 (3列布局，让标题完整显示) -->
+        <div
+          class="lg:col-span-3 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 scrollbar-none no-scrollbar">
+
+          <!-- 按钮 1 -->
+          <button onclick="switchStory(1)" id="story-tab-1"
+            class="story-tab-btn flex-shrink-0 w-60 lg:w-full flex items-center gap-2.5 py-2.5 px-3 rounded-xl border text-left transition-all duration-300 bg-gradient-to-r from-rose-950/20 to-slate-900/40 border-rose-500/30 text-slate-100">
+            <span class="font-display text-base font-black opacity-60 text-rose-500">01</span>
+            <span class="font-semibold text-xs tracking-wide">村长怒触不周山</span>
+          </button>
+
+          <!-- 按钮 2 -->
+          <button onclick="switchStory(2)" id="story-tab-2"
+            class="story-tab-btn flex-shrink-0 w-60 lg:w-full flex items-center gap-2.5 py-2.5 px-3 rounded-xl border text-left transition-all duration-300 bg-slate-900/10 border-slate-800/80 text-slate-400 hover:text-slate-200 hover:border-slate-700/60">
+            <span class="font-display text-base font-black opacity-60">02</span>
+            <span class="font-semibold text-xs tracking-wide">副村长化名D.B. COOPER劫机</span>
+          </button>
+
+          <!-- 按钮 3 -->
+          <button onclick="switchStory(3)" id="story-tab-3"
+            class="story-tab-btn flex-shrink-0 w-60 lg:w-full flex items-center gap-2.5 py-2.5 px-3 rounded-xl border text-left transition-all duration-300 bg-slate-900/10 border-slate-800/80 text-slate-400 hover:text-slate-200 hover:border-slate-700/60">
+            <span class="font-display text-base font-black opacity-60">03</span>
+            <span class="font-semibold text-xs tracking-wide">村保安刺杀斐迪南大公</span>
+          </button>
+
+          <!-- 按钮 4 -->
+          <button onclick="switchStory(4)" id="story-tab-4"
+            class="story-tab-btn flex-shrink-0 w-60 lg:w-full flex items-center gap-2.5 py-2.5 px-3 rounded-xl border text-left transition-all duration-300 bg-slate-900/10 border-slate-800/80 text-slate-400 hover:text-slate-200 hover:border-slate-700/60">
+            <span class="font-display text-base font-black opacity-60">04</span>
+            <span class="font-semibold text-xs tracking-wide">村长扶贫网贷脱贫</span>
+          </button>
+
+          <!-- 按钮 5 -->
+          <button onclick="switchStory(5)" id="story-tab-5"
+            class="story-tab-btn flex-shrink-0 w-60 lg:w-full flex items-center gap-2.5 py-2.5 px-3 rounded-xl border text-left transition-all duration-300 bg-slate-900/10 border-slate-800/80 text-slate-400 hover:text-slate-200 hover:border-slate-700/60">
+            <span class="font-display text-base font-black opacity-60">05</span>
+            <span class="font-semibold text-xs tracking-wide">副村长骗微信步数偷能量</span>
+          </button>
+
         </div>
 
-        <!-- 卡片 5：Hard Support -->
-        <div class="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-sm bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/30 hover:shadow-[0_0_25px_rgba(59,130,246,0.15)] group">
-          <!-- 头像区 -->
-          <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-slate-950 to-slate-900 border border-slate-800/80 mx-auto flex items-center justify-center mb-6 overflow-hidden relative shadow-inner group-hover:border-blue-500/20 transition-colors">
-            <span class="font-display text-3xl font-black text-blue-500/60 group-hover:text-blue-500 group-hover:scale-110 transition-all">POS 5</span>
+        <!-- 右侧：详情图文卡片区 (占比缩回至 9 列，完美平衡) -->
+        <div class="lg:col-span-9 min-h-[420px] relative">
+
+          <!-- 卡片 1 -->
+          <div id="story-card-1"
+            class="story-detail-card w-full bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-8 lg:gap-10 items-center transition-all duration-500 opacity-100 scale-100">
+            <!-- 左：文字介绍 -->
+            <div class="w-full md:w-[35%] lg:w-[30%] shrink-0 space-y-4">
+              <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-rose-500">村长怒触不周山</h3>
+              <p class="text-slate-200 text-base sm:text-lg leading-relaxed font-light">
+                上古时期，坑神熊村长争夺创世坑神失败后，怒撞天地支柱不周山，导致“天倾西北，地陷东南”，世界大乱。
+              </p>
+              <div class="inline-flex items-center gap-2 text-xs font-mono text-slate-500">
+                <span>角色：村长</span>
+                <span>•</span>
+                <span>发生时间：上古洪荒</span>
+              </div>
+            </div>
+            <!-- 右：图片 (自适应放大) -->
+            <div
+              class="flex-1 aspect-[4/3] rounded-xl overflow-hidden border border-slate-800/80 bg-slate-950 flex flex-col items-center justify-center text-center group hover:border-rose-500/30 transition-all duration-300">
+              <img id="story-img-1" src="./assets/shijian1.jpg" alt="村长怒触不周山"
+                class="w-full h-full object-cover rounded-lg group-hover:scale-[1.03] transition-transform duration-500" />
+            </div>
           </div>
-          <!-- 名字与标签 -->
-          <div class="space-y-2 mb-6">
-            <h3 class="font-display text-2xl font-bold text-slate-100 group-hover:text-blue-400 transition-colors">保镖</h3>
-            <span class="inline-block px-3 py-0.5 text-xs font-semibold rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 tracking-wider">
-              5号位 (Hard Support)
-            </span>
+
+          <!-- 卡片 2 -->
+          <div id="story-card-2"
+            class="story-detail-card hidden w-full bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-8 lg:gap-10 items-center transition-all duration-500 opacity-0 scale-95">
+            <!-- 左：文字介绍 -->
+            <div class="w-full md:w-[35%] lg:w-[30%] shrink-0 space-y-4">
+              <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-rose-500">副村长化名D.B. COOPER劫机</h3>
+              <p class="text-slate-200 text-base sm:text-lg leading-relaxed font-light">
+                副村长李帆1971年劫持西北航空305号航班，情急之下大喊“derB，快跑“，被机组人员听成D.B. COOPER，引发世界奇案。
+              </p>
+              <div class="inline-flex items-center gap-2 text-xs font-mono text-slate-500">
+                <span>角色：副村长</span>
+                <span>•</span>
+                <span>发生时间：1971年</span>
+              </div>
+            </div>
+            <!-- 右：图片 (自适应放大) -->
+            <div
+              class="flex-1 aspect-[4/3] rounded-xl overflow-hidden border border-slate-800/80 bg-slate-950 flex flex-col items-center justify-center text-center group hover:border-rose-500/30 transition-all duration-300">
+              <img id="story-img-2" src="./assets/shijian2.jpg" alt="副村长化名D.B. COOPER劫机"
+                class="w-full h-full object-cover rounded-lg group-hover:scale-[1.03] transition-transform duration-500" />
+            </div>
           </div>
-          <hr class="border-slate-800/60 my-4" />
-          <!-- 绝活英雄 -->
-          <div class="space-y-1">
-            <div class="text-xs uppercase tracking-widest text-slate-500 font-mono">绝活英雄</div>
-            <div class="text-slate-300 text-sm font-medium">水晶室女 / 戴泽 / 巫医</div>
+
+          <!-- 卡片 3 -->
+          <div id="story-card-3"
+            class="story-detail-card hidden w-full bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-8 lg:gap-10 items-center transition-all duration-500 opacity-0 scale-95">
+            <!-- 左：文字介绍 -->
+            <div class="w-full md:w-[35%] lg:w-[30%] shrink-0 space-y-4">
+              <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-rose-500">村保安刺杀斐迪南大公</h3>
+              <p class="text-slate-200 text-base sm:text-lg leading-relaxed font-light">
+                村保安张存隆作为一名愤青，当街刺杀斐迪南大公，史称萨拉热窝事件，引发第一次世界大战。
+              </p>
+              <div class="inline-flex items-center gap-2 text-xs font-mono text-slate-500">
+                <span>角色：村保安</span>
+                <span>•</span>
+                <span>发生时间：1914年</span>
+              </div>
+            </div>
+            <!-- 右：图片 (自适应放大) -->
+            <div
+              class="flex-1 aspect-[4/3] rounded-xl overflow-hidden border border-slate-800/80 bg-slate-950 flex flex-col items-center justify-center text-center group hover:border-rose-500/30 transition-all duration-300">
+              <img id="story-img-3" src="./assets/shijian3.jpg" alt="村保安刺杀斐迪南大公"
+                class="w-full h-full object-cover rounded-lg group-hover:scale-[1.03] transition-transform duration-500" />
+            </div>
           </div>
+
+          <!-- 卡片 4 -->
+          <div id="story-card-4"
+            class="story-detail-card hidden w-full bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-8 lg:gap-10 items-center transition-all duration-500 opacity-0 scale-95">
+            <!-- 左：文字介绍 -->
+            <div class="w-full md:w-[35%] lg:w-[30%] shrink-0 space-y-4">
+              <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-rose-500">村长扶贫网贷脱贫</h3>
+              <p class="text-slate-200 text-base sm:text-lg leading-relaxed font-light">
+                熊坑村村长熊泽响应国家号召，先富带动后富，为了帮助村民们脱贫，挨个用他们手机申请网贷。
+              </p>
+              <div class="inline-flex items-center gap-2 text-xs font-mono text-slate-500">
+                <span>角色：村长</span>
+                <span>•</span>
+                <span>发生时间：现代</span>
+              </div>
+            </div>
+            <!-- 右：图片 (自适应放大) -->
+            <div
+              class="flex-1 aspect-[4/3] rounded-xl overflow-hidden border border-slate-800/80 bg-slate-950 flex flex-col items-center justify-center text-center group hover:border-rose-500/30 transition-all duration-300">
+              <img id="story-img-4" src="./assets/shijian4.jpg" alt="村长扶贫网贷脱贫"
+                class="w-full h-full object-cover rounded-lg group-hover:scale-[1.03] transition-transform duration-500" />
+            </div>
+          </div>
+
+          <!-- 卡片 5 -->
+          <div id="story-card-5"
+            class="story-detail-card hidden w-full bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-8 lg:gap-10 items-center transition-all duration-500 opacity-0 scale-95">
+            <!-- 左：文字介绍 -->
+            <div class="w-full md:w-[35%] lg:w-[30%] shrink-0 space-y-4">
+              <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-rose-500">副村长骗微信步数偷能量</h3>
+              <p class="text-slate-200 text-base sm:text-lg leading-relaxed font-light">
+                副村长李帆为了坚持做公益，每天都在蚂蚁森林偷能量，为了收集更多能量，骗村头老太太微信步数可以提现，然后每天盯着他们的蚂蚁能量偷。
+              </p>
+              <div class="inline-flex items-center gap-2 text-xs font-mono text-slate-500">
+                <span>角色：副村长</span>
+                <span>•</span>
+                <span>发生时间：现代</span>
+              </div>
+            </div>
+            <!-- 右：图片 (自适应放大) -->
+            <div
+              class="flex-1 aspect-[4/3] rounded-xl overflow-hidden border border-slate-800/80 bg-slate-950 flex flex-col items-center justify-center text-center group hover:border-rose-500/30 transition-all duration-300">
+              <img id="story-img-5" src="./assets/shijian5.jpg" alt="副村长骗微信步数偷能量"
+                class="w-full h-full object-cover rounded-lg group-hover:scale-[1.03] transition-transform duration-500" />
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -378,16 +681,18 @@
   </section>
 
   <!-- 趣味数据墙 (Stats & Highlights) 板块 -->
-  <section class="relative py-20 bg-slate-950 border-t border-slate-900/80 overflow-hidden z-10">
+  <section class="relative py-20 bg-slate-950 border-t border-slate-900/80 overflow-hidden z-10 lg:pl-64">
     <!-- 科技感网格背景 -->
     <div class="absolute inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-all duration-300">
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-        
+
         <!-- 数据项 1 -->
-        <div class="text-center space-y-2 p-6 rounded-2xl bg-slate-900/20 border border-slate-900/50 backdrop-blur-sm group hover:border-rose-500/20 transition-all duration-300">
-          <div class="font-display text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(244,63,94,0.3)] group-hover:scale-105 transition-transform duration-300">
+        <div
+          class="text-center space-y-2 p-6 rounded-2xl bg-slate-900/20 border border-slate-900/50 backdrop-blur-sm group hover:border-rose-500/20 transition-all duration-300">
+          <div
+            class="font-display text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(244,63,94,0.3)] group-hover:scale-105 transition-transform duration-300">
             99+
           </div>
           <div class="text-xs sm:text-sm text-slate-400 font-medium tracking-wider">
@@ -396,8 +701,10 @@
         </div>
 
         <!-- 数据项 2 -->
-        <div class="text-center space-y-2 p-6 rounded-2xl bg-slate-900/20 border border-slate-900/50 backdrop-blur-sm group hover:border-rose-500/20 transition-all duration-300">
-          <div class="font-display text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(244,63,94,0.3)] group-hover:scale-105 transition-transform duration-300">
+        <div
+          class="text-center space-y-2 p-6 rounded-2xl bg-slate-900/20 border border-slate-900/50 backdrop-blur-sm group hover:border-rose-500/20 transition-all duration-300">
+          <div
+            class="font-display text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(244,63,94,0.3)] group-hover:scale-105 transition-transform duration-300">
             10,000+
           </div>
           <div class="text-xs sm:text-sm text-slate-400 font-medium tracking-wider">
@@ -406,8 +713,10 @@
         </div>
 
         <!-- 数据项 3 -->
-        <div class="text-center space-y-2 p-6 rounded-2xl bg-slate-900/20 border border-slate-900/50 backdrop-blur-sm group hover:border-rose-500/20 transition-all duration-300">
-          <div class="font-display text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(244,63,94,0.3)] group-hover:scale-105 transition-transform duration-300">
+        <div
+          class="text-center space-y-2 p-6 rounded-2xl bg-slate-900/20 border border-slate-900/50 backdrop-blur-sm group hover:border-rose-500/20 transition-all duration-300">
+          <div
+            class="font-display text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(244,63,94,0.3)] group-hover:scale-105 transition-transform duration-300">
             100%
           </div>
           <div class="text-xs sm:text-sm text-slate-400 font-medium tracking-wider">
@@ -416,8 +725,10 @@
         </div>
 
         <!-- 数据项 4 -->
-        <div class="text-center space-y-2 p-6 rounded-2xl bg-slate-900/20 border border-slate-900/50 backdrop-blur-sm group hover:border-rose-500/20 transition-all duration-300">
-          <div class="font-display text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(244,63,94,0.3)] group-hover:scale-105 transition-transform duration-300">
+        <div
+          class="text-center space-y-2 p-6 rounded-2xl bg-slate-900/20 border border-slate-900/50 backdrop-blur-sm group hover:border-rose-500/20 transition-all duration-300">
+          <div
+            class="font-display text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(244,63,94,0.3)] group-hover:scale-105 transition-transform duration-300">
             80%
           </div>
           <div class="text-xs sm:text-sm text-slate-400 font-medium tracking-wider">
@@ -430,12 +741,12 @@
   </section>
 
   <!-- 页脚与招募通道 (Footer & Call to Action) -->
-  <section id="join" class="relative pt-24 pb-12 bg-slate-900/30 border-t border-slate-900/80 overflow-hidden z-10">
+  <section id="join" class="relative pt-24 pb-12 bg-slate-900/30 border-t border-slate-900/80 overflow-hidden z-10 lg:pl-64">
     <!-- 科技感网格背景 -->
     <div class="absolute inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-all duration-300">
+
       <!-- 招募区 (CTA) -->
       <div class="text-center max-w-3xl mx-auto mb-20 space-y-8">
         <h2 class="text-3xl sm:text-5xl font-black font-display tracking-tight text-white">
@@ -445,9 +756,11 @@
           无论是绝活哥还是绝症哥，熊坑村都欢迎你。加入我们，在欢声笑语中见证遗迹的倒塌或重生！
         </p>
         <div class="inline-block">
-          <a href="#" class="inline-flex items-center justify-center px-8 py-4 text-base font-extrabold tracking-widest text-white bg-gradient-to-r from-red-800 via-rose-600 to-orange-600 rounded-xl shadow-neon-red hover:shadow-neon-red-lg hover:scale-105 hover:brightness-110 active:scale-95 transition-all duration-300 group cursor-pointer">
-            <span>加入开黑群</span>
-            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <a href="https://zh.dotabuff.com/players/1600413635" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-extrabold tracking-widest text-white bg-gradient-to-r from-red-800 via-rose-600 to-orange-600 rounded-xl shadow-neon-red hover:shadow-neon-red-lg hover:scale-105 hover:brightness-110 active:scale-95 transition-all duration-300 group cursor-pointer">
+            <span>点击监视村长战绩</span>
+            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
@@ -466,17 +779,20 @@
         <div class="flex items-center space-x-6">
           <a href="#" class="text-slate-500 hover:text-rose-500 transition-colors" title="Steam">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 .007c-5.597 0-10.29 3.84-11.536 9.03l6.398 2.64c.548-.37 1.21-.59 1.928-.59h.105L12 8.01v-.022c0-2.31 1.88-4.19 4.19-4.19 2.31 0 4.19 1.88 4.19 4.19 0 2.31-1.88 4.19-4.19 4.19h-.022l-3.08 3.12v.11a4.186 4.186 0 0 1-4.19 4.19c-.83 0-1.6-.24-2.26-.66l-3.69 1.53c1.78 2.11 4.46 3.44 7.46 3.44 5.597 0 10.19-4.593 10.19-10.19S17.597.007 12 .007zM8.99 13.29c1.21 0 2.19.98 2.19 2.19 0 1.21-.98 2.19-2.19 2.19a2.19 2.19 0 0 1-2.19-2.19c0-1.21.98-2.19 2.19-2.19zm7.2-7.29c1.1 0 1.99.89 1.99 1.99 0 1.1-.89 1.99-1.99 1.99-1.1 0-1.99-.89-1.99-1.99 0-1.1.89-1.99 1.99-1.99z"/>
+              <path
+                d="M12 .007c-5.597 0-10.29 3.84-11.536 9.03l6.398 2.64c.548-.37 1.21-.59 1.928-.59h.105L12 8.01v-.022c0-2.31 1.88-4.19 4.19-4.19 2.31 0 4.19 1.88 4.19 4.19 0 2.31-1.88 4.19-4.19 4.19h-.022l-3.08 3.12v.11a4.186 4.186 0 0 1-4.19 4.19c-.83 0-1.6-.24-2.26-.66l-3.69 1.53c1.78 2.11 4.46 3.44 7.46 3.44 5.597 0 10.19-4.593 10.19-10.19S17.597.007 12 .007zM8.99 13.29c1.21 0 2.19.98 2.19 2.19 0 1.21-.98 2.19-2.19 2.19a2.19 2.19 0 0 1-2.19-2.19c0-1.21.98-2.19 2.19-2.19zm7.2-7.29c1.1 0 1.99.89 1.99 1.99 0 1.1-.89 1.99-1.99 1.99-1.1 0-1.99-.89-1.99-1.99 0-1.1.89-1.99 1.99-1.99z" />
             </svg>
           </a>
           <a href="#" class="text-slate-500 hover:text-rose-500 transition-colors" title="Discord">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z"/>
+              <path
+                d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z" />
             </svg>
           </a>
           <a href="#" class="text-slate-500 hover:text-rose-500 transition-colors" title="QQ 群">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12c0 1.62.39 3.16 1.08 4.54L2 22l5.54-1.08C8.92 21.61 10.4 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm3.32 14.15c-.29.41-.71.72-1.25.9-.21.07-.44.11-.68.12a5.41 5.41 0 0 1-.9-.08c-.73-.13-1.36-.45-1.84-.94-.37-.37-.62-.83-.75-1.34a2.9 2.9 0 0 1 .37-2.22c.24-.36.57-.65.96-.83.18-.08.38-.13.59-.15.28-.02.56.02.83.12.56.21.98.6 1.24 1.12.16.32.23.68.22 1.04a2.4 2.4 0 0 1-.74 1.26zm.26-4.5c-.32.06-.65.04-.96-.06a2.02 2.02 0 0 1-1.15-.99c-.19-.4-.22-.84-.1-1.26a1.98 1.98 0 0 1 .99-1.2c.41-.21.87-.24 1.29-.09.39.14.71.42.92.78.29.5.31 1.09.07 1.6-.17.37-.48.67-.86.84a1.86 1.86 0 0 1-.2.08z"/>
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12c0 1.62.39 3.16 1.08 4.54L2 22l5.54-1.08C8.92 21.61 10.4 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm3.32 14.15c-.29.41-.71.72-1.25.9-.21.07-.44.11-.68.12a5.41 5.41 0 0 1-.9-.08c-.73-.13-1.36-.45-1.84-.94-.37-.37-.62-.83-.75-1.34a2.9 2.9 0 0 1 .37-2.22c.24-.36.57-.65.96-.83.18-.08.38-.13.59-.15.28-.02.56.02.83.12.56.21.98.6 1.24 1.12.16.32.23.68.22 1.04a2.4 2.4 0 0 1-.74 1.26zm.26-4.5c-.32.06-.65.04-.96-.06a2.02 2.02 0 0 1-1.15-.99c-.19-.4-.22-.84-.1-1.26a1.98 1.98 0 0 1 .99-1.2c.41-.21.87-.24 1.29-.09.39.14.71.42.92.78.29.5.31 1.09.07 1.6-.17.37-.48.67-.86.84a1.86 1.86 0 0 1-.2.08z" />
             </svg>
           </a>
         </div>
@@ -494,7 +810,7 @@
       menuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
       });
-      
+
       // 点击链接后自动隐藏菜单
       mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
@@ -502,6 +818,50 @@
         });
       });
     }
+
+    // --- 村干部往事交互 JS ---
+    function switchStory(index) {
+      document.querySelectorAll('.story-tab-btn').forEach(btn => {
+        btn.className = 'story-tab-btn flex-shrink-0 w-60 lg:w-full flex items-center gap-2.5 py-2.5 px-3 rounded-xl border text-left transition-all duration-300 bg-slate-900/10 border-slate-800/80 text-slate-400 hover:text-slate-200 hover:border-slate-700/60';
+        const numSpan = btn.querySelector('.font-display');
+        if (numSpan) numSpan.className = 'font-display text-base font-black opacity-60';
+      });
+
+      const activeBtn = document.getElementById(`story-tab-${index}`);
+      if (activeBtn) {
+        activeBtn.className = 'story-tab-btn flex-shrink-0 w-60 lg:w-full flex items-center gap-2.5 py-2.5 px-3 rounded-xl border text-left transition-all duration-300 bg-gradient-to-r from-rose-950/20 to-slate-900/40 border-rose-500/30 text-slate-100';
+        const activeNum = activeBtn.querySelector('.font-display');
+        if (activeNum) activeNum.className = 'font-display text-base font-black opacity-60 text-rose-500';
+      }
+
+      document.querySelectorAll('.story-detail-card').forEach(card => {
+        card.classList.add('hidden');
+        card.classList.remove('opacity-100', 'scale-100');
+        card.classList.add('opacity-0', 'scale-95');
+      });
+
+      const activeCard = document.getElementById(`story-card-${index}`);
+      if (activeCard) {
+        activeCard.classList.remove('hidden');
+        setTimeout(() => {
+          activeCard.classList.remove('opacity-0', 'scale-95');
+          activeCard.classList.add('opacity-100', 'scale-100');
+        }, 50);
+      }
+    }
+
+    function checkStoryImages() {
+      for (let i = 1; i <= 5; i++) {
+        const img = document.getElementById(`story-img-${i}`);
+        const placeholder = document.getElementById(`story-placeholder-${i}`);
+        if (img && img.getAttribute('src') && img.getAttribute('src') !== '') {
+          img.classList.remove('hidden');
+          if (placeholder) placeholder.classList.add('hidden');
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', checkStoryImages);
   </script>
 </body>
+
 </html>
