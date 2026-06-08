@@ -90,19 +90,22 @@
   </div>
 
   <!-- 大屏左侧竖向导航栏 (Sidebar Navigation) -->
-  <aside class="hidden lg:flex flex-col justify-between fixed top-0 bottom-0 left-0 w-64 z-50 border-r border-slate-900/80 bg-slate-950/60 backdrop-blur-xl p-8 select-none">
-    
+  <aside
+    class="hidden lg:flex flex-col justify-between fixed top-0 bottom-0 left-0 w-64 z-50 border-r border-slate-900/80 bg-slate-950/60 backdrop-blur-xl p-8 select-none">
+
     <!-- 顶部：Logo 与战队名 -->
     <div class="space-y-6">
       <a href="#" class="flex flex-col items-center text-center space-y-3 group">
         <!-- 战队图标 (类似刀塔神盾的极简科技感图标) -->
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center shadow-neon-red group-hover:scale-105 transition-all duration-300">
+        <div
+          class="w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center shadow-neon-red group-hover:scale-105 transition-all duration-300">
           <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2L2 9l2 11 8 3 8-3 2-11L12 2zm0 3.8l6 4.2-1.5 8.2-4.5 1.8-4.5-1.8L6 10l6-4.2z"/>
+            <path d="M12 2L2 9l2 11 8 3 8-3 2-11L12 2zm0 3.8l6 4.2-1.5 8.2-4.5 1.8-4.5-1.8L6 10l6-4.2z" />
           </svg>
         </div>
         <!-- 战队名字 -->
-        <span class="text-2xl font-black font-display tracking-widest bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent group-hover:brightness-125 transition-all duration-300 drop-shadow-[0_0_15px_rgba(244,63,94,0.3)]">
+        <span
+          class="text-2xl font-black font-display tracking-widest bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent group-hover:brightness-125 transition-all duration-300 drop-shadow-[0_0_15px_rgba(244,63,94,0.3)]">
           熊坑村
         </span>
       </a>
@@ -111,20 +114,28 @@
 
     <!-- 中部：竖向菜单链接 -->
     <nav class="flex flex-col space-y-2 w-full">
-      <a href="#intro" class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
-        <span class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
+      <a href="#intro"
+        class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
+        <span
+          class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
         <span class="text-sm font-semibold tracking-wider">简介 / About</span>
       </a>
-      <a href="#roster" class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
-        <span class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
+      <a href="#roster"
+        class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
+        <span
+          class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
         <span class="text-sm font-semibold tracking-wider">阵容 / Roster</span>
       </a>
-      <a href="#history" class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
-        <span class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
+      <a href="#history"
+        class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
+        <span
+          class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
         <span class="text-sm font-semibold tracking-wider">往事 / History</span>
       </a>
-      <a href="#join" class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
-        <span class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
+      <a href="#join"
+        class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
+        <span
+          class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
         <span class="text-sm font-semibold tracking-wider">加入 / Join us</span>
       </a>
     </nav>
@@ -138,27 +149,31 @@
   </aside>
 
   <!-- 小屏吸顶导航栏 (Topbar Navigation) -->
-  <nav class="lg:hidden fixed top-0 left-0 right-0 z-50 border-b border-slate-900/80 bg-slate-950/70 backdrop-blur-md transition-all duration-300">
+  <nav
+    class="lg:hidden fixed top-0 left-0 right-0 z-50 border-b border-slate-900/80 bg-slate-950/70 backdrop-blur-md transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
 
         <!-- 左侧：战队Logo/名字 -->
         <a href="#" class="flex items-center space-x-3 group">
-          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center shadow-neon-red group-hover:scale-110 transition-transform duration-300">
+          <div
+            class="w-8 h-8 rounded-lg bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center shadow-neon-red group-hover:scale-110 transition-transform duration-300">
             <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2L2 9l2 11 8 3 8-3 2-11L12 2zm0 3.8l6 4.2-1.5 8.2-4.5 1.8-4.5-1.8L6 10l6-4.2z"/>
+              <path d="M12 2L2 9l2 11 8 3 8-3 2-11L12 2zm0 3.8l6 4.2-1.5 8.2-4.5 1.8-4.5-1.8L6 10l6-4.2z" />
             </svg>
           </div>
-          <span class="text-lg font-black font-display tracking-widest bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent group-hover:brightness-125 transition-all duration-300 drop-shadow-[0_0_15px_rgba(244,63,94,0.3)]">
+          <span
+            class="text-lg font-black font-display tracking-widest bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 bg-clip-text text-transparent group-hover:brightness-125 transition-all duration-300 drop-shadow-[0_0_15px_rgba(244,63,94,0.3)]">
             熊坑村
           </span>
         </a>
 
         <!-- 右侧：移动端菜单按钮 -->
         <div class="flex items-center">
-          <button id="mobile-menu-btn" type="button" class="text-slate-400 hover:text-white focus:outline-none p-2" aria-label="Toggle Menu">
+          <button id="mobile-menu-btn" type="button" class="text-slate-400 hover:text-white focus:outline-none p-2"
+            aria-label="Toggle Menu">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
           </button>
         </div>
@@ -167,16 +182,22 @@
     </div>
 
     <!-- 移动端下拉菜单 -->
-    <div id="mobile-menu" class="hidden border-t border-slate-900 bg-slate-950/95 backdrop-blur-lg px-4 pt-2 pb-6 space-y-3">
-      <a href="#intro" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">简介</a>
-      <a href="#roster" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">阵容</a>
-      <a href="#history" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">往事</a>
-      <a href="#join" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">加入</a>
+    <div id="mobile-menu"
+      class="hidden border-t border-slate-900 bg-slate-950/95 backdrop-blur-lg px-4 pt-2 pb-6 space-y-3">
+      <a href="#intro"
+        class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">简介</a>
+      <a href="#roster"
+        class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">阵容</a>
+      <a href="#history"
+        class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">往事</a>
+      <a href="#join"
+        class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">加入</a>
     </div>
   </nav>
 
   <!-- 首屏横幅 (Hero Section) & 关于熊坑村合并 -->
-  <section id="intro" class="relative min-h-[80vh] flex items-center justify-center overflow-hidden z-10 pt-16 pb-8 lg:pl-64">
+  <section id="intro"
+    class="relative min-h-[80vh] flex items-center justify-center overflow-hidden z-10 pt-16 pb-8 lg:pl-64">
     <!-- 震撼首屏大背景图 -->
     <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <img src="./assets/beijing1.jpg" alt="主页背景"
@@ -741,7 +762,8 @@
   </section>
 
   <!-- 页脚与招募通道 (Footer & Call to Action) -->
-  <section id="join" class="relative pt-24 pb-12 bg-slate-900/30 border-t border-slate-900/80 overflow-hidden z-10 lg:pl-64">
+  <section id="join"
+    class="relative pt-24 pb-12 bg-slate-900/30 border-t border-slate-900/80 overflow-hidden z-10 lg:pl-64">
     <!-- 科技感网格背景 -->
     <div class="absolute inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
 
@@ -800,6 +822,104 @@
 
     </div>
   </section>
+
+  <!-- 投票小挂件 (Floating Vote Widget) -->
+  <div id="vote-widget" class="fixed right-6 bottom-24 z-50 flex flex-col items-end transition-all duration-300">
+    <!-- 折叠后的激活圆形按钮 (🗳️) -->
+    <button id="vote-expand-btn"
+      class="hidden flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-rose-600 to-orange-600 shadow-neon-red hover:scale-110 active:scale-95 transition-all text-white focus:outline-none"
+      title="投票选村长">
+      <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+      </svg>
+    </button>
+
+    <!-- 投票面板 -->
+    <div id="vote-panel"
+      class="w-72 sm:w-80 bg-slate-950/85 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-5 shadow-2xl relative overflow-hidden group transition-all duration-300">
+      <!-- 背景微光斑 -->
+      <div class="absolute -top-[30%] -right-[30%] w-32 h-32 rounded-full bg-rose-600/10 blur-2xl pointer-events-none">
+      </div>
+
+      <!-- 头部：标题与折叠按钮 -->
+      <div class="flex items-center justify-between mb-4 relative z-10">
+        <span
+          class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-rose-500/20 bg-rose-500/10 text-rose-400 text-[10px] font-bold uppercase tracking-wider">
+          🗳️ COMMUNITY POLL / 战队民调
+        </span>
+        <button id="vote-collapse-btn" class="text-slate-500 hover:text-white transition-colors p-1" title="折叠">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- 投票标题 -->
+      <h4 class="text-sm sm:text-base font-extrabold text-slate-100 mb-4 relative z-10 font-display tracking-tight">
+        你支持谁当下一届村长？
+      </h4>
+
+      <!-- 投票表单 (未投票时显示) -->
+      <div id="vote-form" class="space-y-2.5 relative z-10">
+        <button onclick="castVote(1)"
+          class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:bg-rose-950/20 hover:border-rose-500/30 text-left text-xs sm:text-sm text-slate-300 font-semibold transition-all duration-300 group/opt">
+          <div class="flex items-center gap-2.5">
+            <span
+              class="w-6 h-6 rounded-lg bg-slate-800 flex items-center justify-center text-xs text-rose-400 group-hover/opt:bg-rose-500 group-hover/opt:text-white font-mono transition-colors">1</span>
+            <span>熊泽 (村长 / 1号位)</span>
+          </div>
+          <span class="text-slate-500 group-hover/opt:text-rose-400 transition-colors text-xs font-mono">🗳️ 投他</span>
+        </button>
+
+        <button onclick="castVote(2)"
+          class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:bg-orange-950/20 hover:border-orange-500/30 text-left text-xs sm:text-sm text-slate-300 font-semibold transition-all duration-300 group/opt">
+          <div class="flex items-center gap-2.5">
+            <span
+              class="w-6 h-6 rounded-lg bg-slate-800 flex items-center justify-center text-xs text-orange-400 group-hover/opt:bg-orange-500 group-hover/opt:text-white font-mono transition-colors">2</span>
+            <span>李帆 (副村长 / 2号位)</span>
+          </div>
+          <span class="text-slate-500 group-hover/opt:text-orange-400 transition-colors text-xs font-mono">🗳️ 投他</span>
+        </button>
+      </div>
+
+      <!-- 投票结果 (已投票时显示) -->
+      <div id="vote-result" class="hidden space-y-4 relative z-10">
+        <div class="space-y-3">
+          <!-- 熊泽数据 -->
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs font-semibold">
+              <span class="text-slate-300">1. 熊泽</span>
+              <span id="vote-pct-1" class="text-rose-400 font-mono">0%</span>
+            </div>
+            <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden">
+              <div id="vote-bar-1"
+                class="h-full bg-gradient-to-r from-red-500 to-rose-500 rounded-full transition-all duration-1000 ease-out"
+                style="width: 0%"></div>
+            </div>
+          </div>
+          <!-- 李帆数据 -->
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs font-semibold">
+              <span class="text-slate-300">2. 李帆</span>
+              <span id="vote-pct-2" class="text-orange-400 font-mono">0%</span>
+            </div>
+            <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden">
+              <div id="vote-bar-2"
+                class="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full transition-all duration-1000 ease-out"
+                style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-[1px] bg-slate-800/60 my-2"></div>
+        <!-- 感谢文案 -->
+        <p class="text-xs text-rose-400 font-medium leading-relaxed text-center animate-pulse-slow">
+          感谢你为反抗熊坑村贡献了宝贵的一票
+        </p>
+      </div>
+    </div>
+  </div>
 
   <!-- 极简响应式移动端菜单交互脚本 -->
   <script>
@@ -860,7 +980,91 @@
         }
       }
     }
-    window.addEventListener('DOMContentLoaded', checkStoryImages);
+
+    // --- 投票小挂件 JS 逻辑 ---
+    const votePanel = document.getElementById('vote-panel');
+    const voteExpandBtn = document.getElementById('vote-expand-btn');
+    const voteCollapseBtn = document.getElementById('vote-collapse-btn');
+    const voteForm = document.getElementById('vote-form');
+    const voteResult = document.getElementById('vote-result');
+
+    function initVoteWidget() {
+      // 检查折叠状态
+      const isCollapsed = localStorage.getItem('vote_widget_collapsed') === 'true';
+      if (isCollapsed && votePanel && voteExpandBtn) {
+        votePanel.classList.add('hidden');
+        voteExpandBtn.classList.remove('hidden');
+      }
+
+      // 检查投票状态
+      const hasVoted = localStorage.getItem('vote_cast_v2') !== null;
+      if (hasVoted) {
+        showVoteResults();
+      }
+    }
+
+    if (voteCollapseBtn) {
+      voteCollapseBtn.addEventListener('click', () => {
+        votePanel.classList.add('hidden');
+        voteExpandBtn.classList.remove('hidden');
+        localStorage.setItem('vote_widget_collapsed', 'true');
+      });
+    }
+
+    if (voteExpandBtn) {
+      voteExpandBtn.addEventListener('click', () => {
+        voteExpandBtn.classList.add('hidden');
+        votePanel.classList.remove('hidden');
+        localStorage.setItem('vote_widget_collapsed', 'false');
+      });
+    }
+
+    function castVote(optionId) {
+      // 模拟初始票数
+      let votes1 = parseInt(localStorage.getItem('votes_1') || '142');
+      let votes2 = parseInt(localStorage.getItem('votes_2') || '158');
+
+      if (optionId === 1) {
+        votes1 += 1;
+        localStorage.setItem('votes_1', votes1);
+      } else if (optionId === 2) {
+        votes2 += 1;
+        localStorage.setItem('votes_2', votes2);
+      }
+
+      localStorage.setItem('vote_cast_v2', optionId.toString());
+      showVoteResults();
+    }
+
+    function showVoteResults() {
+      if (!voteForm || !voteResult) return;
+      voteForm.classList.add('hidden');
+      voteResult.classList.remove('hidden');
+
+      const v1 = parseInt(localStorage.getItem('votes_1') || '142');
+      const v2 = parseInt(localStorage.getItem('votes_2') || '158');
+      const total = v1 + v2;
+      const pct1 = Math.round((v1 / total) * 100);
+      const pct2 = 100 - pct1;
+
+      const pct1Span = document.getElementById('vote-pct-1');
+      const pct2Span = document.getElementById('vote-pct-2');
+      if (pct1Span) pct1Span.innerText = `${pct1}%`;
+      if (pct2Span) pct2Span.innerText = `${pct2}%`;
+
+      // 给一点延迟让CSS宽度过渡生效
+      setTimeout(() => {
+        const bar1 = document.getElementById('vote-bar-1');
+        const bar2 = document.getElementById('vote-bar-2');
+        if (bar1) bar1.style.width = `${pct1}%`;
+        if (bar2) bar2.style.width = `${pct2}%`;
+      }, 100);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      checkStoryImages();
+      initVoteWidget();
+    });
   </script>
 </body>
 
