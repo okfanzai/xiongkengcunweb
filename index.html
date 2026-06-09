@@ -574,6 +574,13 @@
             <span class="font-semibold text-xs tracking-wide">副村长骗微信步数偷能量</span>
           </button>
 
+          <!-- 按钮 6 -->
+          <button onclick="switchStory(6)" id="story-tab-6"
+            class="story-tab-btn flex-shrink-0 w-60 lg:w-full flex items-center gap-2.5 py-2.5 px-3 rounded-xl border text-left transition-all duration-300 bg-slate-900/10 border-slate-800/80 text-slate-400 hover:text-slate-200 hover:border-slate-700/60">
+            <span class="font-display text-base font-black opacity-60">06</span>
+            <span class="font-semibold text-xs tracking-wide">村保安骗电工吃降压药摸高压电</span>
+          </button>
+
         </div>
 
         <!-- 右侧：详情图文卡片区 (占比缩回至 9 列，完美平衡) -->
@@ -690,6 +697,29 @@
             <div
               class="flex-1 aspect-[4/3] rounded-xl overflow-hidden border border-slate-800/80 bg-slate-950 flex flex-col items-center justify-center text-center group hover:border-rose-500/30 transition-all duration-300">
               <img id="story-img-5" src="./assets/shijian5.jpg" alt="副村长骗微信步数偷能量"
+                class="w-full h-full object-cover rounded-lg group-hover:scale-[1.03] transition-transform duration-500" />
+            </div>
+          </div>
+
+          <!-- 卡片 6 -->
+          <div id="story-card-6"
+            class="story-detail-card hidden w-full bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-8 lg:gap-10 items-center transition-all duration-500 opacity-0 scale-95">
+            <!-- 左：文字介绍 -->
+            <div class="w-full md:w-[35%] lg:w-[30%] shrink-0 space-y-4">
+              <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-rose-500">村保安骗电工吃降压药摸高压电</h3>
+              <p class="text-slate-200 text-base sm:text-lg leading-relaxed font-light">
+                熊坑村高压电泄露，众人束手无策，村保安哄骗隔壁村电工说随便摸高压电，他这里有降压药。
+              </p>
+              <div class="inline-flex items-center gap-2 text-xs font-mono text-slate-500">
+                <span>角色：村保安</span>
+                <span>•</span>
+                <span>发生时间：现代</span>
+              </div>
+            </div>
+            <!-- 右：图片 (自适应放大) -->
+            <div
+              class="flex-1 aspect-[4/3] rounded-xl overflow-hidden border border-slate-800/80 bg-slate-950 flex flex-col items-center justify-center text-center group hover:border-rose-500/30 transition-all duration-300">
+              <img id="story-img-6" src="./assets/shijian6.jpg" alt="村保安骗电工吃降压药摸高压电"
                 class="w-full h-full object-cover rounded-lg group-hover:scale-[1.03] transition-transform duration-500" />
             </div>
           </div>
@@ -971,7 +1001,7 @@
     }
 
     function checkStoryImages() {
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= 6; i++) {
         const img = document.getElementById(`story-img-${i}`);
         const placeholder = document.getElementById(`story-placeholder-${i}`);
         if (img && img.getAttribute('src') && img.getAttribute('src') !== '') {
