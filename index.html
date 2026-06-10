@@ -822,13 +822,13 @@
       </div>
 
       <!-- 状态卡片容器 -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 max-w-7xl mx-auto items-stretch">
 
         <!-- 卡片 1：村长 -->
         <div id="status-card-1"
-          class="status-card bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-xl p-4 text-center transition-all duration-300 hover:border-rose-500/30 hover:shadow-[0_0_25px_rgba(244,63,94,0.15)] group">
+          class="status-card bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-5 text-center transition-all duration-300 hover:border-rose-500/30 hover:shadow-[0_0_25px_rgba(244,63,94,0.15)] group flex flex-col justify-between h-full min-h-[480px]">
           <!-- 加载状态 -->
-          <div class="loading-skeleton">
+          <div class="loading-skeleton w-full my-auto">
             <div class="flex flex-col items-center space-y-4">
               <div class="w-16 h-16 rounded-full bg-slate-800 animate-pulse"></div>
               <div class="w-24 h-4 bg-slate-800 rounded animate-pulse"></div>
@@ -840,14 +840,14 @@
             </div>
           </div>
           <!-- 实际内容（将被JS填充） -->
-          <div class="status-content hidden"></div>
+          <div class="status-content hidden h-full w-full"></div>
         </div>
 
         <!-- 卡片 2：副村长 -->
         <div id="status-card-2"
-          class="status-card bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-xl p-4 text-center transition-all duration-300 hover:border-orange-500/30 hover:shadow-[0_0_25px_rgba(249,115,22,0.15)] group">
+          class="status-card bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-5 text-center transition-all duration-300 hover:border-orange-500/30 hover:shadow-[0_0_25px_rgba(249,115,22,0.15)] group flex flex-col justify-between h-full min-h-[480px]">
           <!-- 加载状态 -->
-          <div class="loading-skeleton">
+          <div class="loading-skeleton w-full my-auto">
             <div class="flex flex-col items-center space-y-4">
               <div class="w-16 h-16 rounded-full bg-slate-800 animate-pulse"></div>
               <div class="w-24 h-4 bg-slate-800 rounded animate-pulse"></div>
@@ -859,14 +859,14 @@
             </div>
           </div>
           <!-- 实际内容（将被JS填充） -->
-          <div class="status-content hidden"></div>
+          <div class="status-content hidden h-full w-full"></div>
         </div>
 
         <!-- 卡片 3：村保安 -->
         <div id="status-card-3"
-          class="status-card bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-xl p-4 text-center transition-all duration-300 hover:border-amber-500/30 hover:shadow-[0_0_25px_rgba(245,158,11,0.15)] group">
+          class="status-card bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-5 text-center transition-all duration-300 hover:border-amber-500/30 hover:shadow-[0_0_25px_rgba(245,158,11,0.15)] group flex flex-col justify-between h-full min-h-[480px]">
           <!-- 加载状态 -->
-          <div class="loading-skeleton">
+          <div class="loading-skeleton w-full my-auto">
             <div class="flex flex-col items-center space-y-4">
               <div class="w-16 h-16 rounded-full bg-slate-800 animate-pulse"></div>
               <div class="w-24 h-4 bg-slate-800 rounded animate-pulse"></div>
@@ -878,7 +878,45 @@
             </div>
           </div>
           <!-- 实际内容（将被JS填充） -->
-          <div class="status-content hidden"></div>
+          <div class="status-content hidden h-full w-full"></div>
+        </div>
+
+        <!-- 卡片 4：村妇联主任 -->
+        <div id="status-card-4"
+          class="status-card bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-5 text-center transition-all duration-300 hover:border-purple-500/30 hover:shadow-[0_0_25px_rgba(168,85,247,0.15)] group flex flex-col justify-between h-full min-h-[480px]">
+          <!-- 加载状态 -->
+          <div class="loading-skeleton w-full my-auto">
+            <div class="flex flex-col items-center space-y-4">
+              <div class="w-16 h-16 rounded-full bg-slate-800 animate-pulse"></div>
+              <div class="w-24 h-4 bg-slate-800 rounded animate-pulse"></div>
+              <div class="w-32 h-3 bg-slate-800 rounded animate-pulse"></div>
+              <div class="space-y-2 w-full">
+                <div class="w-full h-2 bg-slate-800 rounded animate-pulse"></div>
+                <div class="w-full h-2 bg-slate-800 rounded animate-pulse"></div>
+              </div>
+            </div>
+          </div>
+          <!-- 实际内容（将被JS填充） -->
+          <div class="status-content hidden h-full w-full"></div>
+        </div>
+
+        <!-- 卡片 5：村保安队长 -->
+        <div id="status-card-5"
+          class="status-card bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl p-5 text-center transition-all duration-300 hover:border-cyan-500/30 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] group flex flex-col justify-between h-full min-h-[480px]">
+          <!-- 加载状态 -->
+          <div class="loading-skeleton w-full my-auto">
+            <div class="flex flex-col items-center space-y-4">
+              <div class="w-16 h-16 rounded-full bg-slate-800 animate-pulse"></div>
+              <div class="w-24 h-4 bg-slate-800 rounded animate-pulse"></div>
+              <div class="w-32 h-3 bg-slate-800 rounded animate-pulse"></div>
+              <div class="space-y-2 w-full">
+                <div class="w-full h-2 bg-slate-800 rounded animate-pulse"></div>
+                <div class="w-full h-2 bg-slate-800 rounded animate-pulse"></div>
+              </div>
+            </div>
+          </div>
+          <!-- 实际内容（将被JS填充） -->
+          <div class="status-content hidden h-full w-full"></div>
         </div>
 
       </div>
@@ -1203,7 +1241,9 @@
     const PLAYERS_CONFIG = [
       { id: 1, accountId: '1600413635', name: '村长', role: '1号位 Carry', color: 'rose' },
       { id: 2, accountId: '136386953', name: '副村长', role: '2号位 Mid', color: 'orange' },
-      { id: 3, accountId: '143144216', name: '村保安', role: '3号位 Offlane', color: 'amber' }
+      { id: 3, accountId: '143144216', name: '村保安', role: '3号位 Offlane', color: 'amber' },
+      { id: 4, accountId: '413845418', name: '村妇联主任', role: '4号位 Support', color: 'purple' },
+      { id: 5, accountId: '144119996', name: '村保安队长', role: '5号位 Support', color: 'cyan' }
     ];
 
     const RANK_TIER_MAP = {
@@ -1236,6 +1276,57 @@
         return null;
       }
     }
+
+    async function fetchWinLoss(accountId) {
+      try {
+        const response = await fetch(`https://api.opendota.com/api/players/${accountId}/wl?limit=20`);
+        if (!response.ok) throw new Error('API请求失败');
+        return await response.json();
+      } catch (error) {
+        console.error(`获取玩家 ${accountId} 胜负数据失败:`, error);
+        return null;
+      }
+    }
+
+    async function fetchHeroes(accountId) {
+      try {
+        const response = await fetch(`https://api.opendota.com/api/players/${accountId}/heroes`);
+        if (!response.ok) throw new Error('API请求失败');
+        const heroes = await response.json();
+        return heroes.sort((a, b) => b.games - a.games).slice(0, 3);
+      } catch (error) {
+        console.error(`获取玩家 ${accountId} 英雄数据失败:`, error);
+        return null;
+      }
+    }
+
+    const HERO_NAMES = {
+      1: 'antimage', 2: 'axe', 3: 'bane', 4: 'bloodseeker', 5: 'crystal_maiden',
+      6: 'drow_ranger', 7: 'earthshaker', 8: 'juggernaut', 9: 'mirana', 10: 'morphling',
+      11: 'nevermore', 12: 'phantom_lancer', 13: 'puck', 14: 'pudge', 15: 'razor',
+      16: 'sand_king', 17: 'storm_spirit', 18: 'sven', 19: 'tiny', 20: 'vengefulspirit',
+      21: 'windranger', 22: 'zuus', 23: 'kunkka', 25: 'lina', 26: 'lion',
+      27: 'shadow_shaman', 28: 'slardar', 29: 'tidehunter', 30: 'witch_doctor', 31: 'lich',
+      32: 'riki', 33: 'enigma', 34: 'tinker', 35: 'sniper', 36: 'necrolyte',
+      37: 'warlock', 38: 'beastmaster', 39: 'queenofpain', 40: 'venomancer', 41: 'faceless_void',
+      42: 'skeleton_king', 43: 'death_prophet', 44: 'phantom_assassin', 45: 'pugna', 46: 'templar_assassin',
+      47: 'viper', 48: 'luna', 49: 'dragon_knight', 50: 'dazzle', 51: 'rattletrap',
+      52: 'leshrac', 53: 'furion', 54: 'life_stealer', 55: 'dark_seer', 56: 'clinkz',
+      57: 'omniknight', 58: 'enchantress', 59: 'huskar', 60: 'night_stalker', 61: 'broodmother',
+      62: 'bounty_hunter', 63: 'weaver', 64: 'jakiro', 65: 'batrider', 66: 'chen',
+      67: 'spectre', 68: 'ancient_apparition', 69: 'doom_bringer', 70: 'ursa', 71: 'spirit_breaker',
+      72: 'gyrocopter', 73: 'alchemist', 74: 'invoker', 75: 'silencer', 76: 'obsidian_destroyer',
+      77: 'lycan', 78: 'brewmaster', 79: 'shadow_demon', 80: 'lone_druid', 81: 'chaos_knight',
+      82: 'meepo', 83: 'treant', 84: 'ogre_magi', 85: 'undying', 86: 'rubick',
+      87: 'disruptor', 88: 'nyx_assassin', 89: 'naga_siren', 90: 'keeper_of_the_light', 91: 'wisp',
+      92: 'visage', 93: 'slark', 94: 'medusa', 95: 'troll_warlord', 96: 'centaur',
+      97: 'magnataur', 98: 'shredder', 99: 'bristleback', 100: 'tusk', 101: 'skywrath_mage',
+      102: 'abaddon', 103: 'elder_titan', 104: 'legion_commander', 105: 'techies', 106: 'ember_spirit',
+      107: 'earth_spirit', 108: 'abyssal_underlord', 109: 'terrorblade', 110: 'phoenix', 111: 'oracle',
+      112: 'winter_wyvern', 113: 'arc_warden', 114: 'monkey_king', 119: 'dark_willow', 120: 'pangolier',
+      121: 'grimstroke', 123: 'hoodwink', 126: 'void_spirit', 128: 'snapfire', 129: 'mars',
+      135: 'dawnbreaker', 136: 'marci', 137: 'primal_beast', 138: 'muerta', 145: 'ringmaster', 146: 'kez'
+    };
 
     function getRankName(rankTier) {
       if (!rankTier) return '未定级';
@@ -1278,7 +1369,7 @@
       return '刚刚';
     }
 
-    function renderPlayerCard(player, playerData, recentMatches) {
+    function renderPlayerCard(player, playerData, recentMatches, winLoss, heroes) {
       const card = document.getElementById(`status-card-${player.id}`);
       if (!card) return;
 
@@ -1286,13 +1377,12 @@
       const loadingSkeleton = card.querySelector('.loading-skeleton');
 
       if (!playerData || !recentMatches) {
-        // 错误状态
         statusContent.innerHTML = `
-          <div class="flex flex-col items-center justify-center py-8 space-y-3">
-            <svg class="w-12 h-12 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="flex flex-col items-center justify-center py-12 space-y-3">
+            <svg class="w-12 h-12 text-slate-600 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <p class="text-xs text-slate-500">数据暂不可用</p>
+            <p class="text-xs text-slate-500 font-medium">暂未加载到数据</p>
           </div>
         `;
         loadingSkeleton.classList.add('hidden');
@@ -1301,83 +1391,179 @@
       }
 
       const status = getPlayerStatus(recentMatches);
-      const lastMatch = recentMatches[0];
       const mmr = playerData.mmr_estimate?.estimate || playerData.solo_competitive_rank || '未知';
       const rankName = getRankName(playerData.rank_tier);
 
-      // 获取最后一场比赛信息
-      let lastMatchInfo = '';
-      if (lastMatch) {
-        const isWin = (lastMatch.player_slot < 128 && lastMatch.radiant_win) || 
-                      (lastMatch.player_slot >= 128 && !lastMatch.radiant_win);
-        const kda = `${lastMatch.kills}/${lastMatch.deaths}/${lastMatch.assists}`;
-        const timeDiff = formatTimeDiff(Math.floor(Date.now() / 1000) - (lastMatch.start_time + lastMatch.duration));
+      // 颜色配置映射
+      const colorMap = {
+        rose: { border: 'border-rose-500/20', text: 'text-rose-400', hoverText: 'group-hover:text-rose-300', glow: 'rgba(244,63,94,0.1)', ring: 'ring-rose-500/30' },
+        orange: { border: 'border-orange-500/20', text: 'text-orange-400', hoverText: 'group-hover:text-orange-300', glow: 'rgba(249,115,22,0.1)', ring: 'ring-orange-500/30' },
+        amber: { border: 'border-amber-500/20', text: 'text-amber-400', hoverText: 'group-hover:text-amber-300', glow: 'rgba(245,158,11,0.1)', ring: 'ring-amber-500/30' },
+        purple: { border: 'border-purple-500/20', text: 'text-purple-400', hoverText: 'group-hover:text-purple-300', glow: 'rgba(168,85,247,0.1)', ring: 'ring-purple-500/30' },
+        cyan: { border: 'border-cyan-500/20', text: 'text-cyan-400', hoverText: 'group-hover:text-cyan-300', glow: 'rgba(6,182,212,0.1)', ring: 'ring-cyan-500/30' }
+      };
+      
+      const theme = colorMap[player.color] || colorMap.rose;
+
+      // 1. 计算胜率
+      let winRate = 0;
+      let winRateColor = 'text-slate-300';
+      let winLossText = '0胜/0负';
+      if (winLoss) {
+        const total = winLoss.win + winLoss.lose;
+        winRate = total > 0 ? Math.round((winLoss.win / total) * 100) : 0;
+        winRateColor = winRate >= 55 ? 'text-green-400' : winRate >= 45 ? 'text-yellow-400' : 'text-red-400';
+        winLossText = `${winLoss.win}胜${winLoss.lose}负`;
+      }
+
+      // 2. 计算连胜/连跪趋势
+      let streakText = '';
+      let isWinStreak = false;
+      if (recentMatches.length >= 2) {
+        let streak = 0;
+        const firstMatchWin = (recentMatches[0].player_slot < 128 && recentMatches[0].radiant_win) || 
+                              (recentMatches[0].player_slot >= 128 && !recentMatches[0].radiant_win);
+        for (let i = 0; i < Math.min(recentMatches.length, 5); i++) {
+          const isWin = (recentMatches[i].player_slot < 128 && recentMatches[i].radiant_win) || 
+                        (recentMatches[i].player_slot >= 128 && !recentMatches[i].radiant_win);
+          if (isWin === firstMatchWin) {
+            streak++;
+          } else {
+            break;
+          }
+        }
+        if (streak >= 2) {
+          isWinStreak = firstMatchWin;
+          streakText = firstMatchWin ? `🔥 ${streak}连胜` : `💀 ${streak}连跪`;
+        }
+      }
+
+      // 3. 计算KDA
+      let avgK = '0.0', avgD = '0.0', avgA = '0.0', kdaRatio = '0.0', kdaColor = 'text-slate-300';
+      if (recentMatches.length > 0) {
+        const validMatches = recentMatches.slice(0, 20);
+        const totalKills = validMatches.reduce((sum, m) => sum + (m.kills || 0), 0);
+        const totalDeaths = validMatches.reduce((sum, m) => sum + (m.deaths || 0), 0);
+        const totalAssists = validMatches.reduce((sum, m) => sum + (m.assists || 0), 0);
+        const count = validMatches.length;
         
-        lastMatchInfo = `
-          <div class="text-[10px] text-slate-400 space-y-0.5">
-            <div class="flex items-center justify-center gap-1">
-              <span class="${isWin ? 'text-green-400' : 'text-red-400'} font-semibold">
-                ${isWin ? '胜利' : '失败'}
-              </span>
-              <span>·</span>
-              <span>${timeDiff}</span>
+        avgK = (totalKills / count).toFixed(1);
+        avgD = (totalDeaths / count).toFixed(1);
+        avgA = (totalAssists / count).toFixed(1);
+        kdaRatio = totalDeaths > 0 ? ((totalKills + totalAssists) / totalDeaths).toFixed(1) : '∞';
+        kdaColor = kdaRatio >= 3.5 ? 'text-green-400' : kdaRatio >= 2.5 ? 'text-yellow-400' : 'text-slate-400';
+      }
+
+      // 4. 常用英雄
+      let heroesHtml = '';
+      if (heroes && heroes.length > 0) {
+        const heroItems = heroes.slice(0, 3).map(h => {
+          const heroName = HERO_NAMES[h.hero_id] || 'unknown';
+          const winRate = h.games > 0 ? Math.round((h.win / h.games) * 100) : 0;
+          const wrColor = winRate >= 55 ? 'text-green-400' : winRate >= 45 ? 'text-yellow-400' : 'text-red-400';
+          return `
+            <div class="flex flex-col items-center gap-1 bg-slate-950/50 p-1.5 rounded-lg border border-slate-800/40 w-[64px] hover:scale-105 transition-transform duration-200">
+              <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroName}.png" 
+                   alt="${heroName}" 
+                   class="w-12 h-7.5 object-cover rounded border border-slate-800"
+                   onerror="this.src='https://via.placeholder.com/48x28?text=?'">
+              <span class="${wrColor} text-[9px] font-mono font-bold">${winRate}%</span>
             </div>
-            <div class="font-mono text-slate-500">KDA: ${kda}</div>
+          `;
+        }).join('');
+
+        heroesHtml = `
+          <div class="space-y-1.5">
+            <div class="text-[9px] text-slate-500 font-semibold uppercase tracking-wider text-center">🦸 常用绝活英雄</div>
+            <div class="flex justify-center gap-2">${heroItems}</div>
           </div>
         `;
       }
 
-      // 状态指示器边框动画
-      let borderAnimation = '';
-      if (status.status === 'just-finished') {
-        borderAnimation = 'animate-pulse';
-        card.classList.add('border-green-500/40');
-      } else {
-        card.classList.remove('border-green-500/40');
-      }
-
       statusContent.innerHTML = `
-        <div class="flex flex-col items-center space-y-3">
-          <!-- 头像 -->
-          <div class="relative">
-            <img src="${playerData.profile?.avatarfull || playerData.profile?.avatar || 'https://via.placeholder.com/64'}" 
-                 alt="${player.name}"
-                 class="w-14 h-14 rounded-full border-2 border-slate-700 group-hover:border-${player.color}-500/50 transition-all duration-300"
-                 onerror="this.src='https://via.placeholder.com/64?text=${player.name[0]}'">
-            <div class="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-              <span class="text-[10px]">${status.icon}</span>
+        <div class="flex flex-col justify-between h-full space-y-4">
+          <!-- 头部个人信息 -->
+          <div class="flex flex-col items-center space-y-2">
+            <!-- 头像带有动态霓虹光晕 -->
+            <div class="relative group-hover:scale-105 transition-transform duration-300">
+              <div class="absolute inset-0 rounded-full bg-${player.color}-500/20 blur-sm"></div>
+              <img src="${playerData.profile?.avatarfull || playerData.profile?.avatar || 'https://via.placeholder.com/64'}" 
+                   alt="${player.name}"
+                   class="relative w-14 h-14 rounded-full border-2 border-slate-700 ring-4 ${theme.ring} object-cover">
+              <span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-slate-900 flex items-center justify-center border border-slate-800 shadow-lg text-xs">
+                ${status.icon}
+              </span>
+            </div>
+
+            <!-- 名字与位置 -->
+            <div class="space-y-0.5 mt-2">
+              <h3 class="font-display text-sm font-black tracking-wide ${theme.text} ${theme.hoverText} transition-colors">
+                ${player.name}
+              </h3>
+              <p class="text-[9px] text-slate-500 font-extrabold uppercase tracking-widest font-mono">${player.role}</p>
+            </div>
+
+            <!-- 在线状态 Badge -->
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-950/80 border border-slate-850 text-[9px] font-bold text-${status.color}-400 mt-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-${status.color}-500 animate-pulse"></span>
+              ${status.text}
+            </div>
+
+            <!-- 段位与天梯分数 -->
+            <div class="text-[10px] font-semibold text-slate-400 mt-1">
+              段位: <span class="text-slate-200">${rankName}</span> 
+              <span class="text-slate-600">|</span> 
+              MMR: <span class="${theme.text} font-bold font-mono">${typeof mmr === 'number' ? mmr.toLocaleString() : mmr}</span>
             </div>
           </div>
 
-          <!-- 名字和角色 -->
-          <div class="space-y-0.5">
-            <h3 class="font-display text-base font-bold text-${player.color}-400 group-hover:text-${player.color}-300 transition-colors">
-              ${player.name}
-            </h3>
-            <p class="text-[10px] text-slate-500 font-medium">${player.role}</p>
-          </div>
+          <!-- 分割线 -->
+          <div class="h-[1px] bg-gradient-to-r from-transparent via-slate-800/80 to-transparent"></div>
 
-          <!-- 状态 -->
-          <div class="w-full px-2 py-1 rounded-lg bg-slate-950/50 border border-slate-800/60">
-            <p class="text-[10px] font-semibold text-${status.color}-400">${status.text}</p>
-          </div>
-
-          <!-- 段位信息 -->
-          <div class="w-full space-y-1.5 text-left px-1">
-            <div class="flex justify-between items-center text-[10px]">
-              <span class="text-slate-500">天梯</span>
-              <span class="text-${player.color}-400 font-bold font-mono">${typeof mmr === 'number' ? mmr.toLocaleString() : mmr}</span>
+          <!-- 2x2 极简网格指标 -->
+          <div class="grid grid-cols-2 gap-2 text-left">
+            <!-- 胜率 -->
+            <div class="bg-slate-950/30 border border-slate-900/60 rounded-xl p-2 flex flex-col justify-between min-h-[48px]">
+              <span class="text-[8px] text-slate-500 font-bold uppercase tracking-wider">近20场胜率</span>
+              <div class="flex items-baseline justify-between mt-0.5">
+                <span class="${winRateColor} font-display text-xs font-black">${winRate}%</span>
+                <span class="text-[8px] text-slate-500 font-mono">${winLossText}</span>
+              </div>
             </div>
-            <div class="flex justify-between items-center text-[10px]">
-              <span class="text-slate-500">段位</span>
-              <span class="text-slate-300 font-semibold">${rankName}</span>
+
+            <!-- KDA -->
+            <div class="bg-slate-950/30 border border-slate-900/60 rounded-xl p-2 flex flex-col justify-between min-h-[48px]">
+              <span class="text-[8px] text-slate-500 font-bold uppercase tracking-wider">场均 KDA</span>
+              <div class="flex items-baseline justify-between mt-0.5">
+                <span class="${kdaColor} font-display text-xs font-black">${kdaRatio}</span>
+                <span class="text-[7.5px] text-slate-500 font-mono">${avgK}/${avgD}/${avgA}</span>
+              </div>
+            </div>
+
+            <!-- 坑神指数 -->
+            <div class="bg-slate-950/30 border border-slate-900/60 rounded-xl p-2 flex flex-col justify-between min-h-[48px]">
+              <span class="text-[8px] text-slate-500 font-bold uppercase tracking-wider">💀 坑神指数</span>
+              <div class="flex items-baseline justify-between mt-0.5">
+                <span class="text-red-400 font-display text-xs font-black">${avgD}</span>
+                <span class="text-[8px] text-slate-500 font-mono">死/场</span>
+              </div>
+            </div>
+
+            <!-- 近期趋势 -->
+            <div class="bg-slate-950/30 border border-slate-900/60 rounded-xl p-2 flex flex-col justify-between min-h-[48px]">
+              <span class="text-[8px] text-slate-500 font-bold uppercase tracking-wider">近期趋势</span>
+              <div class="flex items-baseline justify-between mt-0.5">
+                <span class="${isWinStreak ? 'text-green-400' : streakText ? 'text-red-400' : 'text-slate-400'} text-[9px] font-black">${streakText || '稳定'}</span>
+                <span class="text-[8px] text-slate-500 font-mono">${streakText ? '战绩' : '平稳'}</span>
+              </div>
             </div>
           </div>
 
-          <hr class="border-slate-800/60 w-full" />
+          <!-- 分割线 -->
+          <div class="h-[1px] bg-gradient-to-r from-transparent via-slate-800/80 to-transparent"></div>
 
-          <!-- 最近比赛 -->
-          ${lastMatchInfo || '<p class="text-[10px] text-slate-600">暂无比赛记录</p>'}
+          <!-- 常用英雄 -->
+          ${heroesHtml}
         </div>
       `;
 
@@ -1386,16 +1572,17 @@
     }
 
     async function updateLiveStatus() {
-      console.log('正在更新实时状态...');
-      
-      for (const player of PLAYERS_CONFIG) {
-        const [playerData, recentMatches] = await Promise.all([
+      const updates = PLAYERS_CONFIG.map(async (player) => {
+        const [playerData, recentMatches, winLoss, heroes] = await Promise.all([
           fetchPlayerData(player.accountId),
-          fetchRecentMatches(player.accountId)
+          fetchRecentMatches(player.accountId),
+          fetchWinLoss(player.accountId),
+          fetchHeroes(player.accountId)
         ]);
-        
-        renderPlayerCard(player, playerData, recentMatches);
-      }
+        renderPlayerCard(player, playerData, recentMatches, winLoss, heroes);
+      });
+
+      await Promise.all(updates);
 
       // 更新时间戳
       const now = new Date();
