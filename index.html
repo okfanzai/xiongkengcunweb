@@ -72,6 +72,34 @@
     .text-glow {
       text-shadow: 0 0 12px rgba(244, 63, 94, 0.5);
     }
+
+    /* 捶蛋震动动画 */
+    @keyframes shake {
+      0%, 100% { transform: translate(0, 0) scale(0.98); }
+      10%, 30%, 50%, 70%, 90% { transform: translate(-4px, -2px) scale(0.98); }
+      20%, 40%, 60%, 80% { transform: translate(4px, 2px) scale(0.98); }
+    }
+    .animate-shake {
+      animation: shake 0.15s ease-in-out;
+    }
+
+    /* 漂浮粒子向上漂浮动画 */
+    @keyframes floatUp {
+      0% {
+        transform: translate(-50%, -50%) translateY(0) scale(0.8) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) translateY(-120px) scale(1.25) rotate(var(--rot, 15deg));
+        opacity: 0;
+      }
+    }
+    .floating-particle {
+      position: absolute;
+      pointer-events: none;
+      animation: floatUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      z-index: 100;
+    }
   </style>
 </head>
 
@@ -134,6 +162,12 @@
         <span
           class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
         <span class="text-sm font-semibold tracking-wider">阵容 / Roster</span>
+      </a>
+      <a href="#ti15-cheer"
+        class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
+        <span
+          class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
+        <span class="text-sm font-semibold tracking-wider">应援 / TI15 Cheer</span>
       </a>
       <a href="#history"
         class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
@@ -203,6 +237,8 @@
         class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">简介</a>
       <a href="#roster"
         class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">阵容</a>
+      <a href="#ti15-cheer"
+        class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">应援</a>
       <a href="#history"
         class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">往事</a>
       <a href="#live-status"
@@ -313,6 +349,115 @@
     <!-- 首屏装饰底部斜角或网格线 -->
     <div
       class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-slate-950 to-transparent pointer-events-none z-10">
+    </div>
+  </section>
+
+  <!-- TI15 应援特区 -->
+  <section id="ti15-cheer" class="relative py-20 bg-slate-950 overflow-hidden z-10 lg:pl-64 border-t border-slate-900/80">
+    <!-- 科技感网格背景 -->
+    <div class="absolute inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-all duration-300">
+      
+      <!-- 标题 -->
+      <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rose-500/20 bg-rose-500/5 text-rose-400 text-xs font-semibold tracking-widest uppercase shadow-[0_0_15px_rgba(244,63,94,0.1)]">
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+          🏆 TI15 CHEER ZONE / 熊坑村应援特区
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black font-display tracking-tight text-white">
+          为中国队加油应援
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base font-light">
+          大局当前，村委会做出重大牺牲，助力西恩刀塔重返荣耀！
+        </p>
+      </div>
+
+      <!-- 内容卡片 -->
+      <div class="max-w-4xl mx-auto bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-3xl p-6 sm:p-10 relative group transition-all duration-300 hover:border-slate-700/80 hover:shadow-[0_0_35px_rgba(244,63,94,0.08)]">
+        <!-- 背景发光效果 -->
+        <div
+          class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-rose-600 to-orange-600 opacity-5 blur-xl group-hover:opacity-10 transition duration-1000">
+        </div>
+
+        <div class="relative flex flex-col md:flex-row items-center gap-10">
+          
+          <!-- 左侧：副村长照片互动区域 -->
+          <div class="w-full md:w-[40%] shrink-0 flex flex-col items-center">
+            <div id="fcz-image-container" class="relative w-56 h-72 rounded-2xl overflow-hidden border-2 border-slate-800 shadow-neon-red hover:border-rose-500/30 transition-all duration-300 cursor-pointer select-none">
+              <!-- 用于漂浮特效的容器 -->
+              <div id="float-container" class="absolute inset-0 z-20 pointer-events-none"></div>
+              
+              <!-- 正常照片 -->
+              <img id="fcz-img" src="./assets/fcz.webp" alt="副村长"
+                class="w-full h-full object-cover transition-transform duration-300 pointer-events-none">
+              
+              <!-- 位置标记 -->
+              <div class="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-sm border border-slate-800 text-[10px] font-bold text-rose-400 tracking-wider">
+                🎯 点击照片捶蛋
+              </div>
+            </div>
+            <span class="mt-3 text-xs text-slate-500 font-mono">副村长李帆·荣誉牺牲</span>
+          </div>
+
+          <!-- 右侧：命令文案与点击进度条 -->
+          <div class="flex-1 space-y-6 text-left w-full">
+            <!-- 命令呼叫框 -->
+            <div class="bg-slate-950/80 border border-slate-850/80 rounded-2xl p-5 relative overflow-hidden">
+              <div class="absolute top-0 left-0 h-full w-1.5 bg-gradient-to-b from-rose-600 to-orange-500"></div>
+              <h4 class="text-xs font-bold text-rose-500 tracking-widest uppercase mb-2">📢 村委会特级红色指令</h4>
+              <p class="text-slate-200 text-sm sm:text-base leading-relaxed font-semibold italic">
+                “副村长，我命令你立刻站起来锤自己🥚🥚100下为TI15中国队加油，我知道这很难但这是命令。”
+              </p>
+            </div>
+
+            <!-- 应援进度条 -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-end">
+                <span class="text-xs font-mono text-slate-400">🥚🥚 捶蛋进度</span>
+                <span id="cheer-counter" class="text-sm font-mono font-bold text-rose-400"><span id="cheer-count">0</span> / 100</span>
+              </div>
+              <div class="w-full h-3 bg-slate-950 rounded-full overflow-hidden border border-slate-900 relative">
+                <div id="cheer-bar" class="h-full bg-gradient-to-r from-red-600 via-rose-500 to-orange-500 rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
+              </div>
+              <div id="cheer-milestone" class="text-[11px] text-slate-500 font-medium italic mt-1 min-h-[16px]">
+                副村长正在做准备活动，状态良好...
+              </div>
+            </div>
+
+            <!-- 应援按钮 & 状态信息 -->
+            <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
+              <button id="cheer-btn"
+                class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-extrabold tracking-widest text-white bg-gradient-to-r from-red-700 via-rose-600 to-orange-600 rounded-xl shadow-neon-red hover:shadow-neon-red-lg hover:scale-105 active:scale-95 transition-all duration-300 select-none">
+                <span>点击帮助副村长捶蛋</span>
+                <span class="ml-2">🥊</span>
+              </button>
+              
+              <!-- 累计总点击 -->
+              <div class="text-xs text-slate-500 font-mono">
+                您的累计应援总数：<span id="total-clicks" class="text-slate-300 font-bold">0</span> 次
+              </div>
+            </div>
+
+            <!-- 达成100次后的感谢面板 -->
+            <div id="thanks-panel" class="hidden bg-green-500/10 border border-green-500/20 rounded-2xl p-5">
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">🎉</span>
+                <div class="space-y-1">
+                  <h5 class="text-sm font-bold text-green-400">使命达成！</h5>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-semibold">
+                    感谢你和副村长为TI15中国队做出的贡献。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1240,10 +1385,206 @@
       }, 100);
     }
 
+    // --- TI15 敲蛋应援 JS 逻辑 ---
+    let screamAudio = null;
+
+    function playSynthScream() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const filter = ctx.createBiquadFilter();
+        const gain = ctx.createGain();
+        
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        
+        // 锯齿波富含谐波，经过滤波器扫频后极像人声
+        osc.type = 'sawtooth';
+        
+        const now = ctx.currentTime;
+        const duration = 0.45; // 稍微拉长一点以展现“嗷呜”的滑音过程
+        
+        // 音高：从较高的“嗷” (700Hz) 指数级向下滑动到低沉的“呜” (160Hz)
+        osc.frequency.setValueAtTime(700, now);
+        osc.frequency.exponentialRampToValueAtTime(160, now + duration);
+        
+        // 滤波器：截止频率从高频 (1800Hz) 迅速扫频到低频 (280Hz)
+        // 模拟嘴型从张大的“Ao”过渡到闭合的“Wu”时的声学共振峰变化
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(1800, now);
+        filter.frequency.exponentialRampToValueAtTime(280, now + duration);
+        
+        // 音量：淡入淡出，锯齿波音量设为 0.16 避免刺耳
+        gain.gain.setValueAtTime(0.16, now);
+        gain.gain.exponentialRampToValueAtTime(0.005, now + duration);
+        
+        osc.start(now);
+        osc.stop(now + duration);
+      } catch (e) {
+        console.error('AudioContext synth error:', e);
+      }
+    }
+
+    function playScreamSound() {
+      if (!screamAudio) {
+        screamAudio = new Audio('./assets/scream.mp3');
+        screamAudio.addEventListener('error', () => {
+          screamAudio = 'failed';
+        });
+      }
+
+      if (screamAudio && screamAudio !== 'failed') {
+        screamAudio.currentTime = 0;
+        screamAudio.play().catch(() => {
+          playSynthScream();
+        });
+      } else {
+        playSynthScream();
+      }
+    }
+
+    function initCheerWidget() {
+      const container = document.getElementById('fcz-image-container');
+      const img = document.getElementById('fcz-img');
+      const btn = document.getElementById('cheer-btn');
+      const counterSpan = document.getElementById('cheer-count');
+      const totalClicksSpan = document.getElementById('total-clicks');
+      const progressBar = document.getElementById('cheer-bar');
+      const milestoneText = document.getElementById('cheer-milestone');
+      const thanksPanel = document.getElementById('thanks-panel');
+      const floatContainer = document.getElementById('float-container');
+
+      if (!container || !img || !btn) return;
+
+      // 读取计数器
+      let cheerCount = parseInt(localStorage.getItem('ti15_cheer_count') || '0');
+      let totalClicks = parseInt(localStorage.getItem('ti15_total_clicks') || '0');
+
+      updateCheerUI();
+
+      function updateCheerUI() {
+        if (cheerCount > 100) cheerCount = 100;
+        if (counterSpan) counterSpan.innerText = cheerCount;
+        if (totalClicksSpan) totalClicksSpan.innerText = totalClicks;
+        if (progressBar) progressBar.style.width = `${cheerCount}%`;
+
+        // 里程碑文案
+        if (milestoneText) {
+          if (cheerCount === 0) {
+            milestoneText.innerText = "副村长正在做准备活动，状态良好...";
+          } else if (cheerCount < 20) {
+            milestoneText.innerText = "副村长开始自锤了！感觉有点疼...（当前进度 " + cheerCount + "%）";
+          } else if (cheerCount < 50) {
+            milestoneText.innerText = "副村长咬紧牙关，已经锤了 " + cheerCount + " 下！加油！";
+          } else if (cheerCount < 80) {
+            milestoneText.innerText = "副村长忍不住流下眼泪，面部逐渐扭曲...（当前进度 " + cheerCount + "%）";
+          } else if (cheerCount < 100) {
+            milestoneText.innerText = "副村长快撑不住了！最后冲刺！冲冲冲！";
+          } else {
+            milestoneText.innerText = "目标达成！副村长已经倒地不起，但西恩刀塔的战绩加成已满载！";
+          }
+        }
+
+        // 感谢面板显示
+        if (cheerCount >= 100) {
+          if (thanksPanel) thanksPanel.classList.remove('hidden');
+        } else {
+          if (thanksPanel) thanksPanel.classList.add('hidden');
+        }
+      }
+
+      function handleCheerClick(e) {
+        if (cheerCount < 100) {
+          cheerCount++;
+          localStorage.setItem('ti15_cheer_count', cheerCount);
+        }
+        totalClicks++;
+        localStorage.setItem('ti15_total_clicks', totalClicks);
+
+        updateCheerUI();
+        
+        // 播放惨叫
+        playScreamSound();
+
+        // 切换图片为流泪
+        img.src = './assets/fcz_cry.webp';
+
+        // 震动动画
+        container.classList.remove('animate-shake');
+        void container.offsetWidth; // 触发回流重置动画
+        container.classList.add('animate-shake');
+
+        // 生成浮动文本
+        spawnFloatText(e);
+
+        // 延迟恢复
+        if (container.imageTimeout) clearTimeout(container.imageTimeout);
+        container.imageTimeout = setTimeout(() => {
+          img.src = './assets/fcz.webp';
+          container.classList.remove('animate-shake');
+        }, 300);
+      }
+
+      function spawnFloatText(e) {
+        const floatTexts = [
+          '🥚💥 嗷！',
+          '🇨🇳 西恩刀塔加油！',
+          '😭 呜呜呜...',
+          '🥊 啪！',
+          '为TI15加油！',
+          '痛！痛！痛！',
+          '大局为重！',
+          '副村长挺住！',
+          '为了西恩的荣耀！',
+          '功不可没！',
+          '蛋碎的声音...',
+          '加油中国队！',
+          '太惨了...'
+        ];
+
+        const el = document.createElement('div');
+        el.className = 'floating-particle font-black text-sm sm:text-base select-none whitespace-nowrap text-rose-500 drop-shadow-[0_2px_8px_rgba(244,63,94,0.8)]';
+        el.innerText = floatTexts[Math.floor(Math.random() * floatTexts.length)];
+
+        // 获取点击相对位置
+        const rect = container.getBoundingClientRect();
+        let x, y;
+        if (e && e.clientX && e.clientY) {
+          x = e.clientX - rect.left;
+          y = e.clientY - rect.top;
+        } else {
+          x = rect.width / 2 + (Math.random() * 40 - 20);
+          y = rect.height / 2 + (Math.random() * 40 - 20);
+        }
+
+        el.style.left = `${x}px`;
+        el.style.top = `${y}px`;
+        
+        const rot = `${(Math.random() * 40 - 20)}deg`;
+        el.style.setProperty('--rot', rot);
+
+        floatContainer.appendChild(el);
+
+        setTimeout(() => {
+          el.remove();
+        }, 800);
+      }
+
+      container.addEventListener('click', handleCheerClick);
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        handleCheerClick(null);
+      });
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       checkStoryImages();
       initVoteWidget();
       initLiveStatus();
+      initCheerWidget();
     });
 
     // --- 实时状态模块 JS 逻辑 ---
