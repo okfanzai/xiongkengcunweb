@@ -1811,6 +1811,7 @@
     }
 
     async function fetchHeroes(accountId) {
+      // 常用英雄数据变化缓慢,使用7天缓存以节省API配额
       return getOrFetchCachedData(`player_heroes_${accountId}`, async () => {
         try {
           const response = await fetch(`https://api.opendota.com/api/players/${accountId}/heroes`);
@@ -1821,7 +1822,7 @@
           console.error(`获取玩家 ${accountId} 英雄数据失败:`, error);
           return null;
         }
-      });
+      }, 7 * 24 * 60 * 60 * 1000); // 7天缓存
     }
 
     const HERO_NAMES = {
