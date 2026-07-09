@@ -1917,14 +1917,22 @@
 
       // 颜色配置映射
       const colorMap = {
-        rose: { border: 'border-rose-500/20', text: 'text-rose-400', hoverText: 'group-hover:text-rose-300', glow: 'rgba(244,63,94,0.1)', ring: 'ring-rose-500/30' },
-        orange: { border: 'border-orange-500/20', text: 'text-orange-400', hoverText: 'group-hover:text-orange-300', glow: 'rgba(249,115,22,0.1)', ring: 'ring-orange-500/30' },
-        amber: { border: 'border-amber-500/20', text: 'text-amber-400', hoverText: 'group-hover:text-amber-300', glow: 'rgba(245,158,11,0.1)', ring: 'ring-amber-500/30' },
-        purple: { border: 'border-purple-500/20', text: 'text-purple-400', hoverText: 'group-hover:text-purple-300', glow: 'rgba(168,85,247,0.1)', ring: 'ring-purple-500/30' },
-        cyan: { border: 'border-cyan-500/20', text: 'text-cyan-400', hoverText: 'group-hover:text-cyan-300', glow: 'rgba(6,182,212,0.1)', ring: 'ring-cyan-500/30' }
+        rose: { border: 'border-rose-500/20', text: 'text-rose-400', hoverText: 'group-hover:text-rose-300', glow: 'rgba(244,63,94,0.1)', ring: 'ring-rose-500/30', bgGlow: 'bg-rose-500/20' },
+        orange: { border: 'border-orange-500/20', text: 'text-orange-400', hoverText: 'group-hover:text-orange-300', glow: 'rgba(249,115,22,0.1)', ring: 'ring-orange-500/30', bgGlow: 'bg-orange-500/20' },
+        amber: { border: 'border-amber-500/20', text: 'text-amber-400', hoverText: 'group-hover:text-amber-300', glow: 'rgba(245,158,11,0.1)', ring: 'ring-amber-500/30', bgGlow: 'bg-amber-500/20' },
+        purple: { border: 'border-purple-500/20', text: 'text-purple-400', hoverText: 'group-hover:text-purple-300', glow: 'rgba(168,85,247,0.1)', ring: 'ring-purple-500/30', bgGlow: 'bg-purple-500/20' },
+        cyan: { border: 'border-cyan-500/20', text: 'text-cyan-400', hoverText: 'group-hover:text-cyan-300', glow: 'rgba(6,182,212,0.1)', ring: 'ring-cyan-500/30', bgGlow: 'bg-cyan-500/20' }
       };
 
       const theme = colorMap[player.color] || colorMap.rose;
+
+      // 在线状态指示灯样式映射
+      const statusColorMap = {
+        slate: { text: 'text-slate-400', bg: 'bg-slate-500' },
+        green: { text: 'text-green-400', bg: 'bg-green-500' },
+        yellow: { text: 'text-yellow-400', bg: 'bg-yellow-500' }
+      };
+      const statusTheme = statusColorMap[status.color] || statusColorMap.slate;
 
       // 1. 计算胜率（基于最近20场比赛）
       let winRate = 0;
@@ -2060,7 +2068,7 @@
           <div class="flex flex-col items-center space-y-2">
             <!-- 头像带有动态霓虹光晕 -->
             <div class="relative group-hover:scale-105 transition-transform duration-300">
-              <div class="absolute inset-0 rounded-full bg-${player.color}-500/20 blur-sm"></div>
+              <div class="absolute inset-0 rounded-full ${theme.bgGlow} blur-sm"></div>
               <img src="${playerData.profile?.avatarfull || playerData.profile?.avatar || 'https://via.placeholder.com/64'}" 
                    alt="${player.name}"
                    class="relative w-14 h-14 rounded-full border-2 border-slate-700 ring-4 ${theme.ring} object-cover">
@@ -2077,8 +2085,8 @@
             </div>
 
             <!-- 在线状态 Badge -->
-            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-950/80 border border-slate-800 text-[9px] font-bold text-${status.color}-400 mt-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-${status.color}-500 animate-pulse"></span>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-950/80 border border-slate-800 text-[9px] font-bold ${statusTheme.text} mt-1">
+              <span class="w-1.5 h-1.5 rounded-full ${statusTheme.bg} animate-pulse"></span>
               ${status.text}
             </div>
           </div>
