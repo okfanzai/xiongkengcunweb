@@ -120,6 +120,57 @@
       animation: floatUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
       z-index: 100;
     }
+
+    /* 战狼3 暴击伤害飘字与打击动画 */
+    @keyframes critFloat {
+      0% {
+        transform: translate(-50%, -50%) translateY(0) scale(0.6) rotate(var(--crit-rot, -5deg));
+        opacity: 0;
+      }
+      15% {
+        transform: translate(-50%, -50%) translateY(-12px) scale(1.35) rotate(var(--crit-rot, -5deg));
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) translateY(-95px) scale(0.95) rotate(var(--crit-rot, 5deg));
+        opacity: 0;
+      }
+    }
+
+    .damage-text {
+      position: absolute;
+      pointer-events: none;
+      animation: critFloat 0.85s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+      z-index: 50;
+      font-weight: 900;
+      white-space: nowrap;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 15px rgba(239, 68, 68, 0.8);
+      user-select: none;
+    }
+
+    /* 冲击波粒子 */
+    @keyframes shockwave {
+      0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 1;
+        border-width: 4px;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(2.2);
+        opacity: 0;
+        border-width: 1px;
+      }
+    }
+
+    .shockwave-ring {
+      position: absolute;
+      pointer-events: none;
+      border-radius: 9999px;
+      border-style: solid;
+      border-color: rgba(244, 63, 94, 0.8);
+      animation: shockwave 0.4s ease-out forwards;
+      z-index: 45;
+    }
   </style>
 </head>
 
@@ -196,6 +247,15 @@
           class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
         <span class="text-sm font-semibold tracking-wider">往事 / History</span>
       </a>
+      <a href="#zhanlang3-arena"
+        class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-rose-400/90 hover:text-rose-400 hover:bg-rose-500/10 transition-all duration-300 relative group">
+        <span
+          class="absolute left-0 w-1 h-0 bg-rose-500 rounded-full group-hover:h-6 transition-all duration-300"></span>
+        <span class="text-sm font-semibold tracking-wider flex items-center gap-1.5">
+          <span>战狼3 / 暴打村长</span>
+          <span class="text-[10px] px-1 py-0.2 bg-red-600/30 text-rose-300 rounded border border-rose-500/30 font-bold">HOT</span>
+        </span>
+      </a>
       <a href="#live-status"
         class="sidebar-link flex items-center space-x-4 py-3 px-4 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-rose-500/5 transition-all duration-300 relative group">
         <span
@@ -262,6 +322,11 @@
         class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">阵容</a>
       <a href="#history"
         class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">往事</a>
+      <a href="#zhanlang3-arena"
+        class="block px-3 py-2 rounded-md text-base font-medium text-rose-400 hover:text-rose-300 hover:bg-slate-900 transition-all flex items-center justify-between">
+        <span>战狼3 · 暴打村长</span>
+        <span class="text-xs px-1.5 py-0.5 rounded bg-red-600/30 text-rose-300 border border-rose-500/30">HOT</span>
+      </a>
       <a href="#live-status"
         class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-rose-500 hover:bg-slate-900 transition-all">实时</a>
       <a href="#join"
@@ -269,9 +334,37 @@
     </div>
   </nav>
 
+  <!-- 村头大喇叭 / 突发快讯横幅 -->
+  <div id="village-broadcast"
+    class="relative z-30 lg:pl-64 pt-16 lg:pt-0 bg-slate-950">
+    <div class="border-b border-rose-500/30 bg-gradient-to-r from-red-950/80 via-slate-900/90 to-rose-950/80 backdrop-blur-md px-4 sm:px-6 py-2.5 shadow-[0_4px_20px_rgba(244,63,94,0.15)]">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs sm:text-sm">
+        <div class="flex items-center gap-3 overflow-hidden w-full sm:w-auto">
+          <!-- 闪烁警报徽章 -->
+          <span
+            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold tracking-wider shrink-0 animate-pulse text-[11px] sm:text-xs shadow-[0_0_10px_rgba(244,63,94,0.3)]">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+            📢 村头大喇叭
+          </span>
+          <!-- 播报文本 -->
+          <div class="text-slate-200 truncate font-medium flex items-center gap-2">
+            <span class="text-rose-400 font-bold shrink-0">【紧急快讯】</span>
+            <span class="truncate">村委会通报：副村长李帆与熊村长就‘开黑谁来背锅’问题进行了友好而激烈的物理切磋，熊村长目前伤情稳定，并表示‘下次还敢’。</span>
+          </div>
+        </div>
+        <!-- 快速跳转按钮 -->
+        <a href="#zhanlang3-arena"
+          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-bold text-xs tracking-wider shadow-neon-red transition-all duration-300 hover:scale-105 active:scale-95 group">
+          <span>前往现场围观 / 参战</span>
+          <span class="group-hover:translate-x-0.5 transition-transform">🥊</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- 首屏横幅 (Hero Section) & 关于熊坑村合并 -->
   <section id="intro"
-    class="relative min-h-[80vh] flex items-center justify-center overflow-hidden z-10 pt-16 pb-8 lg:pl-64">
+    class="relative min-h-[80vh] flex items-center justify-center overflow-hidden z-10 pt-8 pb-8 lg:pl-64">
     <!-- 震撼首屏大背景图 -->
     <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <img src="./assets/beijing1.webp" alt="主页背景"
@@ -489,14 +582,14 @@
     </div>
   </section>
 
-  <section id="roster" class="relative py-24 bg-slate-950 overflow-hidden z-10 lg:pl-64">
+  <section id="roster" class="relative py-16 bg-slate-950 overflow-hidden z-10 lg:pl-64">
     <!-- 科技感网格背景 -->
     <div class="absolute inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-all duration-300">
 
       <!-- 标题 -->
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+      <div class="text-center max-w-3xl mx-auto mb-10 space-y-4">
         <div
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rose-500/20 bg-rose-500/5 text-rose-400 text-xs font-semibold tracking-widest uppercase">
           COMMITTEE / 领导班子
@@ -697,19 +790,185 @@
 
       </div>
 
+      <!-- 战狼3：李帆暴打熊村长 互动解压擂台 (紧凑型双栏Bento结构) -->
+      <div id="zhanlang3-arena"
+        class="mt-14 scroll-mt-24 relative rounded-3xl p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-slate-900/90 via-slate-950/95 to-red-950/30 border border-rose-500/30 backdrop-blur-xl shadow-[0_0_40px_rgba(244,63,94,0.12)] overflow-hidden">
+        
+        <!-- 背景环境光效 -->
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-rose-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-20 -top-20 w-80 h-80 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- 顶部标签与标题 -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-5 border-b border-slate-800/80 relative z-10">
+          <div class="space-y-1.5">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-bold tracking-widest uppercase">
+                <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                🎬 熊坑大影业 · 现象级巨制特别企划
+              </span>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono font-medium">
+                公映倒计时: 熊村长下次故意坑你时
+              </span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black font-display tracking-tight text-white flex flex-wrap items-center gap-3">
+              <span>《战狼3：李帆暴打熊村长》</span>
+              <span class="text-xs sm:text-sm font-sans font-bold px-2.5 py-0.5 rounded bg-red-600 text-white tracking-normal uppercase shadow-sm">
+                物理调解现场
+              </span>
+            </h3>
+          </div>
+          <!-- 快捷操作：复制战报 -->
+          <button id="copy-report-btn" onclick="copyBattleReport()"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-rose-600/15 hover:bg-rose-600/25 border border-rose-500/40 text-rose-300 hover:text-white font-semibold text-xs sm:text-sm transition-all duration-300 active:scale-95 shadow-sm hover:shadow-neon-red">
+            <svg class="w-4 h-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+            </svg>
+            <span>生成今日战报发群</span>
+          </button>
+        </div>
+
+        <!-- 紧凑双栏主体：左海报+打点判定，右战况仪表盘 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10">
+          
+          <!-- 左侧：海报展示与互动打击靶心 (5列) -->
+          <div class="lg:col-span-5 flex flex-col items-center">
+            <div id="poster-container" onclick="hitVillageHead(event)"
+              class="relative group cursor-crosshair select-none rounded-2xl overflow-hidden border-2 border-rose-500/40 shadow-[0_0_35px_rgba(244,63,94,0.25)] hover:border-rose-400 transition-all duration-300 max-w-sm w-full bg-slate-950">
+              
+              <!-- 常态待命/准备出拳海报 -->
+              <img id="zhanlang3-poster" src="./assets/zhanlang3.jpg" alt="战狼3 李帆准备暴打熊村长"
+                class="w-full h-auto object-cover block pointer-events-none">
+              
+              <!-- 铁拳命中瞬间特写海报 (点击时毫秒级瞬切，纯正街机打击停顿感) -->
+              <img id="zhanlang3-poster-hit" src="./assets/zhanlang_hit.webp" alt="战狼3 李帆铁拳命中熊村长"
+                class="w-full h-full object-cover absolute inset-0 opacity-0 pointer-events-none">
+              
+              <!-- 悬停准星/打击提示罩层 -->
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-4 pointer-events-none">
+                <div class="inline-flex items-center justify-center gap-1.5 py-1.5 px-3.5 rounded-full bg-red-600/90 text-white text-xs font-bold tracking-wider mx-auto shadow-lg backdrop-blur-sm">
+                  <span>👊 点击画面任意处 · 重拳暴打熊村长</span>
+                </div>
+              </div>
+
+              <!-- 边缘闪红打击效果遮罩 (点击时触发) -->
+              <div id="hit-flash-overlay" class="absolute inset-0 bg-red-600/0 pointer-events-none transition-colors duration-100"></div>
+
+              <!-- 飘字与粒子挂载容器 -->
+              <div id="damage-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+            </div>
+
+            <!-- 海报底部操作提示 -->
+            <div class="mt-3.5 flex items-center justify-between w-full max-w-sm px-2 text-xs text-slate-400">
+              <span class="inline-flex items-center gap-1 text-rose-400 font-semibold">
+                <span class="animate-bounce inline-block">👇</span> 点击海报直接暴击
+              </span>
+              <button onclick="toggleSound()" id="sound-btn" class="text-slate-400 hover:text-slate-200 font-mono transition-colors flex items-center gap-1">
+                <span id="sound-icon">🔊</span>
+                <span id="sound-text">打击音效: 开</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 右侧：战况控制台与数据面板 (7列) -->
+          <div class="lg:col-span-7 space-y-5">
+            
+            <!-- 核心数据卡：全村累计挨打 + 连击 -->
+            <div class="grid grid-cols-2 gap-4">
+              <!-- 全村累计挨打 -->
+              <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm relative overflow-hidden">
+                <div class="text-xs font-medium text-slate-400 mb-1 flex items-center justify-between">
+                  <span>全村累计暴打熊村长</span>
+                  <span class="text-[10px] text-rose-400 bg-rose-500/10 px-1.5 py-0.5 rounded border border-rose-500/20 font-bold">LIVE</span>
+                </div>
+                <div id="total-hits-display"
+                  class="text-3xl sm:text-4xl font-black font-display tracking-tight bg-gradient-to-r from-red-500 via-rose-500 to-amber-400 bg-clip-text text-transparent">
+                  12,480
+                </div>
+                <div class="text-[11px] text-slate-500 mt-1">
+                  数据已实时载入熊坑村功德簿
+                </div>
+              </div>
+
+              <!-- 本次连击 Combo -->
+              <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm relative overflow-hidden">
+                <div class="text-xs font-medium text-slate-400 mb-1 flex items-center justify-between">
+                  <span>您本次正义输出</span>
+                  <span id="combo-badge" class="text-[10px] text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20 font-mono font-bold">
+                    Combo x0
+                  </span>
+                </div>
+                <div id="session-hits-display"
+                  class="text-3xl sm:text-4xl font-black font-display tracking-tight text-white">
+                  0
+                </div>
+                <div id="combo-desc" class="text-[11px] text-amber-400/90 font-medium mt-1 truncate">
+                  点击海报助阵李副村长
+                </div>
+              </div>
+            </div>
+
+            <!-- 熊村长健康度与状态监控 (HP 条) -->
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/40 border border-slate-800/80 space-y-2.5">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-300 font-medium flex items-center gap-1.5">
+                  <span>🤕 熊村长实时状态：</span>
+                  <span id="boss-status-text" class="text-rose-400 font-bold">嘴硬顽固 (满血)</span>
+                </span>
+                <span id="boss-hp-text" class="font-mono text-slate-400 font-semibold">HP: 100%</span>
+              </div>
+              <div class="w-full h-3.5 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-slate-800">
+                <div id="boss-hp-bar"
+                  class="h-full rounded-full bg-gradient-to-r from-red-600 via-rose-500 to-amber-500 transition-all duration-300 shadow-[0_0_10px_rgba(244,63,94,0.5)]"
+                  style="width: 100%"></div>
+              </div>
+              <div class="flex justify-between items-center text-[11px] text-slate-500 font-mono">
+                <span>防御力: 0 (全靠脸硬抗)</span>
+                <span>背锅抗性: -999%</span>
+              </div>
+            </div>
+
+            <!-- 剧情背景简介 -->
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/30 border border-slate-800/60 text-xs sm:text-sm text-slate-300 space-y-2">
+              <div class="font-bold text-white flex items-center gap-2">
+                <span class="text-rose-500">◆</span> 剧情通报：正义铁拳，势不可挡
+              </div>
+              <p class="text-slate-400 leading-relaxed text-xs">
+                公元2026年，熊村长因中路打团频频空大、疯狂甩锅给保安并怒抢李帆副村长的圣剑，引发村民震怒。副村长李帆临危受命，化身特种战狼展开物理调解！熊村长虽已鼻青脸肿，仍坚称“都是队友问题，下次还敢”。
+              </p>
+            </div>
+
+            <!-- 演职员表与快捷操作 -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs text-slate-400">
+              <div class="flex items-center gap-4">
+                <span>领衔暴打：<strong class="text-slate-200">李帆</strong></span>
+                <span>挨揍担当：<strong class="text-slate-200">熊泽</strong></span>
+                <span class="hidden sm:inline">武术指导：<strong class="text-slate-200">全体被坑村民</strong></span>
+              </div>
+              <button onclick="resetBossHp()"
+                class="text-xs text-slate-500 hover:text-rose-400 underline underline-offset-4 decoration-slate-700 hover:decoration-rose-500/50 transition-colors">
+                给熊村长买跌打药 (满血复活)
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   </section>
 
   <!-- 村干部往事 (History) 板块 -->
   <section id="history"
-    class="relative py-24 bg-slate-900/60 border-t border-b border-slate-900/80 overflow-hidden z-10 lg:pl-64">
+    class="relative py-16 bg-slate-900/60 border-t border-b border-slate-900/80 overflow-hidden z-10 lg:pl-64">
     <!-- 科技感网格背景 -->
     <div class="absolute inset-0 bg-grid-pattern mask-radial pointer-events-none z-0"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-all duration-300">
 
       <!-- 标题 -->
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+      <div class="text-center max-w-3xl mx-auto mb-10 space-y-4">
         <div
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-rose-500/20 bg-rose-500/5 text-rose-400 text-xs font-semibold tracking-widest uppercase">
           VILLAGE HISTORY / 峥嵘岁月
@@ -2189,6 +2448,308 @@
         clearInterval(updateInterval);
       }
     });
+
+    // ==========================================
+    // 《战狼3：李帆暴打熊村长》解压打卡交互逻辑
+    // ==========================================
+    let soundEnabled = true;
+    let audioCtx = null;
+    let sessionHits = 0;
+    let comboCount = 0;
+    let comboTimer = null;
+    let hitFrameTimer = null;
+    let bossHp = 100;
+
+    // 预加载击中特写图片，确保 0 延时瞬切
+    const hitImgPreload = new Image();
+    hitImgPreload.src = './assets/zhanlang_hit.webp';
+
+    const DAMAGE_QUOTES = [
+      { text: "暴击 -9999! 💥", color: "text-red-400 text-lg sm:text-2xl" },
+      { text: "正义铁拳! 👊", color: "text-amber-400 text-base sm:text-xl" },
+      { text: "叫你抢圣剑! ⚔️", color: "text-rose-400 text-base sm:text-xl" },
+      { text: "空大还敢甩锅?! 🤬", color: "text-orange-400 text-sm sm:text-lg" },
+      { text: "物理调解! 🔨", color: "text-yellow-300 text-base sm:text-xl" },
+      { text: "血压下降 -10! 📉", color: "text-emerald-400 text-sm sm:text-base" },
+      { text: "战狼出击! 🐺", color: "text-rose-500 text-base sm:text-xl" },
+      { text: "熊村长: 下次还敢! 😭", color: "text-sky-300 text-sm sm:text-base" },
+      { text: "功德 +1 📿", color: "text-amber-300 text-base sm:text-xl" },
+      { text: "给李副村长倒茶! 🍵", color: "text-emerald-300 text-sm sm:text-base" },
+      { text: "骨折警告! ⚠️", color: "text-red-500 text-base sm:text-xl" }
+    ];
+
+    const BOSS_STATUSES = [
+      { minHp: 85, text: "嘴硬顽固 (满血抗揍)", color: "text-rose-400" },
+      { minHp: 65, text: "眼神发虚 (试图甩锅给保安)", color: "text-amber-400" },
+      { minHp: 40, text: "头皮发麻 (寻找遁地卷轴)", color: "text-orange-400" },
+      { minHp: 20, text: "双手抱头 (痛哭承认空大)", color: "text-yellow-400" },
+      { minHp: 1, text: "鼻青脸肿 (声泪俱下求放过)", color: "text-red-400" },
+      { minHp: 0, text: "锁血嘴硬: ‘下次还敢故意坑你!’", color: "text-purple-400" }
+    ];
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) audioCtx = new AudioContextClass();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playPunchSound(isCrit) {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        // 打击低频沉闷感
+        osc.type = isCrit ? 'sawtooth' : 'triangle';
+        const startFreq = isCrit ? 220 : 160;
+        const endFreq = 40;
+        osc.frequency.setValueAtTime(startFreq, now);
+        osc.frequency.exponentialRampToValueAtTime(endFreq, now + 0.12);
+
+        gain.gain.setValueAtTime(isCrit ? 0.9 : 0.7, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.14);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.14);
+
+        // 暴击时叠加清脆音
+        if (isCrit) {
+          const bellOsc = ctx.createOscillator();
+          const bellGain = ctx.createGain();
+          bellOsc.type = 'sine';
+          bellOsc.frequency.setValueAtTime(880, now);
+          bellOsc.frequency.exponentialRampToValueAtTime(440, now + 0.18);
+          bellGain.gain.setValueAtTime(0.4, now);
+          bellGain.gain.exponentialRampToValueAtTime(0.01, now + 0.18);
+          bellOsc.connect(bellGain);
+          bellGain.connect(ctx.destination);
+          bellOsc.start(now);
+          bellOsc.stop(now + 0.18);
+        }
+      } catch (e) {
+        console.warn('Audio play failed:', e);
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const soundIcon = document.getElementById('sound-icon');
+      const soundText = document.getElementById('sound-text');
+      if (soundIcon && soundText) {
+        soundIcon.textContent = soundEnabled ? '🔊' : '🔇';
+        soundText.textContent = soundEnabled ? '打击音效: 开' : '打击音效: 关';
+      }
+    }
+
+    function initVillageHeadHits() {
+      const stored = localStorage.getItem('xkc_village_head_total_hits');
+      const total = stored ? parseInt(stored, 10) : 12480;
+      const display = document.getElementById('total-hits-display');
+      if (display) {
+        display.textContent = total.toLocaleString();
+      }
+    }
+
+    function hitVillageHead(event) {
+      const container = document.getElementById('poster-container');
+      const poster = document.getElementById('zhanlang3-poster');
+      const flashOverlay = document.getElementById('hit-flash-overlay');
+      if (!container || !poster) return;
+
+      // 1. 累计计数
+      sessionHits++;
+      comboCount++;
+
+      let totalHits = parseInt(localStorage.getItem('xkc_village_head_total_hits') || '12480', 10) + 1;
+      localStorage.setItem('xkc_village_head_total_hits', totalHits);
+
+      // 更新展示
+      const totalDisplay = document.getElementById('total-hits-display');
+      const sessionDisplay = document.getElementById('session-hits-display');
+      const comboBadge = document.getElementById('combo-badge');
+      const comboDesc = document.getElementById('combo-desc');
+
+      if (totalDisplay) totalDisplay.textContent = totalHits.toLocaleString();
+      if (sessionDisplay) sessionDisplay.textContent = sessionHits.toLocaleString();
+      if (comboBadge) {
+        comboBadge.textContent = `Combo x${comboCount}`;
+        comboBadge.className = comboCount > 10
+          ? 'text-[10px] text-red-400 bg-red-500/20 px-1.5 py-0.5 rounded border border-red-500/40 font-mono font-bold animate-pulse'
+          : 'text-[10px] text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20 font-mono font-bold';
+      }
+      if (comboDesc) {
+        if (comboCount > 20) comboDesc.textContent = '🔥 战狼再世！手速已突破天际！';
+        else if (comboCount > 10) comboDesc.textContent = '⚡ 狂暴连招！李副村长点头称赞！';
+        else if (comboCount > 5) comboDesc.textContent = '👊 正义连击！熊村长开始求饶！';
+        else comboDesc.textContent = '持续点击保持连击！';
+      }
+
+      // 重置连击倒计时
+      if (comboTimer) clearTimeout(comboTimer);
+      comboTimer = setTimeout(() => {
+        comboCount = 0;
+        if (comboBadge) comboBadge.textContent = 'Combo x0';
+        if (comboDesc) comboDesc.textContent = '连击中断，点击海报重新蓄力';
+      }, 2500);
+
+      // 2. 扣除血量
+      const isCrit = comboCount % 5 === 0;
+      bossHp -= (isCrit ? 8 : 4);
+      if (bossHp <= 0) {
+        bossHp = 100; // 满血复活继续被暴打
+        showFloatingDamage(container, "💥 满血复活！下次还敢故意坑你！", "text-purple-400 text-xl sm:text-2xl", event);
+      }
+      updateBossHpUi();
+
+      // 3. 铁拳命中双帧瞬切与震颤动画
+      const posterHit = document.getElementById('zhanlang3-poster-hit');
+      if (posterHit) {
+        posterHit.classList.remove('opacity-0');
+        posterHit.classList.add('opacity-100');
+        if (hitFrameTimer) clearTimeout(hitFrameTimer);
+        hitFrameTimer = setTimeout(() => {
+          posterHit.classList.remove('opacity-100');
+          posterHit.classList.add('opacity-0');
+        }, 140);
+      }
+
+      container.classList.remove('animate-shake');
+      void container.offsetWidth; // 触发 reflow 重置动画
+      container.classList.add('animate-shake');
+
+      // 4. 边缘闪红
+      if (flashOverlay) {
+        flashOverlay.style.backgroundColor = isCrit ? 'rgba(239, 68, 68, 0.45)' : 'rgba(239, 68, 68, 0.25)';
+        setTimeout(() => {
+          flashOverlay.style.backgroundColor = 'rgba(239, 68, 68, 0)';
+        }, 120);
+      }
+
+      // 5. 音效
+      playPunchSound(isCrit);
+
+      // 6. 飘字与粒子
+      const quote = DAMAGE_QUOTES[Math.floor(Math.random() * DAMAGE_QUOTES.length)];
+      showFloatingDamage(container, quote.text, quote.color, event);
+      createShockwave(container, event);
+    }
+
+    function updateBossHpUi() {
+      const hpBar = document.getElementById('boss-hp-bar');
+      const hpText = document.getElementById('boss-hp-text');
+      const statusText = document.getElementById('boss-status-text');
+
+      const safeHp = Math.max(0, Math.min(100, bossHp));
+      if (hpBar) hpBar.style.width = `${safeHp}%`;
+      if (hpText) hpText.textContent = `HP: ${safeHp}%`;
+
+      const status = BOSS_STATUSES.find(s => safeHp >= s.minHp) || BOSS_STATUSES[BOSS_STATUSES.length - 1];
+      if (statusText) {
+        statusText.textContent = status.text;
+        statusText.className = `${status.color} font-bold`;
+      }
+    }
+
+    function resetBossHp() {
+      bossHp = 100;
+      updateBossHpUi();
+      showToast('💊 已给熊村长敷上红花油，生命值已回满！随时可以再打！');
+    }
+
+    function showFloatingDamage(container, text, colorClass, event) {
+      const damageContainer = document.getElementById('damage-container');
+      if (!damageContainer) return;
+
+      const rect = container.getBoundingClientRect();
+      const x = event ? (event.clientX - rect.left) : (rect.width / 2);
+      const y = event ? (event.clientY - rect.top) : (rect.height / 2);
+
+      const el = document.createElement('div');
+      el.className = `damage-text ${colorClass}`;
+      el.textContent = text;
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      el.style.setProperty('--crit-rot', `${(Math.random() * 20 - 10).toFixed(1)}deg`);
+
+      damageContainer.appendChild(el);
+      setTimeout(() => {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      }, 850);
+    }
+
+    function createShockwave(container, event) {
+      const damageContainer = document.getElementById('damage-container');
+      if (!damageContainer || !event) return;
+
+      const rect = container.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      const wave = document.createElement('div');
+      wave.className = 'shockwave-ring';
+      wave.style.width = '60px';
+      wave.style.height = '60px';
+      wave.style.left = `${x}px`;
+      wave.style.top = `${y}px`;
+
+      damageContainer.appendChild(wave);
+      setTimeout(() => {
+        if (wave.parentNode) wave.parentNode.removeChild(wave);
+      }, 400);
+    }
+
+    function copyBattleReport() {
+      const totalHits = parseInt(localStorage.getItem('xkc_village_head_total_hits') || '12480', 10);
+      const reportText = `【熊坑村前线战报】\n今日在《战狼3：李帆暴打熊村长》片场，我助阵李副村长对熊村长实施了 ${sessionHits > 0 ? sessionHits : 1} 次正义暴击！\n全村已累计暴打熊村长 ${totalHits.toLocaleString()} 次！\n熊村长目前嘴硬表示“下次还敢故意坑你”，村民速来支援调解：www.bbbkb.com`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(reportText).then(() => {
+          showToast('📋 战报已复制！快发到开黑群嘲讽村长！');
+        }).catch(() => {
+          prompt('请手动复制战报：', reportText);
+        });
+      } else {
+        prompt('请手动复制战报：', reportText);
+      }
+    }
+
+    function showToast(message) {
+      let toast = document.getElementById('xkc-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'xkc-toast';
+        toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-2xl bg-slate-900/95 border border-rose-500/50 text-white text-xs sm:text-sm font-semibold shadow-[0_0_30px_rgba(244,63,94,0.35)] backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none translate-y-4';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      }, 2500);
+    }
+
+    // 初始化累计次数
+    document.addEventListener('DOMContentLoaded', () => {
+      initVillageHeadHits();
+    });
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      initVillageHeadHits();
+    }
   </script>
 </body>
 
