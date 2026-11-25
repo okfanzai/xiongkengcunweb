@@ -277,10 +277,15 @@
           </a>
 
           <!-- Desktop Nav Links -->
-          <div class="hidden md:flex items-center gap-1">
+          <div class="hidden lg:flex items-center gap-1">
             <a href="#intro"
               class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 transition-all">
               首页概览
+            </a>
+            <a href="#village-court"
+              class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 transition-all flex items-center gap-1.5">
+              <span>⚖️ 战绩法庭</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 border border-amber-500/40 text-amber-300 font-mono font-bold leading-none">NEW</span>
             </a>
             <a href="#roster"
               class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 transition-all">
@@ -336,7 +341,7 @@
               <span>↗</span>
             </a>
             <button id="mobile-menu-btn" type="button"
-              class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg border border-slate-800 bg-slate-900/60"
+              class="lg:hidden text-slate-300 hover:text-white p-2 rounded-lg border border-slate-800 bg-slate-900/60"
               aria-label="Toggle Menu">
               <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
@@ -348,8 +353,12 @@
 
       <!-- Mobile Drawer Menu -->
       <div id="mobile-menu"
-        class="hidden md:hidden border-t border-slate-800 bg-obsidian/95 backdrop-blur-xl px-4 py-3 space-y-1.5">
+        class="hidden lg:hidden border-t border-slate-800 bg-obsidian/95 backdrop-blur-xl px-4 py-3 space-y-1.5">
         <a href="#intro" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-200 hover:bg-slate-800/70">首页概览</a>
+        <a href="#village-court" class="flex items-center justify-between px-3 py-2 rounded-lg text-sm font-semibold text-amber-400 hover:bg-slate-800/70">
+          <span>⚖️ 村委会战绩法庭</span>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 border border-amber-500/40">NEW</span>
+        </a>
         <a href="#roster" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-200 hover:bg-slate-800/70">阵容与实时战绩</a>
         <a href="#entertainment" class="flex items-center justify-between px-3 py-2 rounded-lg text-sm font-semibold text-rose-400 hover:bg-slate-800/70">
           <span>村委会整活特区</span>
@@ -478,8 +487,58 @@
     </div>
   </section>
 
+  <!-- Village Performance Court Section (Auto Verdict + Punishment Desk) -->
+  <section id="village-court" class="scroll-mt-24 relative py-14 bg-obsidian border-b border-slate-800/80 overflow-hidden">
+    <div class="absolute inset-0 bg-hud-grid mask-radial pointer-events-none z-0"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <!-- Header & Defendant Selector -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6 pb-4 border-b border-slate-800/80">
+        <div>
+          <div class="text-xs font-mono font-bold text-amber-400 tracking-widest uppercase mb-1">
+            VILLAGE TRIBUNAL // 熊坑村村委会战绩审判庭
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-black tracking-tight text-white flex flex-wrap items-center gap-3">
+            <span>⚖️ 村委会战绩法庭</span>
+            <span id="court-mode-badge"
+              class="text-xs font-mono font-bold px-2.5 py-1 rounded bg-slate-800 border border-slate-700 text-slate-300">
+              正在调阅 OpenDota 案卷...
+            </span>
+          </h2>
+        </div>
+
+        <!-- 5-Player Quick Summon Tabs -->
+        <div id="court-defendant-tabs" class="flex flex-wrap items-center gap-2">
+          <!-- Rendered dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Simulated Mode Explicit Warning Banner (Shown ONLY when API data unavailable) -->
+      <div id="court-fallback-banner"
+        class="hidden mb-5 px-4 py-3 rounded-xl bg-amber-500/15 border border-amber-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs sm:text-sm text-amber-200">
+        <div class="flex items-center gap-2 font-semibold">
+          <span>⚠️</span>
+          <span>当前为【模拟庭审模式】：OpenDota 实时数据暂不可用，以下判词为随机趣味生成，非真实战绩。</span>
+        </div>
+        <button type="button" onclick="updateLiveStatus()"
+          class="self-start sm:self-auto px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/35 border border-amber-400/50 text-amber-200 font-mono text-xs font-bold transition-colors shrink-0">
+          ↻ 重试拉取真实战绩
+        </button>
+      </div>
+
+      <!-- Main Verdict Container -->
+      <div id="court-main-panel" class="hud-panel-hot hud-corners rounded-2xl p-5 sm:p-7 relative overflow-hidden">
+        <!-- Populated dynamically by renderVillageCourt() -->
+        <div class="py-12 text-center space-y-3">
+          <div class="inline-block w-8 h-8 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+          <p class="text-sm font-mono text-slate-400">正在传唤今日被告并调取 OpenDota 最近一局战绩...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Unified 5-Player Roster & Live OpenDota Status Section -->
-  <section id="roster" class="relative py-14 bg-abyss/60 border-b border-slate-800/80 overflow-hidden">
+  <section id="roster" class="scroll-mt-24 relative py-14 bg-abyss/60 border-b border-slate-800/80 overflow-hidden">
     <div class="absolute inset-0 bg-hud-grid mask-radial pointer-events-none z-0"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -517,7 +576,7 @@
   </section>
 
   <!-- Entertainment Zone: Tabbed Interactive Arenas (Zhanlang 3 + TI15 Cheer) -->
-  <section id="entertainment" class="relative py-14 bg-obsidian border-b border-slate-800/80 overflow-hidden">
+  <section id="entertainment" class="scroll-mt-24 relative py-14 bg-obsidian border-b border-slate-800/80 overflow-hidden">
     <div class="absolute inset-0 bg-hud-grid mask-radial pointer-events-none z-0"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -581,7 +640,7 @@
               <img id="zhanlang3-poster" src="./assets/zhanlang3.jpg" alt="战狼3 李帆准备暴打熊村长"
                 class="w-full h-auto object-cover block pointer-events-none">
               <img id="zhanlang3-poster-hit" src="./assets/zhanlang_hit.webp" alt="战狼3 李帆铁拳命中熊村长"
-                class="w-full h-full object-cover absolute inset-0 opacity-0 pointer-events-none">
+                class="w-full h-full object-cover absolute inset-0 opacity-0 scale-100 transition-all duration-200 ease-out pointer-events-none">
 
               <div class="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-4 pointer-events-none">
                 <div class="py-1.5 px-3.5 rounded-full bg-red-600/90 text-white text-xs font-bold tracking-wider mx-auto shadow-lg">
@@ -760,11 +819,11 @@
   </section>
 
   <!-- Village History Section -->
-  <section id="history" class="relative py-14 bg-abyss/50 border-b border-slate-800/80 overflow-hidden">
+  <section id="history" class="scroll-mt-24 relative py-14 bg-abyss/50 border-b border-slate-800/80 overflow-hidden">
     <div class="absolute inset-0 bg-hud-grid mask-radial pointer-events-none z-0"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="mb-8 pb-4 border-b border-slate-800/80 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+      <div class="mb-6 sm:mb-8 pb-4 border-b border-slate-800/80 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
           <div class="text-xs font-mono font-bold text-amber-400 tracking-widest uppercase mb-1">
             VILLAGE ARCHIVES // 峥嵘岁月
@@ -773,189 +832,232 @@
             村干部往事档案
           </h2>
         </div>
-        <p class="text-slate-400 text-xs sm:text-sm">
-          那些曾在熊坑村口口相传、甚至载入人类文明史册的伟大壮举
-        </p>
+        <div class="flex flex-wrap items-center gap-2.5">
+          <p class="text-slate-400 text-xs sm:text-sm">
+            那些曾在熊坑村口口相传、甚至载入人类文明史册的伟大壮举
+          </p>
+          <span id="history-counter-badge"
+            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-mono font-bold shrink-0">
+            共 6 卷 · 第 01 卷
+          </span>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-        <!-- Left: 4 Cols Story Selector -->
-        <div class="lg:col-span-4 flex lg:flex-col gap-2.5 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 no-scrollbar">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch">
+        <!-- Left: Responsive 2x3 Mobile / 3x2 Tablet / Vertical Desktop Selector -->
+        <div class="lg:col-span-4 grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-col gap-2 sm:gap-2.5">
           <button onclick="switchStory(1)" id="story-tab-1"
-            class="story-tab-btn flex-shrink-0 w-64 lg:w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all bg-gradient-to-r from-rose-950/60 to-slate-900/80 border-rose-500/50 text-white">
-            <span class="font-display text-lg font-black text-rose-500">01</span>
+            class="story-tab-btn w-full flex items-start lg:items-center gap-2.5 lg:gap-3 p-2.5 lg:p-3.5 rounded-xl border text-left transition-all bg-gradient-to-r from-rose-950/60 to-slate-900/80 border-rose-500/50 text-white shadow-[0_0_15px_rgba(244,63,94,0.15)]">
+            <span class="story-num font-display text-sm lg:text-lg font-black text-rose-500 shrink-0 leading-tight">01</span>
             <div class="min-w-0">
-              <div class="font-bold text-sm truncate">村长怒触不周山</div>
-              <div class="text-xs text-slate-400 font-mono">上古洪荒 · 熊泽</div>
+              <div class="font-bold text-xs lg:text-sm leading-snug line-clamp-2 lg:truncate">村长怒触不周山</div>
+              <div class="text-[11px] lg:text-xs text-slate-400 font-mono mt-0.5 truncate">上古洪荒 · 熊泽</div>
             </div>
           </button>
 
           <button onclick="switchStory(2)" id="story-tab-2"
-            class="story-tab-btn flex-shrink-0 w-64 lg:w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700">
-            <span class="font-display text-lg font-black opacity-60">02</span>
+            class="story-tab-btn w-full flex items-start lg:items-center gap-2.5 lg:gap-3 p-2.5 lg:p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700">
+            <span class="story-num font-display text-sm lg:text-lg font-black opacity-60 shrink-0 leading-tight">02</span>
             <div class="min-w-0">
-              <div class="font-bold text-sm truncate">副村长化名 D.B. COOPER 劫机</div>
-              <div class="text-xs text-slate-500 font-mono">1971年 · 李帆</div>
+              <div class="font-bold text-xs lg:text-sm leading-snug line-clamp-2 lg:truncate">副村长化名 D.B. COOPER 劫机</div>
+              <div class="text-[11px] lg:text-xs text-slate-500 font-mono mt-0.5 truncate">1971年 · 李帆</div>
             </div>
           </button>
 
           <button onclick="switchStory(3)" id="story-tab-3"
-            class="story-tab-btn flex-shrink-0 w-64 lg:w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700">
-            <span class="font-display text-lg font-black opacity-60">03</span>
+            class="story-tab-btn w-full flex items-start lg:items-center gap-2.5 lg:gap-3 p-2.5 lg:p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700">
+            <span class="story-num font-display text-sm lg:text-lg font-black opacity-60 shrink-0 leading-tight">03</span>
             <div class="min-w-0">
-              <div class="font-bold text-sm truncate">村保安刺杀斐迪南大公</div>
-              <div class="text-xs text-slate-500 font-mono">1914年 · 张存隆</div>
+              <div class="font-bold text-xs lg:text-sm leading-snug line-clamp-2 lg:truncate">村保安刺杀斐迪南大公</div>
+              <div class="text-[11px] lg:text-xs text-slate-500 font-mono mt-0.5 truncate">1914年 · 张存隆</div>
             </div>
           </button>
 
           <button onclick="switchStory(4)" id="story-tab-4"
-            class="story-tab-btn flex-shrink-0 w-64 lg:w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700">
-            <span class="font-display text-lg font-black opacity-60">04</span>
+            class="story-tab-btn w-full flex items-start lg:items-center gap-2.5 lg:gap-3 p-2.5 lg:p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700">
+            <span class="story-num font-display text-sm lg:text-lg font-black opacity-60 shrink-0 leading-tight">04</span>
             <div class="min-w-0">
-              <div class="font-bold text-sm truncate">村长扶贫网贷脱贫</div>
-              <div class="text-xs text-slate-500 font-mono">2025年 · 熊泽</div>
+              <div class="font-bold text-xs lg:text-sm leading-snug line-clamp-2 lg:truncate">村长扶贫网贷脱贫</div>
+              <div class="text-[11px] lg:text-xs text-slate-500 font-mono mt-0.5 truncate">2025年 · 熊泽</div>
             </div>
           </button>
 
           <button onclick="switchStory(5)" id="story-tab-5"
-            class="story-tab-btn flex-shrink-0 w-64 lg:w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700">
-            <span class="font-display text-lg font-black opacity-60">05</span>
+            class="story-tab-btn w-full flex items-start lg:items-center gap-2.5 lg:gap-3 p-2.5 lg:p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700">
+            <span class="story-num font-display text-sm lg:text-lg font-black opacity-60 shrink-0 leading-tight">05</span>
             <div class="min-w-0">
-              <div class="font-bold text-sm truncate">副村长骗微信步数偷能量</div>
-              <div class="text-xs text-slate-500 font-mono">2026年 · 李帆</div>
+              <div class="font-bold text-xs lg:text-sm leading-snug line-clamp-2 lg:truncate">副村长骗微信步数偷能量</div>
+              <div class="text-[11px] lg:text-xs text-slate-500 font-mono mt-0.5 truncate">2026年 · 李帆</div>
             </div>
           </button>
 
           <button onclick="switchStory(6)" id="story-tab-6"
-            class="story-tab-btn flex-shrink-0 w-64 lg:w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700">
-            <span class="font-display text-lg font-black opacity-60">06</span>
+            class="story-tab-btn w-full flex items-start lg:items-center gap-2.5 lg:gap-3 p-2.5 lg:p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700">
+            <span class="story-num font-display text-sm lg:text-lg font-black opacity-60 shrink-0 leading-tight">06</span>
             <div class="min-w-0">
-              <div class="font-bold text-sm truncate">村保安骗电工吃降压药摸高压电</div>
-              <div class="text-xs text-slate-500 font-mono">2026年 · 村保安</div>
+              <div class="font-bold text-xs lg:text-sm leading-snug line-clamp-2 lg:truncate">村保安骗电工吃降压药摸高压电</div>
+              <div class="text-[11px] lg:text-xs text-slate-500 font-mono mt-0.5 truncate">2026年 · 村保安</div>
             </div>
           </button>
         </div>
 
-        <!-- Right: 8 Cols Story Showcase -->
-        <div class="lg:col-span-8">
-          <!-- Card 1 -->
-          <div id="story-card-1"
-            class="story-detail-card hud-panel hud-corners rounded-2xl p-6 sm:p-8 h-full flex flex-col md:flex-row gap-6 items-center transition-all duration-300">
-            <div class="w-full md:w-[42%] space-y-4">
-              <span class="inline-block px-2.5 py-0.5 rounded bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-mono font-bold">
-                ARCHIVE #01 · 上古洪荒
-              </span>
-              <h3 class="text-2xl sm:text-3xl font-black text-white">村长怒触不周山</h3>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                上古时期，熊坑村村长熊泽争夺创世坑神失败后，怒撞天地支柱不周山，导致“天倾西北，地陷东南”，世界大乱，地表出现巨坑，后在此建立熊坑村。
-              </p>
-              <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
-                涉事干部：<span class="text-amber-400">村长（熊泽）</span>
+        <!-- Right: 8 Cols Story Showcase (Supports Touch Swipe + Pagination Controls) -->
+        <div id="story-showcase" class="lg:col-span-8 flex flex-col gap-3">
+          <div class="flex-1">
+            <!-- Card 1 -->
+            <div id="story-card-1"
+              class="story-detail-card hud-panel hud-corners rounded-2xl p-5 sm:p-8 h-full flex flex-col md:flex-row gap-5 sm:gap-6 items-center transition-all duration-300">
+              <div class="w-full md:w-[42%] space-y-3 sm:space-y-4">
+                <span class="inline-block px-2.5 py-0.5 rounded bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-mono font-bold">
+                  ARCHIVE #01 · 上古洪荒
+                </span>
+                <h3 class="text-xl sm:text-3xl font-black text-white">村长怒触不周山</h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  上古时期，熊坑村村长熊泽争夺创世坑神失败后，怒撞天地支柱不周山，导致“天倾西北，地陷东南”，世界大乱，地表出现巨坑，后在此建立熊坑村。
+                </p>
+                <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
+                  涉事干部：<span class="text-amber-400">村长（熊泽）</span>
+                </div>
+              </div>
+              <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
+                <img id="story-img-1" src="./assets/shijian1.webp" alt="村长怒触不周山" class="w-full h-full object-cover">
               </div>
             </div>
-            <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
-              <img id="story-img-1" src="./assets/shijian1.webp" alt="村长怒触不周山" class="w-full h-full object-cover">
+
+            <!-- Card 2 -->
+            <div id="story-card-2"
+              class="story-detail-card hidden hud-panel hud-corners rounded-2xl p-5 sm:p-8 h-full flex flex-col md:flex-row gap-5 sm:gap-6 items-center transition-all duration-300">
+              <div class="w-full md:w-[42%] space-y-3 sm:space-y-4">
+                <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold">
+                  ARCHIVE #02 · 1971年
+                </span>
+                <h3 class="text-xl sm:text-3xl font-black text-white">副村长化名 D.B. COOPER 劫机</h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  副村长李帆 1971 年劫持西北航空 305 号航班，情急之下大喊“derB，快跑”，被机组人员听成 D.B. COOPER，引发世纪谜案。
+                </p>
+                <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
+                  涉事干部：<span class="text-amber-400">副村长（李帆）</span>
+                </div>
+              </div>
+              <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
+                <img id="story-img-2" src="./assets/shijian2.webp" alt="副村长化名D.B. COOPER劫机" class="w-full h-full object-cover">
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div id="story-card-3"
+              class="story-detail-card hidden hud-panel hud-corners rounded-2xl p-5 sm:p-8 h-full flex flex-col md:flex-row gap-5 sm:gap-6 items-center transition-all duration-300">
+              <div class="w-full md:w-[42%] space-y-3 sm:space-y-4">
+                <span class="inline-block px-2.5 py-0.5 rounded bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-mono font-bold">
+                  ARCHIVE #03 · 1914年
+                </span>
+                <h3 class="text-xl sm:text-3xl font-black text-white">村保安刺杀斐迪南大公</h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  村保安张存隆嫉恶如仇，当街刺杀斐迪南大公，史称萨拉热窝事件，引发第一次世界大战。
+                </p>
+                <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
+                  涉事干部：<span class="text-amber-400">村保安（张存隆）</span>
+                </div>
+              </div>
+              <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
+                <img id="story-img-3" src="./assets/shijian3.webp" alt="村保安刺杀斐迪南大公" class="w-full h-full object-cover">
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div id="story-card-4"
+              class="story-detail-card hidden hud-panel hud-corners rounded-2xl p-5 sm:p-8 h-full flex flex-col md:flex-row gap-5 sm:gap-6 items-center transition-all duration-300">
+              <div class="w-full md:w-[42%] space-y-3 sm:space-y-4">
+                <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold">
+                  ARCHIVE #04 · 2025年
+                </span>
+                <h3 class="text-xl sm:text-3xl font-black text-white">村长扶贫网贷脱贫</h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  熊坑村村长熊泽响应号召，先富带动后富，为了帮助村民们脱贫，挨个用他们手机申请网贷。
+                </p>
+                <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
+                  涉事干部：<span class="text-amber-400">村长（熊泽）</span>
+                </div>
+              </div>
+              <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
+                <img id="story-img-4" src="./assets/shijian4.webp" alt="村长扶贫网贷脱贫" class="w-full h-full object-cover">
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div id="story-card-5"
+              class="story-detail-card hidden hud-panel hud-corners rounded-2xl p-5 sm:p-8 h-full flex flex-col md:flex-row gap-5 sm:gap-6 items-center transition-all duration-300">
+              <div class="w-full md:w-[42%] space-y-3 sm:space-y-4">
+                <span class="inline-block px-2.5 py-0.5 rounded bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-mono font-bold">
+                  ARCHIVE #05 · 2026年
+                </span>
+                <h3 class="text-xl sm:text-3xl font-black text-white">副村长骗微信步数偷能量</h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  副村长李帆为了坚持做公益，每天都在蚂蚁森林偷能量，为了收集更多能量，骗村头老太太微信步数可以提现，让老太太疯狂走路，然后每天盯着她们的蚂蚁能量偷。
+                </p>
+                <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
+                  涉事干部：<span class="text-amber-400">副村长（李帆）</span>
+                </div>
+              </div>
+              <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
+                <img id="story-img-5" src="./assets/shijian5.webp" alt="副村长骗微信步数偷能量" class="w-full h-full object-cover">
+              </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div id="story-card-6"
+              class="story-detail-card hidden hud-panel hud-corners rounded-2xl p-5 sm:p-8 h-full flex flex-col md:flex-row gap-5 sm:gap-6 items-center transition-all duration-300">
+              <div class="w-full md:w-[42%] space-y-3 sm:space-y-4">
+                <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold">
+                  ARCHIVE #06 · 2026年
+                </span>
+                <h3 class="text-xl sm:text-3xl font-black text-white">村保安骗电工吃降压药摸高压电</h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  熊坑村高压电泄露，众人束手无策，村保安哄骗隔壁村电工说随便摸高压电，他这里有降压药。
+                </p>
+                <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
+                  涉事干部：<span class="text-amber-400">村保安</span>
+                </div>
+              </div>
+              <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
+                <img id="story-img-6" src="./assets/shijian6.webp" alt="村保安骗电工吃降压药摸高压电" class="w-full h-full object-cover">
+              </div>
             </div>
           </div>
 
-          <!-- Card 2 -->
-          <div id="story-card-2"
-            class="story-detail-card hidden hud-panel hud-corners rounded-2xl p-6 sm:p-8 h-full flex flex-col md:flex-row gap-6 items-center transition-all duration-300">
-            <div class="w-full md:w-[42%] space-y-4">
-              <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold">
-                ARCHIVE #02 · 1971年
-              </span>
-              <h3 class="text-2xl sm:text-3xl font-black text-white">副村长化名 D.B. COOPER 劫机</h3>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                副村长李帆 1971 年劫持西北航空 305 号航班，情急之下大喊“derB，快跑”，被机组人员听成 D.B. COOPER，引发世纪谜案。
-              </p>
-              <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
-                涉事干部：<span class="text-amber-400">副村长（李帆）</span>
-              </div>
-            </div>
-            <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
-              <img id="story-img-2" src="./assets/shijian2.webp" alt="副村长化名D.B. COOPER劫机" class="w-full h-full object-cover">
-            </div>
-          </div>
+          <!-- Tactical Pagination & Swipe Indicator Bar -->
+          <div class="hud-panel rounded-xl px-3.5 py-2.5 flex items-center justify-between gap-2">
+            <button type="button" onclick="prevStory()"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-xs font-bold text-slate-200 transition-colors active:scale-95">
+              <span>←</span>
+              <span>上一卷</span>
+            </button>
 
-          <!-- Card 3 -->
-          <div id="story-card-3"
-            class="story-detail-card hidden hud-panel hud-corners rounded-2xl p-6 sm:p-8 h-full flex flex-col md:flex-row gap-6 items-center transition-all duration-300">
-            <div class="w-full md:w-[42%] space-y-4">
-              <span class="inline-block px-2.5 py-0.5 rounded bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-mono font-bold">
-                ARCHIVE #03 · 1914年
-              </span>
-              <h3 class="text-2xl sm:text-3xl font-black text-white">村保安刺杀斐迪南大公</h3>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                村保安张存隆嫉恶如仇，当街刺杀斐迪南大公，史称萨拉热窝事件，引发第一次世界大战。
-              </p>
-              <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
-                涉事干部：<span class="text-amber-400">村保安（张存隆）</span>
+            <div class="flex flex-col items-center gap-1.5">
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="switchStory(1)" id="story-dot-1" aria-label="第1卷"
+                  class="story-dot h-1.5 w-6 rounded-full bg-rose-500 transition-all"></button>
+                <button type="button" onclick="switchStory(2)" id="story-dot-2" aria-label="第2卷"
+                  class="story-dot h-1.5 w-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all"></button>
+                <button type="button" onclick="switchStory(3)" id="story-dot-3" aria-label="第3卷"
+                  class="story-dot h-1.5 w-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all"></button>
+                <button type="button" onclick="switchStory(4)" id="story-dot-4" aria-label="第4卷"
+                  class="story-dot h-1.5 w-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all"></button>
+                <button type="button" onclick="switchStory(5)" id="story-dot-5" aria-label="第5卷"
+                  class="story-dot h-1.5 w-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all"></button>
+                <button type="button" onclick="switchStory(6)" id="story-dot-6" aria-label="第6卷"
+                  class="story-dot h-1.5 w-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all"></button>
               </div>
+              <span id="story-page-text" class="text-[11px] font-mono text-slate-400">
+                01 / 06 · <span class="lg:hidden">可左右滑动切篇</span><span class="hidden lg:inline">点击翻阅全部档案</span>
+              </span>
             </div>
-            <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
-              <img id="story-img-3" src="./assets/shijian3.webp" alt="村保安刺杀斐迪南大公" class="w-full h-full object-cover">
-            </div>
-          </div>
 
-          <!-- Card 4 -->
-          <div id="story-card-4"
-            class="story-detail-card hidden hud-panel hud-corners rounded-2xl p-6 sm:p-8 h-full flex flex-col md:flex-row gap-6 items-center transition-all duration-300">
-            <div class="w-full md:w-[42%] space-y-4">
-              <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold">
-                ARCHIVE #04 · 2025年
-              </span>
-              <h3 class="text-2xl sm:text-3xl font-black text-white">村长扶贫网贷脱贫</h3>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                熊坑村村长熊泽响应号召，先富带动后富，为了帮助村民们脱贫，挨个用他们手机申请网贷。
-              </p>
-              <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
-                涉事干部：<span class="text-amber-400">村长（熊泽）</span>
-              </div>
-            </div>
-            <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
-              <img id="story-img-4" src="./assets/shijian4.webp" alt="村长扶贫网贷脱贫" class="w-full h-full object-cover">
-            </div>
-          </div>
-
-          <!-- Card 5 -->
-          <div id="story-card-5"
-            class="story-detail-card hidden hud-panel hud-corners rounded-2xl p-6 sm:p-8 h-full flex flex-col md:flex-row gap-6 items-center transition-all duration-300">
-            <div class="w-full md:w-[42%] space-y-4">
-              <span class="inline-block px-2.5 py-0.5 rounded bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-mono font-bold">
-                ARCHIVE #05 · 2026年
-              </span>
-              <h3 class="text-2xl sm:text-3xl font-black text-white">副村长骗微信步数偷能量</h3>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                副村长李帆为了坚持做公益，每天都在蚂蚁森林偷能量，为了收集更多能量，骗村头老太太微信步数可以提现，让老太太疯狂走路，然后每天盯着她们的蚂蚁能量偷。
-              </p>
-              <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
-                涉事干部：<span class="text-amber-400">副村长（李帆）</span>
-              </div>
-            </div>
-            <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
-              <img id="story-img-5" src="./assets/shijian5.webp" alt="副村长骗微信步数偷能量" class="w-full h-full object-cover">
-            </div>
-          </div>
-
-          <!-- Card 6 -->
-          <div id="story-card-6"
-            class="story-detail-card hidden hud-panel hud-corners rounded-2xl p-6 sm:p-8 h-full flex flex-col md:flex-row gap-6 items-center transition-all duration-300">
-            <div class="w-full md:w-[42%] space-y-4">
-              <span class="inline-block px-2.5 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold">
-                ARCHIVE #06 · 2026年
-              </span>
-              <h3 class="text-2xl sm:text-3xl font-black text-white">村保安骗电工吃降压药摸高压电</h3>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                熊坑村高压电泄露，众人束手无策，村保安哄骗隔壁村电工说随便摸高压电，他这里有降压药。
-              </p>
-              <div class="pt-2 border-t border-slate-800 text-xs font-mono text-slate-400">
-                涉事干部：<span class="text-amber-400">村保安</span>
-              </div>
-            </div>
-            <div class="flex-1 w-full aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/80 bg-obsidian">
-              <img id="story-img-6" src="./assets/shijian6.webp" alt="村保安骗电工吃降压药摸高压电" class="w-full h-full object-cover">
-            </div>
+            <button type="button" onclick="nextStory()"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-600/20 hover:bg-rose-600/35 border border-rose-500/40 text-xs font-bold text-rose-200 transition-colors active:scale-95">
+              <span>下一卷</span>
+              <span>→</span>
+            </button>
           </div>
         </div>
       </div>
@@ -963,7 +1065,7 @@
   </section>
 
   <!-- CTA & Footer Section -->
-  <footer id="join" class="relative py-14 bg-obsidian overflow-hidden">
+  <footer id="join" class="scroll-mt-24 relative py-14 bg-obsidian overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- CTA Banner -->
       <div class="hud-panel-hot hud-corners rounded-2xl p-8 sm:p-10 flex flex-col lg:flex-row items-center justify-between gap-6 mb-10">
@@ -1131,24 +1233,80 @@
       }
     }
 
-    // --- Village History Tabs ---
+    // --- Village History Tabs, Pagination & Mobile Swipe ---
+    const TOTAL_STORIES = 6;
+    let currentStoryIndex = 1;
+
     function switchStory(index) {
+      if (index < 1) index = TOTAL_STORIES;
+      if (index > TOTAL_STORIES) index = 1;
+      currentStoryIndex = index;
+
       document.querySelectorAll('.story-tab-btn').forEach(btn => {
-        btn.className = 'story-tab-btn flex-shrink-0 w-64 lg:w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700';
-        const num = btn.querySelector('.font-display');
-        if (num) num.className = 'font-display text-lg font-black opacity-60';
+        btn.className = 'story-tab-btn w-full flex items-start lg:items-center gap-2.5 lg:gap-3 p-2.5 lg:p-3.5 rounded-xl border text-left transition-all bg-slate-900/40 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700';
+        const num = btn.querySelector('.story-num');
+        if (num) num.className = 'story-num font-display text-sm lg:text-lg font-black opacity-60 shrink-0 leading-tight';
       });
 
       const activeBtn = document.getElementById(`story-tab-${index}`);
       if (activeBtn) {
-        activeBtn.className = 'story-tab-btn flex-shrink-0 w-64 lg:w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all bg-gradient-to-r from-rose-950/60 to-slate-900/80 border-rose-500/50 text-white';
-        const activeNum = activeBtn.querySelector('.font-display');
-        if (activeNum) activeNum.className = 'font-display text-lg font-black text-rose-500';
+        activeBtn.className = 'story-tab-btn w-full flex items-start lg:items-center gap-2.5 lg:gap-3 p-2.5 lg:p-3.5 rounded-xl border text-left transition-all bg-gradient-to-r from-rose-950/60 to-slate-900/80 border-rose-500/50 text-white shadow-[0_0_15px_rgba(244,63,94,0.15)]';
+        const activeNum = activeBtn.querySelector('.story-num');
+        if (activeNum) activeNum.className = 'story-num font-display text-sm lg:text-lg font-black text-rose-500 shrink-0 leading-tight';
       }
 
       document.querySelectorAll('.story-detail-card').forEach(card => card.classList.add('hidden'));
       const activeCard = document.getElementById(`story-card-${index}`);
       if (activeCard) activeCard.classList.remove('hidden');
+
+      // Update pagination dots and badges
+      const padded = String(index).padStart(2, '0');
+      const totalPadded = String(TOTAL_STORIES).padStart(2, '0');
+      const headerBadge = document.getElementById('history-counter-badge');
+      if (headerBadge) headerBadge.textContent = `共 ${TOTAL_STORIES} 卷 · 第 ${padded} 卷`;
+
+      const pageText = document.getElementById('story-page-text');
+      if (pageText) {
+        pageText.innerHTML = `${padded} / ${totalPadded} · <span class="lg:hidden">可左右滑动切篇</span><span class="hidden lg:inline">点击翻阅全部档案</span>`;
+      }
+
+      document.querySelectorAll('.story-dot').forEach((dot, i) => {
+        const isCurrent = (i + 1) === index;
+        dot.className = isCurrent
+          ? 'story-dot h-1.5 w-6 rounded-full bg-rose-500 transition-all'
+          : 'story-dot h-1.5 w-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all';
+      });
+    }
+
+    function prevStory() {
+      switchStory(currentStoryIndex - 1);
+    }
+
+    function nextStory() {
+      switchStory(currentStoryIndex + 1);
+    }
+
+    function initStorySwipe() {
+      const showcase = document.getElementById('story-showcase');
+      if (!showcase) return;
+      let startX = 0;
+      let startY = 0;
+
+      showcase.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+
+      showcase.addEventListener('touchend', (e) => {
+        if (e.changedTouches.length !== 1) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+          if (dx < 0) nextStory();
+          else prevStory();
+        }
+      }, { passive: true });
     }
 
     // --- Poll Widget Logic (Collapsed by default) ---
@@ -1784,6 +1942,560 @@
       `;
     }
 
+    // ==========================================
+    // Village Performance Court Engine (Real OpenDota + Honest Fallback)
+    // ==========================================
+    const COURT_DATA_CACHE = {};
+    let courtSelectedPlayerId = null;
+    let courtCurrentVerdict = null;
+    let courtExtraPunishment = null;
+    let courtVariantSeed = 0;
+
+    const COURT_VERDICT_LIBRARY = {
+      feeder: {
+        tierLabel: '重罪 · 恶意送头',
+        stampText: '重罪定谳',
+        stampCls: 'border-rose-500/70 text-rose-400 bg-rose-950/50',
+        charges: [
+          ['恶意送温暖罪', '泉水VIP观光重罪'],
+          ['敌方第六人卧底罪', '高频复活倒计时罪'],
+          ['严重危害熊坑村天梯安全罪', '提款机慈善罪']
+        ],
+        defenses: [
+          '“对面五个人像疯狗一样冲我脸，辅助在野区采蘑菇能怪我？”',
+          '“我这是在用生命给队友拉扯发育空间，你们懂不懂战术牺牲！”',
+          '“鼠标垫太滑加键盘断联，真的，我发誓不是我菜！”'
+        ],
+        mainPunishments: [
+          '立刻在开黑群发一个拼手气红包安抚民心，下局强制 5 号位包鸡包眼。',
+          '语音公开朗读 30 秒《战犯深刻检讨书》，下把自觉把核心位让给队友。'
+        ],
+        sidePunishments: [
+          '剥夺本晚抢圣剑与甩锅给村保安的政治权利。',
+          '本晚禁止再选该英雄，违者由李副村长直接物理调解。'
+        ],
+        mitigations: [
+          '下局拿下 MVP 或全场死亡 ≤ 3 次，可当庭申请撤销处分。',
+          '下局主动买齐 10 组真眼且零甩锅，准予戴罪立功。'
+        ]
+      },
+      unluckyMvp: {
+        tierLabel: '轻罪 · 虽败犹荣',
+        stampText: '尽力免喷',
+        stampCls: 'border-amber-400/70 text-amber-300 bg-amber-950/40',
+        charges: [
+          ['疑似带不动队友但仍需连坐罪', '数据好看却没赢球罪'],
+          ['孤勇者未能一打九罪', '悲情院长连带责任']
+        ],
+        defenses: [
+          '“我这战绩都要累吐血了，建议法庭当场查封其他四位干部的鼠标！”',
+          '“我已经杀穿三路了，基地非要自己爆炸能怪我吗？”'
+        ],
+        mainPunishments: [
+          '免予发红包处罚，颁发「本局免喷金牌」一枚；但因未能一打九翻盘，罚给全队倒茶一次。',
+          '免除经济处罚，仅责令下把继续扛起大旗带飞熊坑村。'
+        ],
+        sidePunishments: [
+          '准许在语音频道合法吐槽队友 60 秒（不得超时）。',
+          '获得下局优先选人权一次。'
+        ],
+        mitigations: [
+          '本案已属从轻发落，下局赢球即可自动销案。'
+        ]
+      },
+      normalLoss: {
+        tierLabel: '中罪 · 常规战犯',
+        stampText: '留村察看',
+        stampCls: 'border-orange-500/70 text-orange-400 bg-orange-950/40',
+        charges: [
+          ['中后期梦游罪', '团战技能随缘释放罪'],
+          ['痛失好局罪', '肉山团决策失误罪']
+        ],
+        defenses: [
+          '“本来稳赢的局，都是刚才那波肉山团指挥太乱了！”',
+          '“我差 200 块就出 BKB 了，你们非要提前接团！”',
+          '“刚才切出去回了个微信，回来基地就没了。”'
+        ],
+        mainPunishments: [
+          '罚写 50 字赛后复盘发到开黑群；下把老老实实选个蓝胖敲鼓。',
+          '下局全程听从村委会统一指挥，禁止独自带线被抓。'
+        ],
+        sidePunishments: [
+          '本晚禁止在语音里质疑队友出装。',
+          '剥夺本晚吹嘘自己“天梯万古/冠绝水平”的发言权。'
+        ],
+        mitigations: [
+          '下局参战率达标且获胜，即可当庭恢复干部待遇。'
+        ]
+      },
+      carriedWin: {
+        tierLabel: '轻罪 · 躺赢混子',
+        stampText: '公然蹭分',
+        stampCls: 'border-yellow-400/70 text-yellow-300 bg-yellow-950/40',
+        charges: [
+          ['公然蹭分躺赢罪', '团战OB隐身罪'],
+          ['顺风送头差点翻盘罪', '抱大腿蹭分嫌疑']
+        ],
+        defenses: [
+          '“赢了就完事了，你们管我死了几次，这就是熊坑村的羁绊！”',
+          '“我死的每一次都骗出了对面关键大招，功劳簿上必须有我！”'
+        ],
+        mainPunishments: [
+          '虽侥幸赢球但战绩辣眼！判处向本局大腿公开致谢三声，并记账冰阔落一瓶。',
+          '下局主动承担买雾、插眼、拉野等全部脏活累活。'
+        ],
+        sidePunishments: [
+          '严禁将本局胜利截图发朋友圈装高手。',
+          '下次开黑必须提前 5 分钟在语音室端茶候场。'
+        ],
+        mitigations: [
+          '下局 KDA 突破 3.5 且不拖后腿，即可摘掉“混子”帽子。'
+        ]
+      },
+      godlikeWin: {
+        tierLabel: '无罪 · 乱杀超神',
+        stampText: '无罪释放',
+        stampCls: 'border-emerald-400/70 text-emerald-300 bg-emerald-950/40',
+        charges: [
+          ['涉嫌找代练自证清白审理', '高调装逼扰乱村容罪'],
+          ['过度虐菜引发对面举报嫌疑']
+        ],
+        defenses: [
+          '“常规操作而已，主要是对面太菜，我甚至一只手在吃泡面。”',
+          '“都别说话，把我的战绩截图置顶到村口公告栏！”'
+        ],
+        mainPunishments: [
+          '经核查确系本人乱杀，当庭宣判无罪释放！授予「熊坑村临时话事人」称号一局。',
+          '免除一切惩罚，由本局阵亡最多的队友向其献上彩虹屁三句。'
+        ],
+        sidePunishments: [
+          '享有下把任意甩锅一次的免死金牌特权。',
+          '但仍需低调做人，防止下把立 Flag 惨遭超鬼反噬。'
+        ],
+        mitigations: [
+          '已是清白之身，继续保持即可！'
+        ]
+      },
+      normalWin: {
+        tierLabel: '保释 · 勉强及格',
+        stampText: '准予保释',
+        stampCls: 'border-cyan-400/70 text-cyan-300 bg-cyan-950/40',
+        charges: [
+          ['中规中矩 · 留村察看'],
+          ['常规获胜 · 暂缓追究']
+        ],
+        defenses: [
+          '“稳扎稳打，这叫大局观，年轻人不懂。”',
+          '“赢了就是好干部，下次继续带大伙上分！”'
+        ],
+        mainPunishments: [
+          '准予保释，暂免处罚；继续保持状态，不可松懈。',
+          '口头表扬一次，但村委会档案室仍持续监控其下局表现。'
+        ],
+        sidePunishments: [
+          '若下把出现超鬼或空大行为，将与历史旧账数罪并罚。'
+        ],
+        mitigations: [
+          '保持连胜即可彻底免除庭审传唤。'
+        ]
+      },
+      simulated: {
+        tierLabel: '模拟庭审 · 非真实战绩',
+        stampText: '模拟庭审',
+        stampCls: 'border-amber-400/80 text-amber-300 bg-amber-950/50',
+        charges: [
+          ['涉嫌私自切断村委会网线藏匿战绩罪'],
+          ['疑似战绩过于惨烈导致 OpenDota 拒收罪'],
+          ['无照开黑与神秘隐身罪']
+        ],
+        defenses: [
+          '“不是我打得菜，是 V 社和 OpenDota 服务器联合针对我！”',
+          '“没查到数据就等于我是连胜，无罪！”',
+          '“别审了，快点重试刷新，等接口好了让你们见识什么叫真冠绝！”'
+        ],
+        mainPunishments: [
+          '【模拟裁决】暂缓执行实刑，待 OpenDota 接口恢复后第一时间翻旧账重审！',
+          '【模拟裁决】先罚喝两大口白开水压压惊，等真实战绩拉回后再行定罪。'
+        ],
+        sidePunishments: [
+          '【模拟附加】本条为接口离线期间的娱乐判词，不计入正式村委会黑历史。'
+        ],
+        mitigations: [
+          '点击上方「重试拉取真实战绩」，即可切换回基于真实比赛的正式庭审。'
+        ]
+      }
+    };
+
+    const EXTRA_PUNISHMENT_POOL = [
+      '🎤 语音频道深情朗诵《我是熊坑村头号战犯》一遍',
+      '🏷️ 开黑群昵称强制改为“村委会重点帮扶对象”24小时',
+      '🍵 下局开局前给全队发口头彩虹屁（每人不少于 10 字）',
+      '👁️ 下局负责承包全队真眼与诡计之雾，买不完不准出大件',
+      '🧧 立刻在群里发一个 8.88 元拼手气红包安抚民心',
+      '🛡️ 下局自动顶替村保安位置，全锅一肩挑，禁止甩锅',
+      '🥤 欠本局 MVP 冰阔落一瓶，记入熊坑村功德账本',
+      '🤐 下局前 15 分钟禁止在语音里质疑队友出装'
+    ];
+
+    function pickVariant(arr, seed) {
+      return arr[Math.abs(seed) % arr.length];
+    }
+
+    function computeCrimeScore(match) {
+      if (!match) return -1;
+      const isWin = (match.player_slot < 128 && match.radiant_win) || (match.player_slot >= 128 && !match.radiant_win);
+      const kills = match.kills || 0;
+      const deaths = match.deaths || 0;
+      const assists = match.assists || 0;
+      const kda = (kills + assists) / Math.max(1, deaths);
+      return (isWin ? 0 : 100) + deaths * 6 - kda * 8;
+    }
+
+    function pickDefaultDefendant() {
+      let bestId = PLAYERS_CONFIG[0].id;
+      let highestScore = -999;
+      PLAYERS_CONFIG.forEach(p => {
+        const entry = COURT_DATA_CACHE[p.id];
+        const match = entry?.recentMatches?.[0] || null;
+        if (match) {
+          const score = computeCrimeScore(match);
+          if (score > highestScore) {
+            highestScore = score;
+            bestId = p.id;
+          }
+        }
+      });
+      return bestId;
+    }
+
+    function buildVerdict(player, match, seedOffset = 0) {
+      const caseNum = 2000 + ((player.id * 731 + (match ? (match.match_id % 6000) : (seedOffset * 137))) % 7999);
+      if (!match) {
+        const lib = COURT_VERDICT_LIBRARY.simulated;
+        const seed = player.id + seedOffset;
+        return {
+          isReal: false,
+          caseNo: `(2026) 熊坑模字第 ${caseNum} 号`,
+          player,
+          matchSummary: null,
+          tierLabel: lib.tierLabel,
+          stampText: lib.stampText,
+          stampCls: lib.stampCls,
+          charges: pickVariant(lib.charges, seed),
+          defense: pickVariant(lib.defenses, seed + 1),
+          mainPunishment: pickVariant(lib.mainPunishments, seed + 2),
+          sidePunishment: pickVariant(lib.sidePunishments, seed + 3),
+          mitigation: pickVariant(lib.mitigations, seed + 4)
+        };
+      }
+
+      const isWin = (match.player_slot < 128 && match.radiant_win) || (match.player_slot >= 128 && !match.radiant_win);
+      const kills = match.kills || 0;
+      const deaths = match.deaths || 0;
+      const assists = match.assists || 0;
+      const kdaNum = (kills + assists) / Math.max(1, deaths);
+      const kdaText = deaths === 0 ? `${kills + assists}.0` : kdaNum.toFixed(1);
+      const heroName = HERO_NAMES[match.hero_id] || 'unknown';
+      const timeAgo = formatTimeDiff(Math.floor(Date.now() / 1000) - match.start_time);
+
+      let tierKey = 'normalWin';
+      if (!isWin) {
+        if (deaths >= 10 || kdaNum < 1.2) tierKey = 'feeder';
+        else if (kdaNum >= 3.5 && deaths <= 5) tierKey = 'unluckyMvp';
+        else tierKey = 'normalLoss';
+      } else {
+        if (deaths >= 8 || kdaNum < 2.0) tierKey = 'carriedWin';
+        else if (kdaNum >= 5.0 && deaths <= 4) tierKey = 'godlikeWin';
+        else tierKey = 'normalWin';
+      }
+
+      const lib = COURT_VERDICT_LIBRARY[tierKey];
+      const seed = (match.match_id || player.id) + seedOffset;
+
+      return {
+        isReal: true,
+        caseNo: `(2026) 熊坑刑初字第 ${caseNum} 号`,
+        player,
+        matchSummary: { isWin, kills, deaths, assists, kdaText, heroName, timeAgo },
+        tierLabel: lib.tierLabel,
+        stampText: lib.stampText,
+        stampCls: lib.stampCls,
+        charges: pickVariant(lib.charges, seed),
+        defense: pickVariant(lib.defenses, seed + 1),
+        mainPunishment: pickVariant(lib.mainPunishments, seed + 2),
+        sidePunishment: pickVariant(lib.sidePunishments, seed + 3),
+        mitigation: pickVariant(lib.mitigations, seed + 4)
+      };
+    }
+
+    function renderCourtTabs() {
+      const container = document.getElementById('court-defendant-tabs');
+      if (!container) return;
+
+      container.innerHTML = PLAYERS_CONFIG.map(p => {
+        const entry = COURT_DATA_CACHE[p.id];
+        const match = entry?.recentMatches?.[0] || null;
+        let dotCls = 'bg-amber-400';
+        if (match) {
+          const isWin = (match.player_slot < 128 && match.radiant_win) || (match.player_slot >= 128 && !match.radiant_win);
+          dotCls = isWin ? 'bg-emerald-400' : 'bg-rose-500';
+        }
+        const isActive = p.id === courtSelectedPlayerId;
+        const btnCls = isActive
+          ? 'bg-gradient-to-r from-rose-600 to-red-700 text-white border-rose-400 shadow-neon-red'
+          : 'bg-slate-900/80 text-slate-300 border-slate-700/80 hover:border-amber-500/50 hover:text-white';
+        return `
+          <button type="button" onclick="selectCourtDefendant(${p.id})"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-bold transition-all ${btnCls}">
+            <span class="w-1.5 h-1.5 rounded-full ${dotCls}"></span>
+            <span>${p.name}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectCourtDefendant(playerId) {
+      courtSelectedPlayerId = playerId;
+      courtExtraPunishment = null;
+      courtVariantSeed = 0;
+      renderVillageCourt();
+    }
+
+    function rerollCourtVerdict() {
+      courtVariantSeed++;
+      renderVillageCourt();
+      showToast('⚖️ 法官已重新翻阅卷宗并调整量刑措辞！');
+    }
+
+    function rollExtraPunishment() {
+      const pool = EXTRA_PUNISHMENT_POOL.filter(item => item !== courtExtraPunishment);
+      courtExtraPunishment = pool[Math.floor(Math.random() * pool.length)];
+      renderVillageCourt();
+      showToast('🎲 村民公投加刑成功！已写入下方处罚执行单');
+    }
+
+    function renderVillageCourt() {
+      const panel = document.getElementById('court-main-panel');
+      const modeBadge = document.getElementById('court-mode-badge');
+      const fallbackBanner = document.getElementById('court-fallback-banner');
+      if (!panel) return;
+
+      if (!courtSelectedPlayerId) {
+        courtSelectedPlayerId = pickDefaultDefendant();
+      }
+      renderCourtTabs();
+
+      const player = PLAYERS_CONFIG.find(p => p.id === courtSelectedPlayerId) || PLAYERS_CONFIG[0];
+      const cacheEntry = COURT_DATA_CACHE[player.id];
+      const recentMatch = cacheEntry?.recentMatches?.[0] || null;
+      const verdict = buildVerdict(player, recentMatch, courtVariantSeed);
+      courtCurrentVerdict = verdict;
+
+      if (modeBadge) {
+        if (verdict.isReal) {
+          modeBadge.className = 'text-xs font-mono font-bold px-2.5 py-1 rounded bg-emerald-500/15 border border-emerald-500/35 text-emerald-300';
+          modeBadge.textContent = '● OpenDota 真实战绩审理中';
+        } else {
+          modeBadge.className = 'text-xs font-mono font-bold px-2.5 py-1 rounded bg-amber-500/20 border border-amber-500/40 text-amber-300';
+          modeBadge.textContent = '⚠️ 模拟庭审模式 · 非真实战绩';
+        }
+      }
+      if (fallbackBanner) {
+        fallbackBanner.classList.toggle('hidden', verdict.isReal);
+      }
+
+      const avatarSrc = player.localAvatar || cacheEntry?.playerData?.profile?.avatarfull || './assets/zhanduilogo.webp';
+      const chargesHtml = verdict.charges.map(c => `
+        <span class="inline-flex items-center px-2.5 py-1 rounded bg-rose-500/15 border border-rose-500/35 text-rose-300 text-xs font-bold">
+          《${c}》
+        </span>
+      `).join('');
+
+      const evidenceHtml = verdict.isReal ? `
+        <div class="bg-obsidian/85 border border-slate-800 rounded-xl p-4 space-y-3">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+            <span>实测案情凭证</span>
+            <span>${verdict.matchSummary.timeAgo}</span>
+          </div>
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+              <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${verdict.matchSummary.heroName}.png"
+                   alt="${verdict.matchSummary.heroName}"
+                   class="w-14 h-8 object-cover rounded border border-slate-700"
+                   onerror="this.style.display='none'">
+              <div>
+                <div class="text-xs font-mono text-slate-300 uppercase">${verdict.matchSummary.heroName.replace(/_/g, ' ')}</div>
+                <span class="inline-block mt-0.5 px-2 py-0.5 rounded text-xs font-bold ${verdict.matchSummary.isWin ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30' : 'bg-rose-500/15 text-rose-400 border border-rose-500/30'}">
+                  ${verdict.matchSummary.isWin ? '胜 利' : '败 北'}
+                </span>
+              </div>
+            </div>
+            <div class="text-right font-mono">
+              <div class="text-xl font-black text-white">${verdict.matchSummary.kills} / <span class="text-rose-400">${verdict.matchSummary.deaths}</span> / ${verdict.matchSummary.assists}</div>
+              <div class="text-xs text-amber-400 font-bold">KDA ${verdict.matchSummary.kdaText}</div>
+            </div>
+          </div>
+        </div>
+      ` : `
+        <div class="bg-amber-950/30 border border-amber-500/35 rounded-xl p-4 space-y-2">
+          <div class="text-xs font-mono font-bold text-amber-300">⚠️ 模拟案卷 · 非真实战绩</div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            OpenDota 接口当前无响应或未返回最近比赛记录，本庭已自动切换为随机娱乐判词，绝不编造虚假 KDA。
+          </p>
+        </div>
+      `;
+
+      const extraPunishmentHtml = courtExtraPunishment ? `
+        <div class="mt-3 p-3 rounded-lg bg-rose-600/15 border border-rose-500/40 flex items-start justify-between gap-2">
+          <div class="text-xs sm:text-sm text-rose-200 font-bold">
+            <span class="text-amber-300 font-mono mr-1">[村民加刑]</span>${courtExtraPunishment}
+          </div>
+          <button type="button" onclick="courtExtraPunishment=null; renderVillageCourt();"
+            class="text-xs text-slate-400 hover:text-white shrink-0" title="撤销加刑">✕</button>
+        </div>
+      ` : '';
+
+      panel.innerHTML = `
+        <!-- Verdict Red-Header -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-rose-500/25">
+          <div>
+            <div class="text-xs font-mono text-rose-400 font-bold tracking-widest">
+              熊坑村村委会战绩审判庭 · ${verdict.isReal ? '正式裁定书' : '模拟庭审演示'}
+            </div>
+            <div class="text-xs font-mono text-slate-400 mt-0.5">案号：${verdict.caseNo}</div>
+          </div>
+          <div class="px-3 py-1 rounded border-2 font-black font-display text-xs sm:text-sm tracking-widest uppercase -rotate-2 ${verdict.stampCls}">
+            【${verdict.stampText}】
+          </div>
+        </div>
+
+        <!-- 2-Col Content: Left Defendant & Evidence, Right Charges & Defense -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Left 5 Cols -->
+          <div class="lg:col-span-5 space-y-4">
+            <div class="flex items-center gap-4">
+              <img src="${avatarSrc}" alt="${player.name}"
+                class="w-16 h-16 rounded-xl object-cover border-2 border-rose-500/50 shrink-0">
+              <div class="min-w-0">
+                <div class="text-xs font-mono text-amber-400 uppercase">当庭被告 · ${verdict.tierLabel}</div>
+                <h3 class="text-2xl font-black text-white truncate">${player.name}</h3>
+                <div class="text-xs text-slate-400 font-mono">${player.role} · ${player.title}</div>
+              </div>
+            </div>
+            ${evidenceHtml}
+          </div>
+
+          <!-- Right 7 Cols -->
+          <div class="lg:col-span-7 space-y-4">
+            <div class="space-y-2">
+              <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">一、指控罪名</div>
+              <div class="flex flex-wrap gap-2">${chargesHtml}</div>
+            </div>
+
+            <div class="bg-obsidian/70 border border-slate-800 rounded-xl p-4 space-y-1.5">
+              <div class="text-xs font-mono text-amber-400 uppercase tracking-wider">二、被告当庭嘴硬辩解</div>
+              <p class="text-sm sm:text-base text-slate-100 font-semibold italic leading-relaxed">
+                ${verdict.defense}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dedicated Punishment Execution Desk -->
+        <div class="mt-6 pt-5 border-t border-slate-800/90">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded bg-red-600/25 border border-rose-500/40 text-rose-300 text-xs font-mono font-bold">
+                🔨 村委会处罚执行栏
+              </span>
+              <span class="text-xs text-slate-400">三段式量刑 · 支持村民公投加刑</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" onclick="rollExtraPunishment()"
+                class="px-3 py-1.5 rounded-lg bg-amber-500/15 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 text-xs font-bold transition-all active:scale-95">
+                🎲 村民不服 · 随机加刑抽签
+              </button>
+              <a href="#entertainment" onclick="switchEntertainmentTab('zhanlang3')"
+                class="px-3 py-1.5 rounded-lg bg-rose-600/20 hover:bg-rose-600/35 border border-rose-500/40 text-rose-200 text-xs font-bold transition-all">
+                🥊 押赴《战狼3》现场执行
+              </a>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="bg-obsidian/80 border border-rose-500/30 rounded-xl p-3.5 space-y-1.5">
+              <div class="text-xs font-mono font-bold text-rose-400">🔴 主刑（强制执行）</div>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${verdict.mainPunishment}</p>
+            </div>
+            <div class="bg-obsidian/80 border border-amber-500/30 rounded-xl p-3.5 space-y-1.5">
+              <div class="text-xs font-mono font-bold text-amber-400">🟠 附加刑（剥夺特权）</div>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${verdict.sidePunishment}</p>
+            </div>
+            <div class="bg-obsidian/80 border border-emerald-500/30 rounded-xl p-3.5 space-y-1.5">
+              <div class="text-xs font-mono font-bold text-emerald-400">🟢 戴罪立功（减刑条件）</div>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${verdict.mitigation}</p>
+            </div>
+          </div>
+
+          ${extraPunishmentHtml}
+        </div>
+
+        <!-- Bottom Action Toolbar -->
+        <div class="mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button type="button" onclick="copyCourtVerdict()"
+              class="inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-extrabold tracking-wider text-white bg-gradient-to-r from-rose-600 to-amber-600 hover:brightness-110 btn-esports shadow-neon-red transition-all active:scale-95">
+              <span>📋 复制判决书发群</span>
+            </button>
+            <button type="button" onclick="rerollCourtVerdict()"
+              class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold transition-all active:scale-95">
+              <span>🔄 换个法官措辞</span>
+            </button>
+          </div>
+          <span class="text-xs font-mono text-slate-500">
+            ${verdict.isReal ? '数据已与下方五虎上将 OpenDota 实时同步' : '当前为离线模拟判词，不伪装真实战绩'}
+          </span>
+        </div>
+      `;
+    }
+
+    function copyCourtVerdict() {
+      if (!courtCurrentVerdict) return;
+      const v = courtCurrentVerdict;
+      const lines = [];
+      if (v.isReal) {
+        lines.push('⚖️【熊坑村村委会战绩判决书】');
+        lines.push(`案号：${v.caseNo}`);
+        lines.push(`被告：${v.player.name}（${v.player.role}）`);
+        lines.push(`实测案情：最近一局使用 ${v.matchSummary.heroName}，战绩 ${v.matchSummary.kills}/${v.matchSummary.deaths}/${v.matchSummary.assists}（${v.matchSummary.isWin ? '胜利' : '败北'} · KDA ${v.matchSummary.kdaText}）`);
+      } else {
+        lines.push('⚖️【熊坑村村委会战绩判决书 · 模拟庭审】');
+        lines.push('⚠️ 说明：OpenDota 实时接口暂不可用，本条为随机趣味判词（非真实战绩）');
+        lines.push(`被告：${v.player.name}（${v.player.role}）`);
+      }
+      lines.push(`指控罪名：${v.charges.join('、')}`);
+      lines.push(`被告辩解：${v.defense}`);
+      lines.push('【处罚执行单】');
+      lines.push(`· 主刑：${v.mainPunishment}`);
+      lines.push(`· 附加刑：${v.sidePunishment}`);
+      if (courtExtraPunishment) {
+        lines.push(`· 村民加刑：${courtExtraPunishment}`);
+      }
+      lines.push(`· 减刑条件：${v.mitigation}`);
+      if (v.isReal) {
+        lines.push('（数据来源：OpenDota 实时战绩）');
+      }
+
+      const text = lines.join('\n');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('📋 判决书已复制！快发到开黑群公开宣判！');
+        }).catch(() => prompt('请手动复制判决书：', text));
+      } else {
+        prompt('请手动复制判决书：', text);
+      }
+    }
+
     async function updateLiveStatus() {
       const updates = PLAYERS_CONFIG.map(async (player) => {
         const [playerData, recentMatches, heroes] = await Promise.all([
@@ -1791,10 +2503,17 @@
           fetchRecentMatches(player.accountId),
           fetchHeroes(player.accountId)
         ]);
+        COURT_DATA_CACHE[player.id] = { playerData, recentMatches };
         renderPlayerCard(player, playerData, recentMatches, heroes);
       });
 
       await Promise.all(updates);
+
+      // Refresh Village Court reusing fetched OpenDota data (zero extra API calls)
+      if (!courtSelectedPlayerId) {
+        courtSelectedPlayerId = pickDefaultDefendant();
+      }
+      renderVillageCourt();
 
       const updateTimeEl = document.getElementById('last-update-time');
       if (updateTimeEl) {
@@ -1959,13 +2678,15 @@
 
       const posterHit = document.getElementById('zhanlang3-poster-hit');
       if (posterHit) {
-        posterHit.classList.remove('opacity-0');
-        posterHit.classList.add('opacity-100');
+        // Instant snap-in for impact, smooth fade-out after a clearly visible hold
+        posterHit.classList.remove('duration-200', 'opacity-0', 'scale-100');
+        posterHit.classList.add('duration-0', 'opacity-100', 'scale-[1.03]');
         if (hitFrameTimer) clearTimeout(hitFrameTimer);
+        const holdMs = isCrit ? 650 : 480;
         hitFrameTimer = setTimeout(() => {
-          posterHit.classList.remove('opacity-100');
-          posterHit.classList.add('opacity-0');
-        }, 140);
+          posterHit.classList.remove('duration-0', 'opacity-100', 'scale-[1.03]');
+          posterHit.classList.add('duration-200', 'opacity-0', 'scale-100');
+        }, holdMs);
       }
 
       container.classList.remove('animate-shake');
@@ -1973,8 +2694,8 @@
       container.classList.add('animate-shake');
 
       if (flashOverlay) {
-        flashOverlay.style.backgroundColor = isCrit ? 'rgba(239, 68, 68, 0.45)' : 'rgba(239, 68, 68, 0.25)';
-        setTimeout(() => { flashOverlay.style.backgroundColor = 'rgba(239, 68, 68, 0)'; }, 120);
+        flashOverlay.style.backgroundColor = isCrit ? 'rgba(239, 68, 68, 0.32)' : 'rgba(239, 68, 68, 0.16)';
+        setTimeout(() => { flashOverlay.style.backgroundColor = 'rgba(239, 68, 68, 0)'; }, 180);
       }
 
       playPunchSound(isCrit);
@@ -2047,6 +2768,7 @@
       }
     }
 
+    let toastTimer = null;
     function showToast(message) {
       let toast = document.getElementById('xkc-toast');
       if (!toast) {
@@ -2059,7 +2781,8 @@
       toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
       toast.classList.add('opacity-100', 'translate-y-0');
 
-      setTimeout(() => {
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
         toast.classList.remove('opacity-100', 'translate-y-0');
         toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
       }, 2500);
@@ -2070,6 +2793,7 @@
       initLiveStatus();
       initCheerWidget();
       initVillageHeadHits();
+      initStorySwipe();
       setupAudioUnlock();
     });
   </script>
