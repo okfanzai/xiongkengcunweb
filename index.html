@@ -507,9 +507,15 @@
           </h2>
         </div>
 
-        <!-- 5-Player Quick Summon Tabs -->
-        <div id="court-defendant-tabs" class="flex flex-wrap items-center gap-2">
-          <!-- Rendered dynamically via JS -->
+        <!-- Random Summon Control (1 of 5 Random Defendant) -->
+        <div class="flex flex-wrap items-center gap-2.5">
+          <span class="text-xs font-mono text-slate-400 px-2.5 py-1 rounded bg-slate-900/80 border border-slate-800">
+            🎲 随机抽签 · 5 选 1 开庭
+          </span>
+          <button type="button" onclick="summonRandomDefendant()"
+            class="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-extrabold tracking-wider text-white bg-gradient-to-r from-rose-600 via-red-600 to-amber-600 hover:brightness-110 btn-esports shadow-neon-red transition-all active:scale-95">
+            <span>🎲 随机传唤下一位倒霉蛋</span>
+          </button>
         </div>
       </div>
 
@@ -2137,55 +2143,103 @@
       '🤐 下局前 15 分钟禁止在语音里质疑队友出装'
     ];
 
-    function pickVariant(arr, seed) {
-      return arr[Math.abs(seed) % arr.length];
+    let courtLastDefense = '';
+
+    function pickRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
     }
 
-    function computeCrimeScore(match) {
-      if (!match) return -1;
-      const isWin = (match.player_slot < 128 && match.radiant_win) || (match.player_slot >= 128 && !match.radiant_win);
-      const kills = match.kills || 0;
-      const deaths = match.deaths || 0;
-      const assists = match.assists || 0;
-      const kda = (kills + assists) / Math.max(1, deaths);
-      return (isWin ? 0 : 100) + deaths * 6 - kda * 8;
+    function pickRandomDefendant(excludeId = null) {
+      const candidates = PLAYERS_CONFIG.filter(p => p.id !== excludeId);
+      const chosen = candidates[Math.floor(Math.random() * candidates.length)] || PLAYERS_CONFIG[0];
+      return chosen.id;
     }
 
-    function pickDefaultDefendant() {
-      let bestId = PLAYERS_CONFIG[0].id;
-      let highestScore = -999;
-      PLAYERS_CONFIG.forEach(p => {
-        const entry = COURT_DATA_CACHE[p.id];
-        const match = entry?.recentMatches?.[0] || null;
-        if (match) {
-          const score = computeCrimeScore(match);
-          if (score > highestScore) {
-            highestScore = score;
-            bestId = p.id;
-          }
-        }
-      });
-      return bestId;
+    function generateDynamicDefense(player, tierKey, matchSummary) {
+      const others = PLAYERS_CONFIG.filter(p => p.id !== player.id);
+      const scapegoat = pickRandom(others).name;
+      const scapegoat2 = pickRandom(others.filter(p => p.name !== scapegoat)).name;
+      const hero = matchSummary ? matchSummary.heroName.replace(/_/g, ' ') : '这英雄';
+      const deaths = matchSummary ? matchSummary.deaths : 8;
+      const assists = matchSummary ? matchSummary.assists : 5;
+
+      const commonScapegoatPool = [
+        `“这把纯属${scapegoat}眼位没做好，我阵亡 ${deaths} 次全是在替他肉身排雷！”`,
+        `“别审我了！刚才语音里一直外放 DJ 干扰我补刀的是${scapegoat}，建议法庭改审他！”`,
+        `“我本来要超神的，结果${scapegoat}关键时刻卡我走位，还把兵线全收了！”`,
+        `“这锅我坚决不背！${scapegoat}开局前立 Flag 说这把必赢，纯属被他毒奶死了！”`,
+        `“你们查一下聊天记录，团战前是${scapegoat}喊的‘上上上’，结果他自己先 TP 跑了！”`,
+        `“我觉得有必要把${scapegoat}和${scapegoat2}一起拉上被告席，这把明显是他们俩演我！”`,
+        `“鼠标突然没电、键盘突然卡键、网线被猫踢了——而且最主要还是${scapegoat}没救我！”`,
+        `“我这叫战略性吸引火力，要是没有我替大家吃技能，${scapegoat}早就超鬼了！”`
+      ];
+
+      const tierSpecificPool = {
+        feeder: [
+          `“对面五个人像疯狗一样专门冲我 ${hero} 的脸，${scapegoat}在野区采蘑菇能怪我？”`,
+          `“死 ${deaths} 次怎么了？我是在用生命给队友拉扯发育空间，你们懂不懂战术牺牲！”`,
+          `“这把对面明显开了透视专门抓我，建议法庭立刻封禁对面，顺便罚${scapegoat}发红包！”`,
+          `“我玩 ${hero} 本来就是卖肉型打法，只是${scapegoat}输出太慢没跟上！”`
+        ],
+        unluckyMvp: [
+          `“我这 ${hero} 都要累吐血了，建议法庭当场查封${scapegoat}的鼠标和键盘！”`,
+          `“我都打成院长了基地还要爆，难道要我顺着网线去帮${scapegoat}按技能吗？”`,
+          `“我尽力了！这把输了纯属村委会排兵布阵失误，申请把本案原告${scapegoat}抓起来！”`
+        ],
+        normalLoss: [
+          `“本来稳赢的局，都怪刚才那波肉山团${scapegoat}瞎指挥！”`,
+          `“我差 200 块就出 BKB 了，${scapegoat}非要提前强行开团，我有什么办法？”`,
+          `“刚才切出去回了个村委会通知，回来发现${scapegoat}已经把高地送没了。”`
+        ],
+        carriedWin: [
+          `“赢了就完事了！你们管我死了 ${deaths} 次干嘛，这就是熊坑村的团队羁绊！”`,
+          `“我虽然只混了 ${assists} 个助攻，但我死的每一次都精准骗出了对面关键大招！”`,
+          `“这把我是精神领袖！要不是我在语音里疯狂给${scapegoat}喊加油，能赢吗？”`
+        ],
+        godlikeWin: [
+          `“常规操作而已，主要是对面太菜，我甚至一只手在吃泡面顺便带飞了${scapegoat}。”`,
+          `“都别说话，把我的 ${hero} 战绩截图置顶到村口公告栏，让${scapegoat}好好学学！”`,
+          `“本庭居然敢审理 MVP？我要求反诉${scapegoat}在局内疯狂抢我人头！”`
+        ],
+        normalWin: [
+          `“稳扎稳打懂不懂？我这叫大局观，不像${scapegoat}整天只知道无脑冲塔。”`,
+          `“赢了就是好干部！下次${scapegoat}要是再坑，我可就不兜底了。”`
+        ],
+        simulated: [
+          `“不是我打得菜，是 V 社和 OpenDota 联合${scapegoat}一起针对我！”`,
+          `“没查到数据就等于我十连胜，无罪！有本事去查${scapegoat}的隐藏战绩！”`,
+          `“接口挂了肯定是${scapegoat}上一把超鬼把服务器数据撑爆了，跟我没关系！”`
+        ]
+      };
+
+      const pool = tierKey === 'simulated'
+        ? [...tierSpecificPool.simulated, ...commonScapegoatPool.slice(1, 6)]
+        : [...(tierSpecificPool[tierKey] || []), ...commonScapegoatPool];
+
+      const filtered = pool.filter(line => line !== courtLastDefense);
+      const chosen = pickRandom(filtered.length > 0 ? filtered : pool);
+      courtLastDefense = chosen;
+      return chosen;
     }
 
-    function buildVerdict(player, match, seedOffset = 0) {
-      const caseNum = 2000 + ((player.id * 731 + (match ? (match.match_id % 6000) : (seedOffset * 137))) % 7999);
+    function buildVerdict(player, match) {
+      const caseNum = 1000 + Math.floor(Math.random() * 8999);
       if (!match) {
         const lib = COURT_VERDICT_LIBRARY.simulated;
-        const seed = player.id + seedOffset;
         return {
           isReal: false,
+          tierKey: 'simulated',
           caseNo: `(2026) 熊坑模字第 ${caseNum} 号`,
           player,
           matchSummary: null,
           tierLabel: lib.tierLabel,
           stampText: lib.stampText,
           stampCls: lib.stampCls,
-          charges: pickVariant(lib.charges, seed),
-          defense: pickVariant(lib.defenses, seed + 1),
-          mainPunishment: pickVariant(lib.mainPunishments, seed + 2),
-          sidePunishment: pickVariant(lib.sidePunishments, seed + 3),
-          mitigation: pickVariant(lib.mitigations, seed + 4)
+          charges: pickRandom(lib.charges),
+          defense: generateDynamicDefense(player, 'simulated', null),
+          mainPunishment: pickRandom(lib.mainPunishments),
+          sidePunishment: pickRandom(lib.sidePunishments),
+          mitigation: pickRandom(lib.mitigations)
         };
       }
 
@@ -2210,85 +2264,78 @@
       }
 
       const lib = COURT_VERDICT_LIBRARY[tierKey];
-      const seed = (match.match_id || player.id) + seedOffset;
+      const matchSummary = { isWin, kills, deaths, assists, kdaText, heroName, timeAgo };
 
       return {
         isReal: true,
+        tierKey,
         caseNo: `(2026) 熊坑刑初字第 ${caseNum} 号`,
         player,
-        matchSummary: { isWin, kills, deaths, assists, kdaText, heroName, timeAgo },
+        matchSummary,
         tierLabel: lib.tierLabel,
         stampText: lib.stampText,
         stampCls: lib.stampCls,
-        charges: pickVariant(lib.charges, seed),
-        defense: pickVariant(lib.defenses, seed + 1),
-        mainPunishment: pickVariant(lib.mainPunishments, seed + 2),
-        sidePunishment: pickVariant(lib.sidePunishments, seed + 3),
-        mitigation: pickVariant(lib.mitigations, seed + 4)
+        charges: pickRandom(lib.charges),
+        defense: generateDynamicDefense(player, tierKey, matchSummary),
+        mainPunishment: pickRandom(lib.mainPunishments),
+        sidePunishment: pickRandom(lib.sidePunishments),
+        mitigation: pickRandom(lib.mitigations)
       };
     }
 
-    function renderCourtTabs() {
-      const container = document.getElementById('court-defendant-tabs');
-      if (!container) return;
-
-      container.innerHTML = PLAYERS_CONFIG.map(p => {
-        const entry = COURT_DATA_CACHE[p.id];
-        const match = entry?.recentMatches?.[0] || null;
-        let dotCls = 'bg-amber-400';
-        if (match) {
-          const isWin = (match.player_slot < 128 && match.radiant_win) || (match.player_slot >= 128 && !match.radiant_win);
-          dotCls = isWin ? 'bg-emerald-400' : 'bg-rose-500';
-        }
-        const isActive = p.id === courtSelectedPlayerId;
-        const btnCls = isActive
-          ? 'bg-gradient-to-r from-rose-600 to-red-700 text-white border-rose-400 shadow-neon-red'
-          : 'bg-slate-900/80 text-slate-300 border-slate-700/80 hover:border-amber-500/50 hover:text-white';
-        return `
-          <button type="button" onclick="selectCourtDefendant(${p.id})"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-bold transition-all ${btnCls}">
-            <span class="w-1.5 h-1.5 rounded-full ${dotCls}"></span>
-            <span>${p.name}</span>
-          </button>
-        `;
-      }).join('');
+    function summonRandomDefendant() {
+      courtSelectedPlayerId = pickRandomDefendant(courtSelectedPlayerId);
+      courtExtraPunishment = null;
+      renderVillageCourt();
+      const player = PLAYERS_CONFIG.find(p => p.id === courtSelectedPlayerId);
+      if (player) {
+        showToast(`⚖️ 砰！已随机传唤「${player.name}」站上被告席！`);
+      }
     }
 
-    function selectCourtDefendant(playerId) {
-      courtSelectedPlayerId = playerId;
-      courtExtraPunishment = null;
-      courtVariantSeed = 0;
-      renderVillageCourt();
+    function rerollDefenseOnly() {
+      if (!courtCurrentVerdict) return;
+      const newDefense = generateDynamicDefense(
+        courtCurrentVerdict.player,
+        courtCurrentVerdict.tierKey,
+        courtCurrentVerdict.matchSummary
+      );
+      courtCurrentVerdict.defense = newDefense;
+      const defenseEl = document.getElementById('court-defense-text');
+      if (defenseEl) {
+        defenseEl.textContent = newDefense;
+      }
+      showToast(`🗣️ ${courtCurrentVerdict.player.name} 又想出了新的甩锅理由！`);
     }
 
     function rerollCourtVerdict() {
-      courtVariantSeed++;
       renderVillageCourt();
-      showToast('⚖️ 法官已重新翻阅卷宗并调整量刑措辞！');
+      showToast('⚖️ 法官已重新翻阅卷宗并随机重判！');
     }
 
     function rollExtraPunishment() {
       const pool = EXTRA_PUNISHMENT_POOL.filter(item => item !== courtExtraPunishment);
       courtExtraPunishment = pool[Math.floor(Math.random() * pool.length)];
-      renderVillageCourt();
+      renderVillageCourt(true);
       showToast('🎲 村民公投加刑成功！已写入下方处罚执行单');
     }
 
-    function renderVillageCourt() {
+    function renderVillageCourt(keepCurrentVerdict = false) {
       const panel = document.getElementById('court-main-panel');
       const modeBadge = document.getElementById('court-mode-badge');
       const fallbackBanner = document.getElementById('court-fallback-banner');
       if (!panel) return;
 
       if (!courtSelectedPlayerId) {
-        courtSelectedPlayerId = pickDefaultDefendant();
+        courtSelectedPlayerId = pickRandomDefendant();
       }
-      renderCourtTabs();
 
       const player = PLAYERS_CONFIG.find(p => p.id === courtSelectedPlayerId) || PLAYERS_CONFIG[0];
       const cacheEntry = COURT_DATA_CACHE[player.id];
       const recentMatch = cacheEntry?.recentMatches?.[0] || null;
-      const verdict = buildVerdict(player, recentMatch, courtVariantSeed);
+      const verdict = (keepCurrentVerdict && courtCurrentVerdict && courtCurrentVerdict.player.id === player.id)
+        ? courtCurrentVerdict
+        : buildVerdict(player, recentMatch);
       courtCurrentVerdict = verdict;
 
       if (modeBadge) {
@@ -2350,7 +2397,7 @@
           <div class="text-xs sm:text-sm text-rose-200 font-bold">
             <span class="text-amber-300 font-mono mr-1">[村民加刑]</span>${courtExtraPunishment}
           </div>
-          <button type="button" onclick="courtExtraPunishment=null; renderVillageCourt();"
+          <button type="button" onclick="courtExtraPunishment=null; renderVillageCourt(true);"
             class="text-xs text-slate-400 hover:text-white shrink-0" title="撤销加刑">✕</button>
         </div>
       ` : '';
@@ -2392,9 +2439,15 @@
               <div class="flex flex-wrap gap-2">${chargesHtml}</div>
             </div>
 
-            <div class="bg-obsidian/70 border border-slate-800 rounded-xl p-4 space-y-1.5">
-              <div class="text-xs font-mono text-amber-400 uppercase tracking-wider">二、被告当庭嘴硬辩解</div>
-              <p class="text-sm sm:text-base text-slate-100 font-semibold italic leading-relaxed">
+            <div class="bg-obsidian/70 border border-slate-800 rounded-xl p-4 space-y-2">
+              <div class="flex items-center justify-between gap-2">
+                <div class="text-xs font-mono text-amber-400 uppercase tracking-wider">二、被告当庭嘴硬辩解</div>
+                <button type="button" onclick="rerollDefenseOnly()"
+                  class="px-2.5 py-1 rounded bg-amber-500/15 hover:bg-amber-500/30 border border-amber-500/35 text-amber-300 text-xs font-bold transition-all active:scale-95">
+                  🗣️ 听他再狡辩一句
+                </button>
+              </div>
+              <p id="court-defense-text" class="text-sm sm:text-base text-slate-100 font-semibold italic leading-relaxed">
                 ${verdict.defense}
               </p>
             </div>
@@ -2511,7 +2564,7 @@
 
       // Refresh Village Court reusing fetched OpenDota data (zero extra API calls)
       if (!courtSelectedPlayerId) {
-        courtSelectedPlayerId = pickDefaultDefendant();
+        courtSelectedPlayerId = pickRandomDefendant();
       }
       renderVillageCourt();
 
